@@ -22,11 +22,13 @@
                     <form action="<?= base_url('Welcome/do_login')?>" method="POST">
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="email" name="email" class="form-control" required autofocus>
+                            <?php echo form_error('email', '<div class="error">', '</div>'); ?>
+                            <input type="email" name="email" class="form-control" value="<?= set_value('email')?>" autofocus>
                         </div>
                         <div class="form-group">
                             <label for="">Password</label>
-                            <input type="password" name="password" class="form-control" required>
+                            <?php echo form_error('password', '<div class="error">', '</div>'); ?>
+                            <input type="password" name="password" class="form-control" value="<?= set_value('password')?>">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Login</button>

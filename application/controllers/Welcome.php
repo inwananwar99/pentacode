@@ -17,18 +17,42 @@ class Welcome extends CI_Controller {
 		return $this->load->view('template',$data);
 	}
 	public function do_login(){
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		$data = $this->db->get_where('users',['email'=> $email])->row_array();
 		if($data){
-			if($data['password'] == $password){
-				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang!</div>');
-				$d = ['nama' => $data['name'],'role' => $data['role']];
-				$this->session->set_userdata($d);
-				return redirect('Welcome/dashboard');
-			}else{
-				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
-				return redirect('Welcome');
+			if($data['id_level'] == 1){
+				if($data['password'] == $password){
+					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Manajer!</div>');
+					$d = ['name' => $data['name'],'role' => 'Manajer'];
+					$this->session->set_userdata($d);
+					return redirect('Welcome/dashboard');
+				}else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
+					return redirect('Welcome');
+				}
+			}else if($data['id_level'] == 2){
+				if($data['password'] == $password){
+					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang HRD!</div>');
+					$d = ['name' => $data['name'],'role' => 'HRD'];
+					$this->session->set_userdata($d);
+					return redirect('Welcome/dashboard');
+				}else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
+					return redirect('Welcome');
+				}
+			}else if($data['id_level'] == 3){
+				if($data['password'] == $password){
+					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Pegawai!</div>');
+					$d = ['name' => $data['name'],'role' => 'Pegawai'];
+					$this->session->set_userdata($d);
+					return redirect('Welcome/dashboard');
+				}else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
+					return redirect('Welcome');
+				}
 			}
 		}else{
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">User tidak terdaftar!</div>');
