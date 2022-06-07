@@ -98,9 +98,31 @@ public function addPegawai(){
         $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Mohon lengkapi terlebih dahulu!</div>');
         return redirect('User/pegawai');
     }else{
-        $this->ModelUser->add('pegawai',$data);
-        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menambahkan data!</div>');
-        return redirect('User/pegawai');
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'inwananwar9b@gmail.com',
+            'smtp_pass' => '@Politeknik99',
+            'smtp_port' => '465',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+        $this->load->library('email');
+        $this->email->initialize($config);
+        $this->email->from('inwananwar9b@gmail.com', 'Inwan Anwar Solihudin');
+        $this->email->to($data['email']);
+        $this->email->subject('Notifikasi Hak Akses Pegawai');
+        $this->email->message('Silahkan login dengan akun yang telah disediakan');
+
+        if ($this->email->send()) {
+            $this->ModelUser->add('pegawai',$data);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menambahkan data!</div>');
+            return redirect('User/pegawai');
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
     }
 }
 

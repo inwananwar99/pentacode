@@ -5,7 +5,7 @@
   <link rel="shortcut icon" href="<?= base_url()?>assets/logo/logobig.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $judul.' '.$this->session->userdata('role').' - Pentacode'; ?></title>
+    <title><?= $judul.' - Pentacode'; ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -68,7 +68,7 @@
             <img src="<?= base_url()?>assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?= $this->session->userdata('name'); ?></a>
+            <a href="#" class="d-block"><?= $this->session->userdata('name').' ('.$this->session->userdata('role').')'; ?></a>
           </div>
         </div>
 
