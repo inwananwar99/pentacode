@@ -8,25 +8,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 </head>
-<body class="bg-info">
+<body class="bg-light">
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-md-4"></div>
-        <div class="col-md-4" style="margin-top: 100px;">
+        <div class="col-md-4" style="margin-top: 30px;">
+        <img src="<?= base_url()?>/assets/logo/logo-prime.png" width="420" height="130" alt="">
             <div class="card">
-                <div class="card-body">
-                    <h3 class="text-center">Login Panel</h3>
-                    <p class="text-center">Silahkan login terlebih dahulu!</p>
+                <div class="card-body bg-dark">
+                    <h3 class="text-center text-white">Login Panel</h3>
+                    <p class="text-center text-white">Silahkan login terlebih dahulu!</p>
                     <?= $this->session->flashdata('message')?>
                     <form action="<?= base_url('Welcome/do_login')?>" method="POST">
                         <div class="form-group">
-                            <label for="">Email</label>
+                            <label for="" class="text-white">Email</label>
                             <?php echo form_error('email', '<div class="error">', '</div>'); ?>
                             <input type="email" name="email" class="form-control" value="<?= set_value('email')?>" autofocus>
                         </div>
                         <div class="form-group">
-                            <label for="">Password</label>
+                            <label for="" class="text-white">Password</label>
                             <?php echo form_error('password', '<div class="error">', '</div>'); ?>
                             <input type="password" name="password" class="form-control" value="<?= set_value('password')?>">
                         </div>
