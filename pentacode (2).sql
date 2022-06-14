@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Bulan Mei 2022 pada 01.33
+-- Waktu pembuatan: 14 Jun 2022 pada 02.18
 -- Versi server: 10.4.22-MariaDB
--- Versi PHP: 8.0.15
+-- Versi PHP: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -68,7 +68,8 @@ CREATE TABLE `jabatan` (
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `jobdesc`, `id_level`) VALUES
-(2, 'Supervisor', 'dfdafaf', 2);
+(1, 'Supervisor', 'jkasfjklafsdf', 3),
+(2, 'Backend Developer', 'Tukang Ngoding', 4);
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,7 @@ INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `jobdesc`, `id_level`) VALU
 
 CREATE TABLE `level` (
   `id_level` int(11) NOT NULL,
-  `level` enum('Manajer','HRD','Pegawai') NOT NULL
+  `level` enum('Manajer','HRD','Pegawai','Admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -86,8 +87,10 @@ CREATE TABLE `level` (
 --
 
 INSERT INTO `level` (`id_level`, `level`) VALUES
-(2, 'Manajer'),
-(4, 'HRD');
+(1, 'Manajer'),
+(2, 'HRD'),
+(3, 'Admin'),
+(4, 'Pegawai');
 
 -- --------------------------------------------------------
 
@@ -130,7 +133,8 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `jenis_kelamin`, `tmp_lahir`, `tgl_lahir`, `alamat`, `email`, `no_tlp`, `id_jabatan`) VALUES
-(2, 'Inwan Anwar Solihudin', 'Laki-laki', 'Karawang', '1999-12-05', 'Kuningan Barat IV, Mampang Prapatan - Jakarta Selatan', 'inwananwar9b@gmail.com', '085723260587', 2);
+(1, 'Ihsan Ibrahim', 'Laki-laki', 'Karawang', '2022-05-30', 'hgfhfdhdf', 'inwananwar99@gmail.com', '97968980', 1),
+(2, 'Denny Adam', 'Laki-laki', 'Lampung', '2000-09-12', 'Cilandak, Jaksel', 'denny@iconpln.co.id', '0789472892', 2);
 
 -- --------------------------------------------------------
 
@@ -227,8 +231,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
-(4, 'Inwan Anwar Solihudin', 'inwananwar9b@gmail.com', 'inwan99', 'img.jpg', 1, 1, '2022-05-08'),
-(6, 'Inwan Anwar Solihudin', 'inwananwar9b@gmail.com', 'dfsafasdfasfa', 'Inwan12.png', 2, 1, '2022-05-16');
+(5, 'Ihsan Ibrahim', 'inwananwar99@gmail.com', 'polsub2018', 'Inwan13.png', 3, 1, '2022-05-30'),
+(6, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31');
 
 --
 -- Indexes for dumped tables
@@ -339,7 +343,7 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT untuk tabel `level`
 --
 ALTER TABLE `level`
-  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `manajer`
@@ -394,10 +398,22 @@ ALTER TABLE `users`
 --
 
 --
+-- Ketidakleluasaan untuk tabel `jabatan`
+--
+ALTER TABLE `jabatan`
+  ADD CONSTRAINT `jabatan_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `level` (`id_level`);
+
+--
 -- Ketidakleluasaan untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`);
+
+--
+-- Ketidakleluasaan untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `level` (`id_level`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

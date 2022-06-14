@@ -161,7 +161,7 @@ public function deletePegawai($id){
         $data = [
             'jabatan' => $this->ModelUser->getJoin('jabatan','level'),
             'level' => $this->ModelUser->getData('level'),
-            'konten' => 'pegawai/jabatan',
+            'konten' => 'admin/jabatan',
             'title' => 'jabatan',
             'judul' => 'Data Jabatan Pegawai'
         ];
@@ -205,10 +205,22 @@ public function deletePegawai($id){
         $this->load->view('template',$data);
     }
     public function data_divisi(){
-
+        $data = [
+            'konten' => 'pegawai/divisi',
+            'title' => 'divisi',
+            'judul' => 'Data Divisi Pegawai',
+            'divisi' => 'Data Divisi'
+        ];
+        $this->load->view('template',$data);
     }
     public function data_jabatan(){
-
+        $data = [
+            'konten' => 'pegawai/jabatan',
+            'title' => 'divisi',
+            'judul' => 'Data Jabatan Pegawai',
+            'jabatan' => $this->ModelUser->getJoin('jabatan','level')
+        ];
+        $this->load->view('template',$data);
     }
 
 }

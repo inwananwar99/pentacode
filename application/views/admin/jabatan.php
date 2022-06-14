@@ -1,3 +1,4 @@
+<a href="#" class="btn btn-success mb-3" data-toggle="modal" data-target="#addModal">Tambah</a>
 <?= $this->session->flashdata('message'); ?>
 <table class="table table-bordered" id="example1">
     <thead>

@@ -86,7 +86,7 @@
               </a>
             </li>
             <?php if($this->session->userdata('role') == 'Pegawai'){?>
-              <li class="nav-item">
+            <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
@@ -115,7 +115,52 @@
               </li>
             </ul>
           </li>
-            <?php }?>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Data Kualifikasi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('User/data_profil'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Pendidikan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('User/data_divisi'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Proyek</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('User/data_jabatan'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Riwayat Pekerjaan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+              <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                Data Kompetensi
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                Data Riwayat Pekerjaan
+                </p>
+              </a>
+            </li>
+            <?php }else if($role == 'Admin'){?>
             <li class="nav-item">
               <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
                 <i class="nav-icon fas fa-user"></i>
@@ -156,6 +201,7 @@
                 </p>
               </a>
             </li>
+            <?php }?>
             <li class="nav-item">
               <a href="<?= base_url('Welcome/logout')?>" class="nav-link">
                 <i class="nav-icon fa fa-sign-out-alt"></i>
