@@ -160,7 +160,7 @@
                 </p>
               </a>
             </li>
-            <?php }else if($role == 'Admin'){?>
+            <?php }else if($this->session->userdata('role') == 'Admin'){?>
             <li class="nav-item">
               <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
                 <i class="nav-icon fas fa-user"></i>
