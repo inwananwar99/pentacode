@@ -145,7 +145,7 @@
             </ul>
           </li>
           <li class="nav-item">
-              <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
+              <a href="<?= base_url('Prestasi')?>" class="nav-link <?= $title == 'prestasi' ? 'active' : ''?>">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
                 Data Kompetensi
