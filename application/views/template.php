@@ -153,10 +153,10 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
+              <a href="<?= base_url('Sertifikat')?>" class="nav-link <?= $title == 'sertifikat' ? 'active' : ''?>">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
-                Data Riwayat Pekerjaan
+                Data Sertifikat
                 </p>
               </a>
             </li>
