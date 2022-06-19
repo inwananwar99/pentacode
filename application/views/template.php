@@ -170,14 +170,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= base_url('User/pegawai')?>" class="nav-link <?= $title == 'pegawai' ? 'active' : ''?>">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                Kelola Data Pegawai
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="<?= base_url('User/level')?>" class="nav-link <?= $title == 'level' ? 'active' : ''?>">
                 <i class="nav-icon fas fa-signal"></i>
                 <p>
@@ -193,14 +185,23 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="<?= base_url('Proyek')?>" class="nav-link <?= $title == 'proyek' ? 'active' : ''?>">
-                <i class="nav-icon fas fa-pen"></i>
+            <?php }else if($this->session->userdata('role') == 'Manajer'){?>
+              <li class="nav-item">
+              <a href="<?= base_url('User/pegawai')?>" class="nav-link <?= $title == 'pegawai' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-users"></i>
                 <p>
-                Kelola Data Proyek
+                Kelola Data Pegawai
                 </p>
               </a>
             </li>
+              <li class="nav-item">
+                <a href="<?= base_url('Proyek')?>" class="nav-link <?= $title == 'proyek' ? 'active' : ''?>">
+                  <i class="nav-icon fas fa-pen"></i>
+                  <p>
+                  Kelola Data Proyek
+                  </p>
+                </a>
+              </li>
             <?php }?>
             <li class="nav-item">
               <a href="<?= base_url('Welcome/logout')?>" class="nav-link">
