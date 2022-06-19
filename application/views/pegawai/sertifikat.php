@@ -20,7 +20,7 @@
             <td><?= $s['jenis_sert'];?></td>
             <td><?= $s['bidang_studi'];?></td>
             <td><?= $s['thn_sert'];?></td>
-            <td><a href="<?= base_url('assets/img/pegawai/prestasi/'.$s['lampiran']); ?>" target="_blank"><?= $s['lampiran'];?></a></td>
+            <td><a href="<?= base_url('assets/img/pegawai/sertifikat/'.$s['lampiran']); ?>" target="_blank"><?= $s['lampiran'];?></a></td>
             <td>
                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $s['id_sert'];?>">Ubah</a>
                 <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $s['id_sert']?>">Hapus</a>
