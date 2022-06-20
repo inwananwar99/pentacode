@@ -182,10 +182,10 @@ public function deletePegawai($id){
     public function updateJabatan($id){
         $data = [
             'nama_jabatan' => $this->input->post('jabatan'),
-            'jobdesc' => $this->input->post('desc'),
+            'jobdesc' => $this->input->post('jobdesc'),
             'id_level' => $this->input->post('id_level')
         ];
-        $this->ModelUser->update(['id_jabatan',$id],'jabatan',$data);
+        $this->ModelUser->update(['id_jabatan' => $id],'jabatan',$data);
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil mengubah Data Jabatan!</div>');
         return redirect('User/jabatan');
     }
@@ -209,10 +209,35 @@ public function deletePegawai($id){
             'konten' => 'pegawai/divisi',
             'title' => 'divisi',
             'judul' => 'Data Divisi Pegawai',
-            'divisi' => 'Data Divisi'
+            'divisi' => $this->ModelUser->getData('divisi')
         ];
         $this->load->view('template',$data);
     }
+
+    public function addDivisi(){
+        $data = [
+            'nama_divisi' => $this->input->post('nama')
+        ];
+        $this->ModelUser->add('divisi',$data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menambahkan Data Divisi!</div>');
+        return redirect('User/data_divisi');
+    }
+
+    public function updateDivisi($id){
+        $data = [
+            'nama_divisi' => $this->input->post('nama')
+        ];
+        $this->ModelUser->update(['id_divisi' => $id],'divisi',$data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil mengubah Data Divisi!</div>');
+        return redirect('User/data_divisi');
+    }
+
+    public function deleteDivisi($id){
+        $this->ModelUser->delete(['id_divisi' => $id],'divisi');
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Berhasil menghapus Data Divisi!</div>');
+        return redirect('User/data_divisi');
+    }
+
     public function data_jabatan(){
         $data = [
             'konten' => 'pegawai/jabatan',
@@ -221,6 +246,48 @@ public function deletePegawai($id){
             'jabatan' => $this->ModelUser->getJoin('jabatan','level')
         ];
         $this->load->view('template',$data);
+    }
+
+    public function pendidikan(){
+        $data = [
+            'konten' => 'pegawai/pendidikan',
+            'title' => 'pendidikan',
+            'judul' => 'Data Pendidikan Pegawai',
+            'pendidikan' => $this->ModelUser->getData('pendidikan')
+        ];
+        $this->load->view('template',$data);
+    }
+
+    public function addPendidikan(){
+        $data = [
+            'jenjang' => $this->input->post('jenjang'),
+            'gelar' => $this->input->post('gelar'),
+            'bidang_studi' => $this->input->post('bidang_studi'),
+            'perguruan_tinggi' => $this->input->post('pt'),
+            'thn_lulus' => $this->input->post('tahun')
+        ];
+        $this->ModelUser->add('pendidikan',$data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menambahkan Data Pendidikan!</div>');
+        return redirect('User/pendidikan');
+    }
+
+    public function updatePendidikan($id){
+        $data = [
+            'jenjang' => $this->input->post('jenjang'),
+            'gelar' => $this->input->post('gelar'),
+            'bidang_studi' => $this->input->post('bidang_studi'),
+            'perguruan_tinggi' => $this->input->post('pt'),
+            'thn_lulus' => $this->input->post('tahun')
+        ];
+        $this->ModelUser->update(['id_pendidikan' => $id],'pendidikan',$data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil mengubah Data Pendidikan!</div>');
+        return redirect('User/pendidikan');
+    }
+
+    public function deletePendidikan($id){
+        $this->ModelUser->delete(['id_pendidikan' => $id],'pendidikan');
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Berhasil menghapus Data Pendidikan!</div>');
+        return redirect('User/pendidikan');
     }
 
 }

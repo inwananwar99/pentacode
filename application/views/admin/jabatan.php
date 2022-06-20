@@ -24,7 +24,7 @@
     </tbody>
 </table>
 
-<!-- Modal Add Level -->
+<!-- Modal Add Jabatan -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg" role="document">
   <div class="modal-content">
@@ -81,7 +81,7 @@
             </div>
             <div class="form-group">
                <label for="">Deskripsi Pekerjaan</label>
-                <textarea name="jobdesc class="form-control"><?= $j1['jobdesc']; ?></textarea>
+                <textarea name="jobdesc" class="form-control"><?= $j1['jobdesc']; ?></textarea>
             </div>
             <div class="form-group">
                <label for="">Level Pegawai</label>
