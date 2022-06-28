@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Jun 2022 pada 02.18
+-- Waktu pembuatan: 28 Jun 2022 pada 02.57
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -31,6 +31,13 @@ CREATE TABLE `divisi` (
   `id_divisi` int(11) NOT NULL,
   `nama_divisi` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `divisi`
+--
+
+INSERT INTO `divisi` (`id_divisi`, `nama_divisi`) VALUES
+(2, 'Maulid');
 
 -- --------------------------------------------------------
 
@@ -68,8 +75,8 @@ CREATE TABLE `jabatan` (
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `jobdesc`, `id_level`) VALUES
-(1, 'Supervisor', 'jkasfjklafsdf', 3),
-(2, 'Backend Developer', 'Tukang Ngoding', 4);
+(1, 'Bussines Analystyyy', 'Mendefinisikan kebutuhan user', 2),
+(2, 'Bussines Analyst', 'Mendefinisikan kebutuhan user', 4);
 
 -- --------------------------------------------------------
 
@@ -165,6 +172,13 @@ CREATE TABLE `prestasi` (
   `lampiran` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `prestasi`
+--
+
+INSERT INTO `prestasi` (`id_prestasi`, `nama_prestasi`, `bidang`, `tahun`, `lampiran`) VALUES
+(2, 'LDK Uswatun Hasanah', 'Keagamaan', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full2.pdf');
+
 -- --------------------------------------------------------
 
 --
@@ -181,6 +195,14 @@ CREATE TABLE `proyek` (
   `tgl_akhir_proyek` date NOT NULL,
   `status_proyek` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `proyek`
+--
+
+INSERT INTO `proyek` (`id_proyek`, `nama_proyek`, `id_pegawai`, `ket_proyek`, `status_pegawai`, `tgl_awal_proyek`, `tgl_akhir_proyek`, `status_proyek`) VALUES
+(2, 'Jawa Tengah', 2, 'dggafs', 'Fungsional', '2022-06-27', '2022-06-28', 'On Progress'),
+(3, 'Purwakarta', 1, 'fgsdggsdg', 'Jasbor', '2022-06-28', '2022-06-30', 'On Progress');
 
 -- --------------------------------------------------------
 
@@ -209,6 +231,13 @@ CREATE TABLE `sertifikat` (
   `lampiran` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `sertifikat`
+--
+
+INSERT INTO `sertifikat` (`id_sert`, `jenis_sert`, `bidang_studi`, `thn_sert`, `lampiran`) VALUES
+(2, 'Pauli', 'Informatikaaa', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full6.pdf');
+
 -- --------------------------------------------------------
 
 --
@@ -232,7 +261,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
 (5, 'Ihsan Ibrahim', 'inwananwar99@gmail.com', 'polsub2018', 'Inwan13.png', 3, 1, '2022-05-30'),
-(6, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31');
+(6, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31'),
+(7, 'Denny Adam', 'sugiarto@iconpln.co.id', 'sugiarto', 'wp2655834.jpg', 1, 1, '2022-06-19');
 
 --
 -- Indexes for dumped tables
@@ -325,7 +355,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `divisi`
 --
 ALTER TABLE `divisi`
-  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `hrd`
@@ -337,7 +367,7 @@ ALTER TABLE `hrd`
 -- AUTO_INCREMENT untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `level`
@@ -361,19 +391,19 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT untuk tabel `pendidikan`
 --
 ALTER TABLE `pendidikan`
-  MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `prestasi`
 --
 ALTER TABLE `prestasi`
-  MODIFY `id_prestasi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_prestasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
-  MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `riwayat_pekerjaan`
@@ -385,13 +415,13 @@ ALTER TABLE `riwayat_pekerjaan`
 -- AUTO_INCREMENT untuk tabel `sertifikat`
 --
 ALTER TABLE `sertifikat`
-  MODIFY `id_sert` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sert` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -408,6 +438,12 @@ ALTER TABLE `jabatan`
 --
 ALTER TABLE `pegawai`
   ADD CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`);
+
+--
+-- Ketidakleluasaan untuk tabel `proyek`
+--
+ALTER TABLE `proyek`
+  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`);
 
 --
 -- Ketidakleluasaan untuk tabel `users`

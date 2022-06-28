@@ -1,21 +1,24 @@
 <?php
 class ModelProyek extends CI_Model{
-    public function getData(){
-        return $this->db->get('proyek')->result_array();
+    public function getData($table){
+        return $this->db->get($table)->result_array();
     }
 
-    public function add($data){
-        return $this->db->insert('proyek',$data);
+    public function add($table,$data){
+        return $this->db->insert($table,$data);
     }
 
-    public function update($id,$data){
-        $this->db->where('id',$id);
-        return $this->db->update('proyek',$data);
+    public function update($table,$id,$data){
+        $this->db->where($id);
+        return $this->db->update($table,$data);
     }
 
-    public function delete($id){
-        $this->db->where('id',$id);
-        return $this->db->delete('proyek');
+    public function delete($table,$id){
+        $this->db->where($id);
+        return $this->db->delete($table);
+    }
+    public function getJoin(){
+        return $this->db->query("SELECT *FROM proyek JOIN pegawai ON proyek.id_pegawai = pegawai.id_pegawai")->result_array();
     }
 }
 ?>

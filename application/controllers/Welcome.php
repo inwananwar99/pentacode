@@ -18,7 +18,6 @@ class Welcome extends CI_Controller {
 	}
 	public function do_login(){
 		$this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		$data = $this->db->get_where('users',['email'=> $email])->row_array();
@@ -26,7 +25,7 @@ class Welcome extends CI_Controller {
 			if($data['id_level'] == 1){
 				if($data['password'] == $password){
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Manajer!</div>');
-					$d = ['name' => $data['name'],'role' => 'Manajer'];
+					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Manajer'];
 					$this->session->set_userdata($d);
 					return redirect('Welcome/dashboard');
 				}else{
@@ -36,7 +35,7 @@ class Welcome extends CI_Controller {
 			}else if($data['id_level'] == 2){
 				if($data['password'] == $password){
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang HRD!</div>');
-					$d = ['name' => $data['name'],'role' => 'HRD'];
+					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'HRD'];
 					$this->session->set_userdata($d);
 					return redirect('Welcome/dashboard');
 				}else{
@@ -46,7 +45,7 @@ class Welcome extends CI_Controller {
 			}else if($data['id_level'] == 3){
 				if($data['password'] == $password){
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Pegawai!</div>');
-					$d = ['name' => $data['name'],'role' => 'Admin'];
+					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Admin'];
 					$this->session->set_userdata($d);
 					return redirect('Welcome/dashboard');
 				}else{
@@ -56,7 +55,7 @@ class Welcome extends CI_Controller {
 			}else if($data['id_level'] == 4){
 				if($data['password'] == $password){
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Pegawai!</div>');
-					$d = ['name' => $data['name'],'role' => 'Pegawai'];
+					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Pegawai'];
 					$this->session->set_userdata($d);
 					return redirect('Welcome/dashboard');
 				}else{
