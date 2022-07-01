@@ -1,8 +1,9 @@
 <?php
     class Prestasi extends CI_Controller{
         public function index(){
+            $user_id = $this->session->userdata('id');
             $data = [
-                'prestasi' => $this->ModelPromosi->getData('prestasi'),
+                'prestasi' => $this->ModelPromosi->join('prestasi',['user_id'=>$user_id]),
                 'konten' => 'pegawai/prestasi',
                 'title' => 'prestasi',
                 'judul' => 'Data Kompetensi'
@@ -26,6 +27,7 @@
                     return redirect('Prestasi');
                 }else{
                     $data = [
+                        'user_id' => $this->session->userdata('id'),
                         'nama_prestasi' => $this->input->post('nama'),
                         'bidang' => $this->input->post('bidang'),
                         'tahun' => $this->input->post('tahun'),
@@ -47,6 +49,7 @@
             $this->load->library('upload', $config);
             if(!$this->upload->do_upload('lampiran')){
                     $data = [
+                        'user_id' => $this->session->userdata('id'),
                         'nama_prestasi' => $this->input->post('nama'),
                         'bidang' => $this->input->post('bidang'),
                         'tahun' => $this->input->post('tahun')
@@ -56,6 +59,7 @@
                     return redirect('Prestasi');
             }else{
                 $data = [
+                    'user_id' => $this->session->userdata('id'),
                     'nama_prestasi' => $this->input->post('nama'),
                     'bidang' => $this->input->post('bidang'),
                     'tahun' => $this->input->post('tahun'),

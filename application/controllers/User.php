@@ -249,17 +249,19 @@ public function deletePegawai($id){
     }
 
     public function pendidikan(){
+        $user_id = $this->session->userdata('id');
         $data = [
             'konten' => 'pegawai/pendidikan',
             'title' => 'pendidikan',
             'judul' => 'Data Pendidikan Pegawai',
-            'pendidikan' => $this->ModelUser->getData('pendidikan')
+            'pendidikan' => $this->ModelPromosi->join('pendidikan',['user_id'=>$user_id])
         ];
         $this->load->view('template',$data);
     }
 
     public function addPendidikan(){
         $data = [
+            'user_id' => $this->session->userdata('id'),
             'jenjang' => $this->input->post('jenjang'),
             'gelar' => $this->input->post('gelar'),
             'bidang_studi' => $this->input->post('bidang_studi'),
@@ -273,6 +275,7 @@ public function deletePegawai($id){
 
     public function updatePendidikan($id){
         $data = [
+            'user_id' => $this->session->userdata('id'),
             'jenjang' => $this->input->post('jenjang'),
             'gelar' => $this->input->post('gelar'),
             'bidang_studi' => $this->input->post('bidang_studi'),

@@ -31,5 +31,13 @@ class ModelPromosi extends CI_Model{
         $this->db->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan');
         return $this->db->get()->result_array();
     }
+
+    public function join($table,$id){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->join('users', $table.'.user_id = users.id');
+        $this->db->where($id);
+        return $this->db->get()->result_array();
+    }
 }
 ?>

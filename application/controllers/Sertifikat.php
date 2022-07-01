@@ -1,8 +1,9 @@
 <?php
     class Sertifikat extends CI_Controller{
         public function index(){
+            $user_id = $this->session->userdata('id');
             $data = [
-                'sertifikat' => $this->ModelPromosi->getData('sertifikat'),
+                'sertifikat' => $this->ModelPromosi->join('sertifikat',['user_id'=>$user_id]),
                 'konten' => 'pegawai/sertifikat',
                 'title' => 'sertifikat',
                 'judul' => 'Data Sertifikat'
@@ -26,6 +27,7 @@
                     return redirect('Sertifikat');
                 }else{
                     $data = [
+                        'user_id' => $this->session->userdata('id'),
                         'jenis_sert' => $this->input->post('jenis'),
                         'bidang_studi' => $this->input->post('bidang_studi'),
                         'thn_sert' => $this->input->post('tahun'),
@@ -47,6 +49,7 @@
             $this->load->library('upload', $config);
             if(!$this->upload->do_upload('lampiran')){
                     $data = [
+                        'user_id' => $this->session->userdata('id'),
                         'jenis_sert' => $this->input->post('jenis'),
                         'bidang_studi' => $this->input->post('bidang_studi'),
                         'thn_sert' => $this->input->post('tahun')
@@ -56,6 +59,7 @@
                     return redirect('Sertifikat');
             }else{
                 $data = [
+                    'user_id' => $this->session->userdata('id'),
                     'jenis_sert' => $this->input->post('jenis'),
                     'bidang_studi' => $this->input->post('bidang_studi'),
                     'thn_sert' => $this->input->post('tahun'),

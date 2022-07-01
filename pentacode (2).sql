@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Jun 2022 pada 02.57
+-- Waktu pembuatan: 01 Jul 2022 pada 11.51
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -151,12 +151,21 @@ INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `jenis_kelamin`, `tmp_lahir
 
 CREATE TABLE `pendidikan` (
   `id_pendidikan` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `jenjang` varchar(20) NOT NULL,
   `gelar` varchar(20) NOT NULL,
   `bidang_studi` varchar(30) NOT NULL,
   `perguruan_tinggi` varchar(30) NOT NULL,
   `thn_lulus` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pendidikan`
+--
+
+INSERT INTO `pendidikan` (`id_pendidikan`, `user_id`, `jenjang`, `gelar`, `bidang_studi`, `perguruan_tinggi`, `thn_lulus`) VALUES
+(2, 6, 'Sarjana', 'Sarjana Terapan', 'Informatika', 'Politeknik Negeri Subang', 2021),
+(3, 8, 'Magister', 'Magister', 'Informatika', 'Politeknik Elektronika Negeri ', 2021);
 
 -- --------------------------------------------------------
 
@@ -166,6 +175,7 @@ CREATE TABLE `pendidikan` (
 
 CREATE TABLE `prestasi` (
   `id_prestasi` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `nama_prestasi` varchar(128) NOT NULL,
   `bidang` varchar(50) NOT NULL,
   `tahun` int(5) NOT NULL,
@@ -176,8 +186,9 @@ CREATE TABLE `prestasi` (
 -- Dumping data untuk tabel `prestasi`
 --
 
-INSERT INTO `prestasi` (`id_prestasi`, `nama_prestasi`, `bidang`, `tahun`, `lampiran`) VALUES
-(2, 'LDK Uswatun Hasanah', 'Keagamaan', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full2.pdf');
+INSERT INTO `prestasi` (`id_prestasi`, `user_id`, `nama_prestasi`, `bidang`, `tahun`, `lampiran`) VALUES
+(2, 6, 'LDK Uswatun Hasanah', 'Keagamaan', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full2.pdf'),
+(3, 8, 'Web Developer Hackathon Sandbox 2018', 'Teknologi Informasi', 2018, 'IC_AssessmentICPay_Versi_2_8.pdf');
 
 -- --------------------------------------------------------
 
@@ -225,6 +236,7 @@ CREATE TABLE `riwayat_pekerjaan` (
 
 CREATE TABLE `sertifikat` (
   `id_sert` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `jenis_sert` varchar(50) NOT NULL,
   `bidang_studi` varchar(50) NOT NULL,
   `thn_sert` int(5) NOT NULL,
@@ -235,8 +247,9 @@ CREATE TABLE `sertifikat` (
 -- Dumping data untuk tabel `sertifikat`
 --
 
-INSERT INTO `sertifikat` (`id_sert`, `jenis_sert`, `bidang_studi`, `thn_sert`, `lampiran`) VALUES
-(2, 'Pauli', 'Informatikaaa', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full6.pdf');
+INSERT INTO `sertifikat` (`id_sert`, `user_id`, `jenis_sert`, `bidang_studi`, `thn_sert`, `lampiran`) VALUES
+(2, 6, 'Pauli', 'Informatikaaa', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full6.pdf'),
+(4, 8, 'Kremlin', 'HR Specialist', 2018, 'IC_AssessmentICPay_Versi_2_8.pdf');
 
 -- --------------------------------------------------------
 
@@ -262,7 +275,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
 (5, 'Ihsan Ibrahim', 'inwananwar99@gmail.com', 'polsub2018', 'Inwan13.png', 3, 1, '2022-05-30'),
 (6, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31'),
-(7, 'Denny Adam', 'sugiarto@iconpln.co.id', 'sugiarto', 'wp2655834.jpg', 1, 1, '2022-06-19');
+(7, 'Denny Adam', 'sugiarto@iconpln.co.id', 'sugiarto', 'wp2655834.jpg', 1, 1, '2022-06-19'),
+(8, 'Dhika Pratara', 'dhika@iconpln.co.id', 'pratara', 'wp2655834.jpg', 4, 1, '2022-06-30');
 
 --
 -- Indexes for dumped tables
@@ -311,13 +325,15 @@ ALTER TABLE `pegawai`
 -- Indeks untuk tabel `pendidikan`
 --
 ALTER TABLE `pendidikan`
-  ADD PRIMARY KEY (`id_pendidikan`);
+  ADD PRIMARY KEY (`id_pendidikan`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeks untuk tabel `prestasi`
 --
 ALTER TABLE `prestasi`
-  ADD PRIMARY KEY (`id_prestasi`);
+  ADD PRIMARY KEY (`id_prestasi`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeks untuk tabel `proyek`
@@ -338,7 +354,8 @@ ALTER TABLE `riwayat_pekerjaan`
 -- Indeks untuk tabel `sertifikat`
 --
 ALTER TABLE `sertifikat`
-  ADD PRIMARY KEY (`id_sert`);
+  ADD PRIMARY KEY (`id_sert`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeks untuk tabel `users`
@@ -391,13 +408,13 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT untuk tabel `pendidikan`
 --
 ALTER TABLE `pendidikan`
-  MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `prestasi`
 --
 ALTER TABLE `prestasi`
-  MODIFY `id_prestasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_prestasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `proyek`
@@ -415,13 +432,13 @@ ALTER TABLE `riwayat_pekerjaan`
 -- AUTO_INCREMENT untuk tabel `sertifikat`
 --
 ALTER TABLE `sertifikat`
-  MODIFY `id_sert` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_sert` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -440,10 +457,28 @@ ALTER TABLE `pegawai`
   ADD CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`);
 
 --
+-- Ketidakleluasaan untuk tabel `pendidikan`
+--
+ALTER TABLE `pendidikan`
+  ADD CONSTRAINT `pendidikan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `prestasi`
+--
+ALTER TABLE `prestasi`
+  ADD CONSTRAINT `prestasi_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Ketidakleluasaan untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
   ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`);
+
+--
+-- Ketidakleluasaan untuk tabel `sertifikat`
+--
+ALTER TABLE `sertifikat`
+  ADD CONSTRAINT `sertifikat_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `users`
