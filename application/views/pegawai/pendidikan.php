@@ -1,14 +1,20 @@
-<a href="#" class="btn btn-success mb-3" data-toggle="modal" data-target="#addModal">Tambah</a>
+<?php if($this->session->userdata('role')!=='Manajer'){?>
+  <a href="#" class="btn btn-success mb-3" data-toggle="modal" data-target="#addModal">Tambah</a>
+<?php }?>
 <?= $this->session->flashdata('message'); ?>
 <table class="table table-bordered" id="example1">
     <thead>
         <tr>
             <th>No. </th>
+            <?php if($this->session->userdata('role')=='Manajer'){?>
+              <th>Nama</th>
+            <?php }?>
             <th>Jenjang Pendidikan</th>
             <th>Gelar Pendidikan</th>
             <th>Bidang Studi</th>
             <th>Perguruan Tinggi</th>
             <th>Tahun Lulus</th>
+            <th>Lampiran</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -18,11 +24,15 @@
     foreach($pendidikan as $d):?>
         <tr>       
             <td><?= $no++; ?></td>
+            <?php if($this->session->userdata('role')=='Manajer'){?>
+              <td><?= $d['name'];?></td>
+            <?php }?>
             <td><?= $d['jenjang']; ?></td>
             <td><?= $d['gelar']; ?></td>
             <td><?= $d['bidang_studi']; ?></td>
             <td><?= $d['perguruan_tinggi']; ?></td>
             <td><?= $d['thn_lulus']; ?></td>
+            <td><a href="<?= base_url('assets/img/pegawai/pendidikan/'.$d['lampiran']); ?>" target="_blank"><?= $d['lampiran'];?></a></td>
             <td>
                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $d['id_pendidikan']; ?>">Ubah</a>
                 <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $d['id_pendidikan']; ?>">Hapus</a>
@@ -42,7 +52,7 @@
       </button>
     </div>
     <div class="modal-body">
-    <form action="<?= base_url('User/addPendidikan');?>" method="POST">
+    <form action="<?= base_url('User/addPendidikan');?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                <label for="">Jenjang Pendidikan</label>
               <select name="jenjang" class="form-control">
@@ -76,6 +86,10 @@
                <label for="">Tahun Lulus</label>
                <input type="text" name="tahun" class="form-control" placeholder="Tahun Lulus ..." autofocus> 
             </div>
+            <div class="form-group">
+               <label for="">Lampiran Ijazah/Sertifikat</label>
+               <input type="file" name="lampiran" class="form-control" placeholder="Lampiran ..." autofocus> 
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -98,7 +112,7 @@
       </button>
     </div>
     <div class="modal-body">
-    <form action="<?= base_url('User/updatePendidikan/'.$d1['id_pendidikan']);?>" method="POST">
+    <form action="<?= base_url('User/updatePendidikan/'.$d1['id_pendidikan']);?>" method="POST" enctype="multipart/form-data">
     <div class="form-group">
                <label for="">Jenjang Pendidikan</label>
               <select name="jenjang" class="form-control">
@@ -131,6 +145,13 @@
             <div class="form-group">
                <label for="">Tahun Lulus</label>
                <input type="text" name="tahun" class="form-control" value="<?= $d1['thn_lulus']; ?>" placeholder="Tahun Lulus ..." autofocus> 
+            </div>
+            <div class="form-group">
+               <label for="">Lampiran Ijazah/Sertifikat</label>
+               <input type="file" name="lampiran" class="form-control" placeholder="Lampiran ..." autofocus>
+               <input type="hidden" name="status" value="<?= $d1['status']; ?>">
+               <br>
+               <p><?= $d1['lampiran']; ?></p> 
             </div>
         </div>
         <div class="modal-footer">

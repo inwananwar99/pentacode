@@ -202,7 +202,45 @@
                   </p>
                 </a>
               </li>
-            <?php }?>
+              <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Validasi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('User/pendidikan'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Pendidikan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('User/data_divisi'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Sertifikat</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('User/data_jabatan'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Kompetensi</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+            <?php }else if($this->session->userdata('role') == 'Super Admin'){?>
+              <li class="nav-item">
+              <a href="<?= base_url('User/admin')?>" class="nav-link">
+                <i class="nav-icon fa fa-sign-out-alt"></i>
+                <p>
+                  Kelola Admin
+                </p>
+              </a>
+            </li>              
+            <?php } ?>
             <li class="nav-item">
               <a href="<?= base_url('Welcome/logout')?>" class="nav-link">
                 <i class="nav-icon fa fa-sign-out-alt"></i>

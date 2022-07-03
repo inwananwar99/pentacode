@@ -25,6 +25,14 @@ class ModelUser extends CI_Model{
         return $this->db->get()->result_array();
     }
 
+    public function getJoinAdmin(){
+        return $this->db->query("SELECT *FROM users JOIN divisi ON users.id_divisi = divisi.id_divisi JOIN level ON users.id_level = level.id_level WHERE level.level LIKE '%Admin%'")->result_array();
+    }
+
+    public function getByLevel(){
+        return $this->db->query("SELECT *FROM level WHERE level LIKE '%Admin%' AND level.level NOT LIKE '%Super%'")->result_array();
+    }
+
     public function getJoinn(){
         $this->db->select('*');
         $this->db->from('pegawai');

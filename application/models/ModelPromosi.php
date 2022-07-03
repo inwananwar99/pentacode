@@ -39,5 +39,12 @@ class ModelPromosi extends CI_Model{
         $this->db->where($id);
         return $this->db->get()->result_array();
     }
+
+    public function join2($table){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->join('users', $table.'.user_id = users.id');
+        return $this->db->get()->result_array();
+    }
 }
 ?>

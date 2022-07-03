@@ -62,6 +62,16 @@ class Welcome extends CI_Controller {
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
 					return redirect('Welcome');
 				}
+			}else if($data['id_level'] == 8){
+				if($data['password'] == $password){
+					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Super Admin!</div>');
+					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Super Admin'];
+					$this->session->set_userdata($d);
+					return redirect('Welcome/dashboard');
+				}else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
+					return redirect('Welcome');
+				}
 			}
 		}else{
 			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">User tidak terdaftar!</div>');

@@ -249,42 +249,87 @@ public function deletePegawai($id){
     }
 
     public function pendidikan(){
-        $user_id = $this->session->userdata('id');
-        $data = [
-            'konten' => 'pegawai/pendidikan',
-            'title' => 'pendidikan',
-            'judul' => 'Data Pendidikan Pegawai',
-            'pendidikan' => $this->ModelPromosi->join('pendidikan',['user_id'=>$user_id])
-        ];
+        if($this->session->userdata('role') == 'Pegawai'){
+            $user_id = $this->session->userdata('id');
+            $data = [
+                'konten' => 'pegawai/pendidikan',
+                'title' => 'pendidikan',
+                'judul' => 'Data Pendidikan Pegawai',
+                'pendidikan' => $this->ModelPromosi->join('pendidikan',['user_id'=>$user_id])
+            ];
+        }else{
+            $data = [
+                'konten' => 'pegawai/pendidikan',
+                'title' => 'pendidikan',
+                'judul' => 'Data Pendidikan Pegawai',
+                'pendidikan' => $this->ModelPromosi->join2('pendidikan')
+            ];
+        }
         $this->load->view('template',$data);
     }
 
     public function addPendidikan(){
-        $data = [
-            'user_id' => $this->session->userdata('id'),
-            'jenjang' => $this->input->post('jenjang'),
-            'gelar' => $this->input->post('gelar'),
-            'bidang_studi' => $this->input->post('bidang_studi'),
-            'perguruan_tinggi' => $this->input->post('pt'),
-            'thn_lulus' => $this->input->post('tahun')
-        ];
-        $this->ModelUser->add('pendidikan',$data);
-        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menambahkan Data Pendidikan!</div>');
-        return redirect('User/pendidikan');
+        $config['upload_path']          = './assets/img/pegawai/pendidikan';
+        $config['allowed_types']        = 'gif|jpg|png|pdf';
+        $config['max_size']             = 5000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+        $this->load->library('upload', $config);
+        if(!$this->upload->do_upload('lampiran')){
+            $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Gagal tambah pendidikan!</div>');
+            return redirect('User/pendidikan');
+        }else{
+            $data = [
+                'user_id' => $this->session->userdata('id'),
+                'jenjang' => $this->input->post('jenjang'),
+                'gelar' => $this->input->post('gelar'),
+                'bidang_studi' => $this->input->post('bidang_studi'),
+                'perguruan_tinggi' => $this->input->post('pt'),
+                'thn_lulus' => $this->input->post('tahun'),
+                'lampiran' => $this->upload->data('file_name'),
+                'status' => 'Diajukan'
+            ];
+            $this->ModelUser->add('pendidikan',$data);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menambahkan Data Pendidikan!</div>');
+            return redirect('User/pendidikan');
+        }
     }
 
     public function updatePendidikan($id){
-        $data = [
-            'user_id' => $this->session->userdata('id'),
-            'jenjang' => $this->input->post('jenjang'),
-            'gelar' => $this->input->post('gelar'),
-            'bidang_studi' => $this->input->post('bidang_studi'),
-            'perguruan_tinggi' => $this->input->post('pt'),
-            'thn_lulus' => $this->input->post('tahun')
-        ];
-        $this->ModelUser->update(['id_pendidikan' => $id],'pendidikan',$data);
-        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil mengubah Data Pendidikan!</div>');
-        return redirect('User/pendidikan');
+        $config['upload_path']          = './assets/img/pegawai/pendidikan';
+        $config['allowed_types']        = 'gif|jpg|png|pdf';
+        $config['max_size']             = 5000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+        $this->load->library('upload', $config);
+        if(!$this->upload->do_upload('lampiran')){
+            $data = [
+                'user_id' => $this->session->userdata('id'),
+                'jenjang' => $this->input->post('jenjang'),
+                'gelar' => $this->input->post('gelar'),
+                'bidang_studi' => $this->input->post('bidang_studi'),
+                'perguruan_tinggi' => $this->input->post('pt'),
+                'thn_lulus' => $this->input->post('tahun'),
+                'status' => $this->input->post('status')
+            ];
+            $this->ModelUser->update(['id_pendidikan' => $id],'pendidikan',$data);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil mengubah Data Pendidikan!</div>');
+            return redirect('User/pendidikan');
+        }else{
+            $data = [
+                'user_id' => $this->session->userdata('id'),
+                'jenjang' => $this->input->post('jenjang'),
+                'gelar' => $this->input->post('gelar'),
+                'bidang_studi' => $this->input->post('bidang_studi'),
+                'perguruan_tinggi' => $this->input->post('pt'),
+                'thn_lulus' => $this->input->post('tahun'),
+                'lampiran' => $this->upload->data('file_name'),
+                'status' => $this->input->post('status')
+            ];
+            $this->ModelUser->update(['id_pendidikan' => $id],'pendidikan',$data);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil mengubah Data Pendidikan!</div>');
+            return redirect('User/pendidikan');
+        }
     }
 
     public function deletePendidikan($id){
@@ -293,5 +338,63 @@ public function deletePegawai($id){
         return redirect('User/pendidikan');
     }
 
+    public function admin(){
+        $data = [
+            'admin' => $this->ModelUser->getJoinAdmin(),
+            'level' => $this->ModelUser->getByLevel(),
+            'pegawai' => $this->ModelUser->getData('pegawai'),
+            'divisi' => $this->ModelUser->getData('divisi'),
+            'konten' => 'admin/index',
+            'title' => 'admin',
+            'judul' => 'Data Admin'
+        ];
+        $this->load->view('template',$data);
+    }
+
+    public function addAdmin(){
+        $config['upload_path']          = './assets/img/admin';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 5000;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+        $this->load->library('upload', $config);
+        if(!$this->upload->do_upload('foto')){
+            $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Silahkan upload foto Anda terlebih dahulu!</div>');
+            return redirect('User/admin');
+        }else{
+            $data = [
+                'name' => $this->input->post('nama'),
+                'email' => $this->input->post('email'),
+                'status_aktif' => 1,
+                'tanggal_buat' => date('Y-m-d'),
+                'password' => $this->input->post('password'),
+                'id_level' => $this->input->post('id_level'),
+                'id_divisi' => $this->input->post('id_divisi'),
+                'foto' => $this->upload->data('file_name')
+            ];
+        }
+        $this->ModelUser->add('users',$data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menambahkan data!</div>');
+        return redirect('User/admin');
+    }
+
+    public function updateAdmin($id){
+            $data = [
+                'name' => $this->input->post('nama'),
+                'email' => $this->input->post('email'),
+                'status_aktif' => 1,
+                'id_level' => $this->input->post('id_level'),
+                'id_divisi' => $this->input->post('id_divisi'),
+            ];
+        $this->ModelUser->update(['id'=> $id],'users',$data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil mengubah Data Admin!</div>');
+        return redirect('User/admin');
+    }
+
+    public function deleteAdmin($id){
+        $this->ModelUser->delete(['id' => $id],'users');
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menghapus Data Admin!</div>');
+        return redirect('User/admin');
+    }
 }
 ?>

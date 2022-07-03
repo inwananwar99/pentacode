@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Jul 2022 pada 11.51
+-- Waktu pembuatan: 03 Jul 2022 pada 22.55
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -37,7 +37,10 @@ CREATE TABLE `divisi` (
 --
 
 INSERT INTO `divisi` (`id_divisi`, `nama_divisi`) VALUES
-(2, 'Maulid');
+(1, 'Finance'),
+(2, 'Pentacode'),
+(3, 'Marketing'),
+(4, 'Digital');
 
 -- --------------------------------------------------------
 
@@ -86,7 +89,7 @@ INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `jobdesc`, `id_level`) VALU
 
 CREATE TABLE `level` (
   `id_level` int(11) NOT NULL,
-  `level` enum('Manajer','HRD','Pegawai','Admin') NOT NULL
+  `level` enum('Manajer','HRD','Pegawai','Admin Finance','Admin Pentacode','Admin Marketing','Admin Digital','Super Admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -96,8 +99,12 @@ CREATE TABLE `level` (
 INSERT INTO `level` (`id_level`, `level`) VALUES
 (1, 'Manajer'),
 (2, 'HRD'),
-(3, 'Admin'),
-(4, 'Pegawai');
+(3, 'Admin Finance'),
+(4, 'Pegawai'),
+(5, 'Admin Pentacode'),
+(6, 'Admin Marketing'),
+(7, 'Admin Digital'),
+(8, 'Super Admin');
 
 -- --------------------------------------------------------
 
@@ -141,7 +148,8 @@ CREATE TABLE `pegawai` (
 
 INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `jenis_kelamin`, `tmp_lahir`, `tgl_lahir`, `alamat`, `email`, `no_tlp`, `id_jabatan`) VALUES
 (1, 'Ihsan Ibrahim', 'Laki-laki', 'Karawang', '2022-05-30', 'hgfhfdhdf', 'inwananwar99@gmail.com', '97968980', 1),
-(2, 'Denny Adam', 'Laki-laki', 'Lampung', '2000-09-12', 'Cilandak, Jaksel', 'denny@iconpln.co.id', '0789472892', 2);
+(2, 'Denny Adam', 'Laki-laki', 'Lampung', '2000-09-12', 'Cilandak, Jaksel', 'denny@iconpln.co.id', '0789472892', 2),
+(3, 'Dhika Pratara', 'Laki-laki', 'Mojokerto', '2022-07-12', 'Jaksel', 'dhikapratara@penta.id', '0875674563', 2);
 
 -- --------------------------------------------------------
 
@@ -155,17 +163,20 @@ CREATE TABLE `pendidikan` (
   `jenjang` varchar(20) NOT NULL,
   `gelar` varchar(20) NOT NULL,
   `bidang_studi` varchar(30) NOT NULL,
-  `perguruan_tinggi` varchar(30) NOT NULL,
-  `thn_lulus` int(30) NOT NULL
+  `perguruan_tinggi` varchar(128) NOT NULL,
+  `thn_lulus` int(30) NOT NULL,
+  `lampiran` text NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `pendidikan`
 --
 
-INSERT INTO `pendidikan` (`id_pendidikan`, `user_id`, `jenjang`, `gelar`, `bidang_studi`, `perguruan_tinggi`, `thn_lulus`) VALUES
-(2, 6, 'Sarjana', 'Sarjana Terapan', 'Informatika', 'Politeknik Negeri Subang', 2021),
-(3, 8, 'Magister', 'Magister', 'Informatika', 'Politeknik Elektronika Negeri ', 2021);
+INSERT INTO `pendidikan` (`id_pendidikan`, `user_id`, `jenjang`, `gelar`, `bidang_studi`, `perguruan_tinggi`, `thn_lulus`, `lampiran`, `status`) VALUES
+(2, 6, 'Sarjana', 'Sarjana Terapan', 'Informatika', 'Politeknik Negeri Subang', 2021, '', ''),
+(3, 8, 'Magister', 'Magister', 'Informatika', 'Politeknik Elektronika Negeri ', 2021, '', ''),
+(4, 6, 'Diploma', 'Ahli Madya', 'Informatika', 'Politeknik Elektronika Negeri Surabaya', 2021, 'BERITA_ACARA_UAT_ICONPAYxMESTIKA_sign_dev.pdf', '');
 
 -- --------------------------------------------------------
 
@@ -179,16 +190,17 @@ CREATE TABLE `prestasi` (
   `nama_prestasi` varchar(128) NOT NULL,
   `bidang` varchar(50) NOT NULL,
   `tahun` int(5) NOT NULL,
-  `lampiran` text NOT NULL
+  `lampiran` text NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `prestasi`
 --
 
-INSERT INTO `prestasi` (`id_prestasi`, `user_id`, `nama_prestasi`, `bidang`, `tahun`, `lampiran`) VALUES
-(2, 6, 'LDK Uswatun Hasanah', 'Keagamaan', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full2.pdf'),
-(3, 8, 'Web Developer Hackathon Sandbox 2018', 'Teknologi Informasi', 2018, 'IC_AssessmentICPay_Versi_2_8.pdf');
+INSERT INTO `prestasi` (`id_prestasi`, `user_id`, `nama_prestasi`, `bidang`, `tahun`, `lampiran`, `status`) VALUES
+(2, 6, 'LDK Uswatun Hasanah', 'Keagamaan', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full2.pdf', ''),
+(3, 8, 'Web Developer Hackathon Sandbox 2018', 'Teknologi Informasi', 2018, 'IC_AssessmentICPay_Versi_2_8.pdf', '');
 
 -- --------------------------------------------------------
 
@@ -240,16 +252,17 @@ CREATE TABLE `sertifikat` (
   `jenis_sert` varchar(50) NOT NULL,
   `bidang_studi` varchar(50) NOT NULL,
   `thn_sert` int(5) NOT NULL,
-  `lampiran` text NOT NULL
+  `lampiran` text NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `sertifikat`
 --
 
-INSERT INTO `sertifikat` (`id_sert`, `user_id`, `jenis_sert`, `bidang_studi`, `thn_sert`, `lampiran`) VALUES
-(2, 6, 'Pauli', 'Informatikaaa', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full6.pdf'),
-(4, 8, 'Kremlin', 'HR Specialist', 2018, 'IC_AssessmentICPay_Versi_2_8.pdf');
+INSERT INTO `sertifikat` (`id_sert`, `user_id`, `jenis_sert`, `bidang_studi`, `thn_sert`, `lampiran`, `status`) VALUES
+(2, 6, 'Pauli', 'Informatikaaa', 2018, 'Advice+no+purchase+-+Gopay+1_1-Test-Report-14-6-2022+12-06-44-full6.pdf', ''),
+(4, 8, 'Kremlin', 'HR Specialist', 2018, 'IC_AssessmentICPay_Versi_2_8.pdf', '');
 
 -- --------------------------------------------------------
 
@@ -259,6 +272,7 @@ INSERT INTO `sertifikat` (`id_sert`, `user_id`, `jenis_sert`, `bidang_studi`, `t
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `id_divisi` int(11) DEFAULT NULL,
   `name` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -272,11 +286,12 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
-(5, 'Ihsan Ibrahim', 'inwananwar99@gmail.com', 'polsub2018', 'Inwan13.png', 3, 1, '2022-05-30'),
-(6, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31'),
-(7, 'Denny Adam', 'sugiarto@iconpln.co.id', 'sugiarto', 'wp2655834.jpg', 1, 1, '2022-06-19'),
-(8, 'Dhika Pratara', 'dhika@iconpln.co.id', 'pratara', 'wp2655834.jpg', 4, 1, '2022-06-30');
+INSERT INTO `users` (`id`, `id_divisi`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
+(6, 4, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31'),
+(7, 2, 'Denny Adam', 'sugiarto@iconpln.co.id', 'sugiarto', 'wp2655834.jpg', 1, 1, '2022-06-19'),
+(8, 3, 'Dhika Pratara', 'dhika@iconpln.co.id', 'pratara', 'wp2655834.jpg', 4, 1, '2022-06-30'),
+(9, NULL, 'Ibnu', 'ibnu@iconpln.co.id', 'ibnuicon', 'default.jpg', 8, 1, '2022-07-03'),
+(12, 4, 'Denny Adam', 'denny@pln.co.id', 'dennyicon', 'info1.png', 7, 1, '2022-07-03');
 
 --
 -- Indexes for dumped tables
@@ -362,7 +377,8 @@ ALTER TABLE `sertifikat`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_level` (`id_level`);
+  ADD KEY `id_level` (`id_level`),
+  ADD KEY `id_divisi` (`id_divisi`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -372,7 +388,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `divisi`
 --
 ALTER TABLE `divisi`
-  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `hrd`
@@ -390,7 +406,7 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT untuk tabel `level`
 --
 ALTER TABLE `level`
-  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `manajer`
@@ -402,13 +418,13 @@ ALTER TABLE `manajer`
 -- AUTO_INCREMENT untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `pendidikan`
 --
 ALTER TABLE `pendidikan`
-  MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `prestasi`
@@ -438,7 +454,7 @@ ALTER TABLE `sertifikat`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -484,7 +500,8 @@ ALTER TABLE `sertifikat`
 -- Ketidakleluasaan untuk tabel `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `level` (`id_level`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `level` (`id_level`),
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`id_divisi`) REFERENCES `divisi` (`id_divisi`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
