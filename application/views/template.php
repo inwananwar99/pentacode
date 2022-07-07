@@ -68,7 +68,8 @@
             <img src="<?= base_url()?>assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block"><?= $this->session->userdata('name').' ('.$this->session->userdata('role').')'; ?></a>
+            <a href="#" class="d-block"><?= $this->session->userdata('name'); ?></a>
+            <p class="text-white"><?= '('.$this->session->userdata('role').')'; ?></p>
           </div>
         </div>
 
@@ -160,7 +161,107 @@
                 </p>
               </a>
             </li>
-            <?php }else if($this->session->userdata('role') == 'Admin'){?>
+            <?php }else if($this->session->userdata('role') == 'Admin Finance'){?>
+            <li class="nav-item">
+              <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                Kelola Data User
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User/level')?>" class="nav-link <?= $title == 'level' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-signal"></i>
+                <p>
+                Kelola Data Level
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User/jabatan')?>" class="nav-link <?= $title == 'jabatan' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-briefcase"></i>
+                <p>
+                Kelola Data Jabatan
+                </p>
+              </a>
+            </li>
+            <?php }else if($this->session->userdata('role') == 'Admin Finance'){?>
+            <li class="nav-item">
+              <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                Kelola Data User
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User/level')?>" class="nav-link <?= $title == 'level' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-signal"></i>
+                <p>
+                Kelola Data Level
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User/jabatan')?>" class="nav-link <?= $title == 'jabatan' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-briefcase"></i>
+                <p>
+                Kelola Data Jabatan
+                </p>
+              </a>
+            </li>
+            <?php }else if($this->session->userdata('role') == 'Admin Pentacode'){?>
+            <li class="nav-item">
+              <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                Kelola Data User
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User/level')?>" class="nav-link <?= $title == 'level' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-signal"></i>
+                <p>
+                Kelola Data Level
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User/jabatan')?>" class="nav-link <?= $title == 'jabatan' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-briefcase"></i>
+                <p>
+                Kelola Data Jabatan
+                </p>
+              </a>
+            </li>
+            <?php }else if($this->session->userdata('role') == 'Admin Marketing'){?>
+            <li class="nav-item">
+              <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                Kelola Data User
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User/level')?>" class="nav-link <?= $title == 'level' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-signal"></i>
+                <p>
+                Kelola Data Level
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User/jabatan')?>" class="nav-link <?= $title == 'jabatan' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-briefcase"></i>
+                <p>
+                Kelola Data Jabatan
+                </p>
+              </a>
+            </li>
+            <?php }else if($this->session->userdata('role') == 'Admin Digital'){?>
             <li class="nav-item">
               <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
                 <i class="nav-icon fas fa-user"></i>
@@ -231,7 +332,8 @@
               </li>
             </ul>
           </li>
-            <?php }else if($this->session->userdata('role') == 'Super Admin'){?>
+            <?php
+           }else if($this->session->userdata('role') == 'Super Admin'){?>
               <li class="nav-item">
               <a href="<?= base_url('User/admin')?>" class="nav-link">
                 <i class="nav-icon fa fa-sign-out-alt"></i>

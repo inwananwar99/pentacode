@@ -44,8 +44,38 @@ class Welcome extends CI_Controller {
 				}
 			}else if($data['id_level'] == 3){
 				if($data['password'] == $password){
-					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Pegawai!</div>');
-					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Admin'];
+					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Admin Finance!</div>');
+					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Admin Finance'];
+					$this->session->set_userdata($d);
+					return redirect('Welcome/dashboard');
+				}else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
+					return redirect('Welcome');
+				}
+			}else if($data['id_level'] == 5){
+				if($data['password'] == $password){
+					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Admin Pentacode!</div>');
+					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Admin Pentacode'];
+					$this->session->set_userdata($d);
+					return redirect('Welcome/dashboard');
+				}else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
+					return redirect('Welcome');
+				}
+			}else if($data['id_level'] == 6){
+				if($data['password'] == $password){
+					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Admin Marketing!</div>');
+					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Admin Marketing'];
+					$this->session->set_userdata($d);
+					return redirect('Welcome/dashboard');
+				}else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
+					return redirect('Welcome');
+				}
+			}else if($data['id_level'] == 7){
+				if($data['password'] == $password){
+					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Admin Digital!</div>');
+					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Admin Digital'];
 					$this->session->set_userdata($d);
 					return redirect('Welcome/dashboard');
 				}else{
@@ -62,7 +92,7 @@ class Welcome extends CI_Controller {
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
 					return redirect('Welcome');
 				}
-			}else if($data['id_level'] == 8){
+			}else if($data['id_level'] == 8){	
 				if($data['password'] == $password){
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Super Admin!</div>');
 					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Super Admin'];

@@ -396,5 +396,14 @@ public function deletePegawai($id){
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menghapus Data Admin!</div>');
         return redirect('User/admin');
     }
+
+    public function validasiBerkas($qualify,$id){
+        if($qualify == 'pendidikan'){
+            $data = $this->input->post('status');
+            $this->db->where(['id_pendidikan'=>$id]);
+        }
+        return $this->db->update($qualify,['status'=>$data]);
+
+    }
 }
 ?>

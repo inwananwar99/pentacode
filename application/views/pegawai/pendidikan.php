@@ -33,10 +33,19 @@
             <td><?= $d['perguruan_tinggi']; ?></td>
             <td><?= $d['thn_lulus']; ?></td>
             <td><a href="<?= base_url('assets/img/pegawai/pendidikan/'.$d['lampiran']); ?>" target="_blank"><?= $d['lampiran'];?></a></td>
+            <?php if($this->session->userdata('role') == 'Pegawai'){ ?>
             <td>
                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $d['id_pendidikan']; ?>">Ubah</a>
                 <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $d['id_pendidikan']; ?>">Hapus</a>
             </td>
+            <?php }else{ ?>
+              <td>
+                <form action="<?= base_url('User/validasiBerkas/'.'pendidikan'.'/'.$d['id_pendidikan']);?>" method="POST">
+                  <input type="hidden" name="status" value="Disetujui">
+                  <button type="submit" class="btn btn-info">Validasi</button>
+                </form>
+              </td>
+            <?php } ?>
         </tr>
     <?php endforeach;?>
     </tbody>
