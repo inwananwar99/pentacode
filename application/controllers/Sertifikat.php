@@ -1,6 +1,7 @@
 <?php
     class Sertifikat extends CI_Controller{
         public function index(){
+            if($this->session->userdata('role') == 'Pegawai'){
             $user_id = $this->session->userdata('id');
             $data = [
                 'sertifikat' => $this->ModelPromosi->join('sertifikat',['user_id'=>$user_id]),
@@ -8,6 +9,14 @@
                 'title' => 'sertifikat',
                 'judul' => 'Data Sertifikat'
             ];
+        }else{
+            $data = [
+                'konten' => 'pegawai/sertifikat',
+                'title' => 'sertifikat',
+                'judul' => 'Data Sertifikat',
+                'sertifikat' => $this->ModelPromosi->join2('sertifikat')
+            ];
+        }
             $this->load->view('template',$data);
         }
         

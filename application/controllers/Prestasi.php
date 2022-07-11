@@ -1,6 +1,7 @@
 <?php
     class Prestasi extends CI_Controller{
         public function index(){
+            if($this->session->userdata('role') == 'Pegawai'){
             $user_id = $this->session->userdata('id');
             $data = [
                 'prestasi' => $this->ModelPromosi->join('prestasi',['user_id'=>$user_id]),
@@ -8,6 +9,14 @@
                 'title' => 'prestasi',
                 'judul' => 'Data Kompetensi'
             ];
+        }else{
+            $data = [
+                'konten' => 'pegawai/prestasi',
+                'title' => 'prestasi',
+                'judul' => 'Data Kompetensi',
+                'prestasi' => $this->ModelPromosi->join2('prestasi')
+            ];
+        }
             $this->load->view('template',$data);
         }
         

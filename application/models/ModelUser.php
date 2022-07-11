@@ -39,5 +39,9 @@ class ModelUser extends CI_Model{
         $this->db->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan');
         return $this->db->get()->result_array();
     }
+
+    public function validasiBerkas($table,$data){
+        return $this->db->update($table,$data);
+    }
 }
 ?>

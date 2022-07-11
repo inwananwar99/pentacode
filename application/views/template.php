@@ -319,13 +319,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('User/data_divisi'); ?>" class="nav-link">
+                <a href="<?= base_url('Sertifikat'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Sertifikat</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('User/data_jabatan'); ?>" class="nav-link">
+                <a href="<?= base_url('Prestasi'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Kompetensi</p>
                 </a>

@@ -9,6 +9,7 @@ class User extends CI_Controller{
             'title' => 'user',
             'judul' => 'Data User'
         ];
+        // var_dump($data['user']);die;
         $this->load->view('template',$data);
     }
 
@@ -401,9 +402,22 @@ public function deletePegawai($id){
         if($qualify == 'pendidikan'){
             $data = $this->input->post('status');
             $this->db->where(['id_pendidikan'=>$id]);
+            $this->ModelUser->validasiBerkas($qualify,['status'=>$data]);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil validasi!</div>');
+            return redirect('User/pendidikan');
+        }else if($qualify == 'sertifikat'){
+            $data = $this->input->post('status');
+            $this->db->where(['id_sert'=>$id]);
+            $this->ModelUser->validasiBerkas($qualify,['status'=>$data]);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil validasi!</div>');
+            return redirect('Sertifikat');
+        }else if($qualify == 'prestasi'){
+            $data = $this->input->post('status');
+            $this->db->where(['id_prestasi'=>$id]);
+            $this->ModelUser->validasiBerkas($qualify,['status'=>$data]);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil validasi!</div>');
+            return redirect('Prestasi');
         }
-        return $this->db->update($qualify,['status'=>$data]);
-
     }
 }
 ?>

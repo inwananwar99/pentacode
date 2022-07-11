@@ -21,10 +21,34 @@
             <td><?= $p['bidang'];?></td>
             <td><?= $p['tahun'];?></td>
             <td><a href="<?= base_url('assets/img/pegawai/prestasi/'.$p['lampiran']); ?>" target="_blank"><?= $p['lampiran'];?></a></td>
+            <?php if($this->session->userdata('role') == 'Pegawai'){ ?>
             <td>
                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $p['id_prestasi'];?>">Ubah</a>
                 <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $p['id_prestasi']?>">Hapus</a>
             </td>
+            <?php }else{ ?>
+              <td>
+                <a href="" class="btn btn-info" data-toggle="modal" data-target="#validateModal<?= $p['id_prestasi']?>">Validasi</a>
+                <div class="modal fade" id="validateModal<?= $p['id_prestasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Validasi Data</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="<?= base_url('User/validasiBerkas/'.'prestasi'.'/'.$p['id_prestasi']);?>" method="POST">
+                        <div class="modal-body">
+                          <button type="submit" value="Ditolak" name="status" class="btn btn-danger">Tolak</button>
+                          <button type="submit" value="Disetujui" name="status" class="btn btn-success">Setujui</button>
+                        </div>
+                        </form>
+                      </div>
+                </div>
+                </div>
+              </td>
+            <?php } ?>
         </tr>
         <?php endforeach; ?>
     </tbody>

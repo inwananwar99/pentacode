@@ -15,14 +15,16 @@
     $no = 1;
     foreach ($user as $u) : ?>
         <tr>       
+          <?php if($u['level'] !== 'Super' && $u['id_level'] == 4){ ?>
             <td><?= $no++;?></td>
             <td><?= $u['name'];?></td>
             <td><?= $u['email']; ?></td>
             <td><?= $u['level']; ?></td>
             <td>
-                <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $u['id'];?>">Ubah</a>
-                <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $u['id']?>">Hapus</a>
+              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $u['id'];?>">Ubah</a>
+              <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $u['id']?>">Hapus</a>
             </td>
+          <?php } ?>
         </tr>
         <?php endforeach; ?>
     </tbody>

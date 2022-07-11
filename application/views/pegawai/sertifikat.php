@@ -21,10 +21,34 @@
             <td><?= $s['bidang_studi'];?></td>
             <td><?= $s['thn_sert'];?></td>
             <td><a href="<?= base_url('assets/img/pegawai/sertifikat/'.$s['lampiran']); ?>" target="_blank"><?= $s['lampiran'];?></a></td>
+            <?php if($this->session->userdata('role') == 'Pegawai'){ ?>
             <td>
                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $s['id_sert'];?>">Ubah</a>
                 <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $s['id_sert']?>">Hapus</a>
             </td>
+            <?php }else{ ?>
+              <td>
+              <a href="" class="btn btn-info" data-toggle="modal" data-target="#validateModal<?= $s['id_sert']?>">Validasi</a>
+                <div class="modal fade" id="validateModal<?= $s['id_sert']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Validasi Data</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="<?= base_url('User/validasiBerkas/'.'sertifikat'.'/'.$s['id_sert']);?>" method="POST">
+                    <div class="modal-body">
+                          <button type="submit" value="Ditolak" name="status" class="btn btn-danger">Tolak</button>
+                          <button type="submit" value="Disetujui" name="status" class="btn btn-success">Setujui</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                </div>
+              </td>
+            <?php } ?>
         </tr>
         <?php endforeach; ?>
     </tbody>

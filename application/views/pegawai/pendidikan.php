@@ -14,6 +14,7 @@
             <th>Bidang Studi</th>
             <th>Perguruan Tinggi</th>
             <th>Tahun Lulus</th>
+            <th>Status</th>
             <th>Lampiran</th>
             <th>Aksi</th>
         </tr>
@@ -32,6 +33,11 @@
             <td><?= $d['bidang_studi']; ?></td>
             <td><?= $d['perguruan_tinggi']; ?></td>
             <td><?= $d['thn_lulus']; ?></td>
+            <?php if($d['status'] == 'Disetujui'){ ?>
+              <td><button class="btn btn-success"><?= $d['status']; ?></button></td>
+              <?php }else{ ?>
+                <td><button class="btn btn-danger"><?= $d['status']; ?></button></td>
+            <?php } ?>
             <td><a href="<?= base_url('assets/img/pegawai/pendidikan/'.$d['lampiran']); ?>" target="_blank"><?= $d['lampiran'];?></a></td>
             <?php if($this->session->userdata('role') == 'Pegawai'){ ?>
             <td>
@@ -40,10 +46,25 @@
             </td>
             <?php }else{ ?>
               <td>
-                <form action="<?= base_url('User/validasiBerkas/'.'pendidikan'.'/'.$d['id_pendidikan']);?>" method="POST">
-                  <input type="hidden" name="status" value="Disetujui">
-                  <button type="submit" class="btn btn-info">Validasi</button>
-                </form>
+              <a href="" class="btn btn-info" data-toggle="modal" data-target="#validateModal<?= $d['id_pendidikan']?>">Validasi</a>
+                <div class="modal fade" id="validateModal<?= $d['id_pendidikan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Validasi Data</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="<?= base_url('User/validasiBerkas/'.'pendidikan'.'/'.$d['id_pendidikan']);?>" method="POST">
+                    <div class="modal-body">
+                          <button type="submit" value="Ditolak" name="status" class="btn btn-danger">Tolak</button>
+                          <button type="submit" value="Disetujui" name="status" class="btn btn-success">Setujui</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                </div>
               </td>
             <?php } ?>
         </tr>
