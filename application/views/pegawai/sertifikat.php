@@ -7,6 +7,7 @@
             <th>Jenis Sertifikat</th>
             <th>Bidang Studi</th>
             <th>Tahun Sertifikat</th>
+            <th>Status</th>
             <th>File Lampiran</th>
             <th>Aksi</th>
         </tr>
@@ -20,6 +21,11 @@
             <td><?= $s['jenis_sert'];?></td>
             <td><?= $s['bidang_studi'];?></td>
             <td><?= $s['thn_sert'];?></td>
+            <?php if($s['status'] == 'Disetujui'){ ?>
+              <td><button class="btn btn-success"><?= $s['status']; ?></button></td>
+              <?php }else{ ?>
+                <td><button class="btn btn-danger"><?= $s['status']; ?></button></td>
+            <?php } ?>
             <td><a href="<?= base_url('assets/img/pegawai/sertifikat/'.$s['lampiran']); ?>" target="_blank"><?= $s['lampiran'];?></a></td>
             <?php if($this->session->userdata('role') == 'Pegawai'){ ?>
             <td>

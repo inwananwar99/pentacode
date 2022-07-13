@@ -7,6 +7,7 @@
             <th>Nama Prestasi</th>
             <th>Bidang</th>
             <th>Tahun Prestasi</th>
+            <th>Status</th>
             <th>File Lampiran</th>
             <th>Aksi</th>
         </tr>
@@ -20,6 +21,11 @@
             <td><?= $p['nama_prestasi'];?></td>
             <td><?= $p['bidang'];?></td>
             <td><?= $p['tahun'];?></td>
+            <?php if($p['status'] == 'Disetujui'){ ?>
+              <td><button class="btn btn-success"><?= $p['status']; ?></button></td>
+              <?php }else{ ?>
+                <td><button class="btn btn-danger"><?= $p['status']; ?></button></td>
+            <?php } ?>
             <td><a href="<?= base_url('assets/img/pegawai/prestasi/'.$p['lampiran']); ?>" target="_blank"><?= $p['lampiran'];?></a></td>
             <?php if($this->session->userdata('role') == 'Pegawai'){ ?>
             <td>

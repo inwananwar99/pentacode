@@ -1,14 +1,16 @@
 <?php
 class User extends CI_Controller{
     public function index(){
+            $id_div = $this->session->userdata('id_divisi');
             $data = [
-            'user' => $this->ModelUser->getJoin('users','level','id_level','id_level'),
+            'user' => $this->ModelUser->getJoinDiv($id_div),
             'level' => $this->ModelUser->getData('level'),
             'pegawai' => $this->ModelUser->getData('pegawai'),
             'konten' => 'pegawai/index',
             'title' => 'user',
             'judul' => 'Data User'
         ];
+        // var_dump($id_div);
         // var_dump($data['user']);die;
         $this->load->view('template',$data);
     }

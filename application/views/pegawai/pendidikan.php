@@ -44,28 +44,28 @@
                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $d['id_pendidikan']; ?>">Ubah</a>
                 <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $d['id_pendidikan']; ?>">Hapus</a>
             </td>
+            <td>
             <?php }else{ ?>
-              <td>
-              <a href="" class="btn btn-info" data-toggle="modal" data-target="#validateModal<?= $d['id_pendidikan']?>">Validasi</a>
-                <div class="modal fade" id="validateModal<?= $d['id_pendidikan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Validasi Data</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <form action="<?= base_url('User/validasiBerkas/'.'pendidikan'.'/'.$d['id_pendidikan']);?>" method="POST">
-                    <div class="modal-body">
-                          <button type="submit" value="Ditolak" name="status" class="btn btn-danger">Tolak</button>
-                          <button type="submit" value="Disetujui" name="status" class="btn btn-success">Setujui</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                </div>
-              </td>
+            <a href="" class="btn btn-info" data-toggle="modal" data-target="#exampleModal<?= $d['id_pendidikan']; ?>">Validasi</a>
+<div class="modal fade" id="exampleModal<?= $d['id_pendidikan']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Validasi Data</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="<?= base_url('User/validasiBerkas/'.'pendidikan'.'/'.$d['id_pendidikan']);?>" method="POST">
+      <div class="modal-body">
+      <button type="submit" value="Ditolak" name="status" class="btn btn-danger">Tolak</button>
+      <button type="submit" value="Disetujui" name="status" class="btn btn-success">Setujui</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+</td>
             <?php } ?>
         </tr>
     <?php endforeach;?>
