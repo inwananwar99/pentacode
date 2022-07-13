@@ -34,7 +34,11 @@
             </td>
             <?php }else{ ?>
               <td>
-                <a href="" class="btn btn-info" data-toggle="modal" data-target="#validateModal<?= $p['id_prestasi']?>">Validasi</a>
+                <?php if($p['status'] == 'Disetujui'){ ?>
+                  <button class="btn btn-info" disabled>Validasi</button>
+                  <?php }else{ ?>
+                    <a href="" class="btn btn-info" data-toggle="modal" data-target="#validateModal<?= $p['id_prestasi']?>">Validasi</a>
+                <?php } ?>
                 <div class="modal fade" id="validateModal<?= $p['id_prestasi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm" role="document">
                   <div class="modal-content">
@@ -86,6 +90,7 @@
             </div>
             <div class="form-group">
                <label for="">Lampiran Prestasi</label>
+               <p class="text-red"><i>*Lampiran harus berupa file pdf</i></p>
                <input type="file" name="lampiran" class="form-control" placeholder="Lampiran Prestasi ..." autofocus>
             </div>
         </div>
@@ -124,6 +129,7 @@
             </div>
             <div class="form-group">
                <label for="">Lampiran Prestasi</label>
+               <p class="text-red"><i>*Lampiran harus berupa file pdf</i></p>
                <input type="file" name="lampiran" class="form-control" placeholder="Lampiran Prestasi ..." autofocus>
             </div>
         </div>

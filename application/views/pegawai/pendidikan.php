@@ -118,6 +118,7 @@
             </div>
             <div class="form-group">
                <label for="">Lampiran Ijazah/Sertifikat</label>
+               <p class="text-red"><i>*Lampiran harus berupa file pdf</i></p>
                <input type="file" name="lampiran" class="form-control" placeholder="Lampiran ..." autofocus> 
             </div>
         </div>
@@ -178,6 +179,7 @@
             </div>
             <div class="form-group">
                <label for="">Lampiran Ijazah/Sertifikat</label>
+               <p class="text-red"><i>*Lampiran harus berupa file pdf</i></p>
                <input type="file" name="lampiran" class="form-control" placeholder="Lampiran ..." autofocus>
                <input type="hidden" name="status" value="<?= $d1['status']; ?>">
                <br>
