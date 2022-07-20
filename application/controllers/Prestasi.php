@@ -9,14 +9,33 @@
                 'title' => 'prestasi',
                 'judul' => 'Data Kompetensi'
             ];
-        }else{
-            $data = [
-                'konten' => 'pegawai/prestasi',
-                'title' => 'prestasi',
-                'judul' => 'Data Kompetensi',
-                'prestasi' => $this->ModelPromosi->join2('prestasi')
+            }else{
+                $data = [
+                    'konten' => 'pegawai/prestasi',
+                    'title' => 'prestasi',
+                    'judul' => 'Data Kompetensi',
+                    'prestasi' => $this->ModelPromosi->join2('prestasi')
+                ];
+            }
+            $id = $this->session->userdata('id');
+            //bobot kriteria
+            $prestasi = $this->db->get_where('prestasi',['user_id' => $id]);
+            $prest = [
+                'id_user' => $id,
+                'kemampuan' => $prestasi->num_rows()
             ];
-        }
+            $this->ModelPenugasan->bobot($id,$prest);
+
+            //gap
+            $this->ModelPenugasan->gap($id);
+
+            //pembobotan nilai
+            $gap = $this->db->get_where('gap',['id_user'=> $id])->row_array();
+            $d =[
+                'kemampuan' => $gap['kemampuan']
+            ];
+            $this->ModelPenugasan->pembobotan('kemampuan',$d,$id);
+
             $this->load->view('template',$data);
         }
         
@@ -40,7 +59,8 @@
                         'nama_prestasi' => $this->input->post('nama'),
                         'bidang' => $this->input->post('bidang'),
                         'tahun' => $this->input->post('tahun'),
-                        'lampiran' => $this->upload->data('file_name')
+                        'lampiran' => $this->upload->data('file_name'),
+                        'status' => 'Diajukan'
                     ];
                     $this->ModelPromosi->add('prestasi',$data);
                     $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil tambah prestasi!</div>');

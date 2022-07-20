@@ -20,5 +20,8 @@ class ModelProyek extends CI_Model{
     public function getJoin(){
         return $this->db->query("SELECT *FROM proyek JOIN pegawai ON proyek.id_pegawai = pegawai.id_pegawai")->result_array();
     }
+    public function join($id){
+        return $this->db->query("SELECT *FROM riwayat_pekerjaan JOIN users ON riwayat_pekerjaan.id_user = users.id WHERE riwayat_pekerjaan.id_user = $id")->result_array();
+    }
 }
 ?>

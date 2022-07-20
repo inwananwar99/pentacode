@@ -138,7 +138,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('User/data_jabatan'); ?>" class="nav-link">
+                <a href="<?= base_url('Proyek/riwayat'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Riwayat Pekerjaan</p>
                 </a>
@@ -286,6 +286,23 @@
                 </p>
               </a>
             </li>
+            <?php }else if($this->session->userdata('role') == 'HRD'){?>
+              <li class="nav-item">
+              <a href="<?= base_url('User/pegawai')?>" class="nav-link <?= $title == 'pegawai' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-users"></i>
+                <p>
+                Kelola Data Pegawai
+                </p>
+              </a>
+            </li>   
+            <li class="nav-item">
+              <a href="<?= base_url('User/pegawai')?>" class="nav-link <?= $title == 'promosi' ? 'active' : ''?>">
+              <i class="nav-icon fas fa-signal"></i>
+                <p>
+                Daftar Promosi Jabatan
+                </p>
+              </a>
+            </li>              
             <?php }else if($this->session->userdata('role') == 'Manajer'){?>
               <li class="nav-item">
               <a href="<?= base_url('User/pegawai')?>" class="nav-link <?= $title == 'pegawai' ? 'active' : ''?>">
@@ -453,165 +470,6 @@
   <script src="<?= base_url()?>assets/dist/js/jquery.mask.min.js"></script>
   <script src="<?= base_url()?>assets/dist/js/terbilang.js"></script>
   <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-  <script>
-      $(function() {
-          $('#formselector').change(function(){
-              $('.forms').hide();
-              $('#' + $(this).val()).show();
-          });
-      });
-      $(document).ready(function(){ // Ketika halaman sudah diload dan siap
-  //Add Form
-        $("#plus").click(function(){
-            $("#form").append(
-              "<div class='row'>"+
-                    "<div class='col-md-3'>"+
-                          "<input type='text' id='item' class='form-control mt-3' name='item[]' placeholder='Item'>"+
-                      "</div>"+
-                      "<div class='col-md-3'>"+
-                          "<input type='text' class='form-control mt-3' name='role[]' id='role1' placeholder='Role'>"+
-                    "</div>"+
-                "</div>"
-            );
-        });
-        $("#reset").click(function(){
-        $("#form").html(""); 
-      });
-      $("#btn-tambah-form").click(function(){ // Ketika tombol Tambah Data Form di klik
-        
-        // Kita akan menambahkan form dengan menggunakan append
-        // pada sebuah tag div yg kita beri id insert-form
-        $("#insert-form").append(
-          "<div class='row' style='margin-left:20px'>" +
-          "<div class='col-md-3'>" +
-          "<input type='text' class='form-control mt-3' name='item[]' placeholder='Item'>" +
-          "</div>" +
-          "<div class='col-md-3'>" +
-          "<input type='text' class='form-control mt-3' name='role[]' placeholder='Role'>" +
-          "</div>" +
-          "<div class='col-md-3'>" +
-          "<input type='text' class='form-control mt-3 qty[]' name='qty' placeholder='QTY'>" +
-          "</div>" +
-          "<div class='col-md-3'>" +
-          "<input type='text' class='form-control mt-3 sum' name='harga[]' placeholder='Harga' id='hargaNext'>" +
-          "</div>" +
-          "</div>");
-      });
-      
-      // Buat fungsi untuk mereset form ke semula
-      $("#btn-reset-form").click(function(){
-        $("#insert-form").html(""); // Kita kosongkan isi dari div insert-form
-        $("#jumlah-form").val("1"); // Ubah kembali value jumlah form menjadi 1
-      });
-    });
-    $(document).ready(function(){
-      $("#lama,#kuantitas").keyup(function(){
-        let lama = $("#lama").val();
-        let kuantitas = $("#kuantitas").val();
-        let hasil = 120000*lama*kuantitas;
-        $("#mph").val(hasil);
-      });
-      $("#mph,#hosting,#grade").keyup(function(){
-        let mph = $("#mph").val();
-        let bahan = $("#bahan").val();
-        let hosting = $("#hosting").val();
-        let grade = $("#grade").val();
-        let margin = 0;
-        if(grade == 1){
-        margin = 15/100;
-        }else if(grade == 2){
-          margin = 30/100;
-        }else if(grade == 3){
-          margin = 45/100;
-        }else if(grade == 4){
-          margin = 60/100
-        }else{
-          margin = grade * (15/100);
-        }
-        if(hosting){
-          let hitung = parseInt(mph) + parseInt(hosting) + parseInt(margin) * 0.2;
-          $("#biayatt").val(hitung);
-        }else{
-          let hitung = parseInt(mph) + margin * 0.2;
-          $("#biayatt").val(hitung);
-        }
-      });
-      $("#hosting,#bahan,#asset,#biayatt").keyup(function(){
-        let bahan = $("#bahan").val();
-        let asset = $("#asset").val();
-        let biayatt = $("#biayatt").val();
-        console.log(bahan);
-        if(bahan){
-          let res = parseInt(bahan) + parseInt(asset) + parseInt(biayatt)
-          let hasil = $("#hasil").val(`${formatRupiah(res)}`);
-        }else{
-          res = parseInt(asset) + parseInt(biayatt)
-          hasil = $("#hasil").val(`${formatRupiah(res)}`);
-        }
-      });
-      $("#qty1,#harga,#diskon").keyup(function(){
-        let hargaAwal = $("#harga").val();
-        let b = "Borongan";
-        let qty = $("#qty1").val();
-          if(qty == b){
-          let diskon = $("#diskon").val();
-          let disc = hargaAwal - (diskon / 100 * hargaAwal);
-          let pajak = disc * 0.1;
-          let total =disc + pajak;
-          $("#pajak").val(`${formatRupiah(pajak)}`);
-          $("#total").val(`${formatRupiah(total)}`);
-          }else{
-            hargaFinal = parseInt(hargaAwal) * parseInt(qty);
-            diskon = $("#diskon").val();
-            disc = hargaFinal - (diskon / 100 * hargaFinal);
-            pajak = disc * 0.1;
-            total =disc + pajak;
-            $("#pajak").val(`${formatRupiah(pajak)}`);
-            $("#total").val(`${formatRupiah(total)}`);
-          }
-      });
-      $("#hargaEdit,#diskonEdit").keyup(function(){
-        let harga = $("#hargaEdit").val();
-        let diskon = $("#diskonEdit").val();
-        let disc = harga - (diskon / 100 * harga);
-        let pajak = disc * 0.11;
-        let total =disc + pajak;
-        $("#pajakEdit").val(`${formatRupiah(pajak)}`);
-        $("#totalEdit").val(`${formatRupiah(total)}`);
-      });
-      $("#qty2").keyup(function(){
-        let harga = $("#hargaa").val();
-      });
-
-    });
-
-    $('#insert-form').on('input','.sum',function(){
-      var totalSum = 0;
-      $('#insert-form .sum').each(function(){
-        var inputVal = $(this).val();
-        if($.isNumeric(inputVal)){
-          let qty = $("#qty2").val();
-          let harga = $("#hargaa").val();
-          let hasil = parseInt(inputVal) * parseInt(qty)
-          let hasil2 = parseInt(harga) * parseInt(qty)
-          totalSum += parseFloat(hasil) + parseInt(hasil2);
-          $('#diskonn,#hargaa,.sum,.qty').keyup(function(){
-            let diskon = $("#diskonn").val();
-            let disc = totalSum - (diskon / 100 * totalSum);
-            let pajak = disc * 0.11;
-            let total =parseInt(disc) + parseInt(pajak);
-            $("#pajakk").val(`${formatRupiah(pajak)}`);
-            $("#totall").val(`${formatRupiah(total)}`);
-          })
-        }
-      });
-    });
-    const formatRupiah = (money) => {
-      return new Intl.NumberFormat('id-ID',
-      { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }
-      ).format(money);
-    }
-  </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

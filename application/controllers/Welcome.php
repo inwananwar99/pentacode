@@ -13,7 +13,7 @@ class Welcome extends CI_Controller {
 			'title' => 'dashboard',
 			'judul' => 'Dashboard',
 			'konten' => 'dashboard'
-		];
+		];		
 		return $this->load->view('template',$data);
 	}
 	public function do_login(){

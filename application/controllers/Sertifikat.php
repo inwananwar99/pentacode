@@ -9,14 +9,32 @@
                 'title' => 'sertifikat',
                 'judul' => 'Data Sertifikat'
             ];
-        }else{
-            $data = [
-                'konten' => 'pegawai/sertifikat',
-                'title' => 'sertifikat',
-                'judul' => 'Data Sertifikat',
-                'sertifikat' => $this->ModelPromosi->join2('sertifikat')
+            }else{
+                $data = [
+                    'konten' => 'pegawai/sertifikat',
+                    'title' => 'sertifikat',
+                    'judul' => 'Data Sertifikat',
+                    'sertifikat' => $this->ModelPromosi->join2('sertifikat')
+                ];
+            }
+            $id = $this->session->userdata('id');
+            //bobot kriteria
+            $sertifikat = $this->db->get_where('sertifikat',['user_id' => $id]);
+            $sert = [
+                'id_user' => $id,
+                'prestasi' => $sertifikat->num_rows()
             ];
-        }
+            $this->ModelPenugasan->bobot($id,$sert);
+
+            //gap
+            $this->ModelPenugasan->gap($id);
+            
+            //pembobotan nilai
+            $gap = $this->db->get_where('gap',['id_user'=> $id])->row_array();
+            $d =[
+                'prestasi' => $gap['prestasi']
+            ];
+            $this->ModelPenugasan->pembobotan('prestasi',$d,$id);
             $this->load->view('template',$data);
         }
         
@@ -40,7 +58,8 @@
                         'jenis_sert' => $this->input->post('jenis'),
                         'bidang_studi' => $this->input->post('bidang_studi'),
                         'thn_sert' => $this->input->post('tahun'),
-                        'lampiran' => $this->upload->data('file_name')
+                        'lampiran' => $this->upload->data('file_name'),
+                        'status' => 'Diajukan'
                     ];
                     $this->ModelPromosi->add('sertifikat',$data);
                     $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil tambah sertifikat!</div>');

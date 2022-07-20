@@ -1,6 +1,37 @@
 <?php
 
 class Proyek extends CI_Controller{
+    public function riwayat(){
+        $id = $this->session->userdata('id');
+        $data = [
+            'judul' => 'Data Proyek',
+            'title' => 'proyek',
+            'join' => $this->ModelProyek->join($id),
+            'konten' => 'pegawai/pekerjaan'
+        ];
+        //bobot kriteria
+        $pekerjaan = $this->db->get_where('riwayat_pekerjaan',['id_user' => $id]);
+        $kerja = [
+            'id_user' => $id,
+            'pengalaman' => $pekerjaan->num_rows()
+        ];
+        $this->ModelPenugasan->bobot($id,$kerja);
+        //klasifikasi nilai bobot
+        $bobot = $this->db->get_where('bobot',['id_user'=> $id])->result_array();
+        $this->ModelPenugasan->classify('pengalaman',$bobot);die;
+
+        //gap
+        $this->ModelPenugasan->gap($id);
+
+        //pembobotan
+		$gap = $this->db->get_where('gap',['id_user'=> $id])->row_array();
+		$d =[
+			'pengalaman' => $gap['pengalaman']
+		];
+		$this->ModelPenugasan->pembobotan('pengalaman',$d,$id);
+        return $this->load->view('template',$data);
+    }
+
     public function index(){
         $data = [
             'judul' => 'Data Proyek',
