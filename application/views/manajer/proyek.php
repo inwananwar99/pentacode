@@ -48,9 +48,11 @@
                <label for="">Nama Pegawai</label>
               <select name="id_pegawai" class="form-control">
                 <option>-- Pilih Pegawai --</option>
-                <?php foreach($pegawai as $p): ?>
-                  <option value="<?= $p['id_pegawai']; ?>"><?= $p['nama_pegawai']; ?></option>
-                <?php endforeach; ?>
+                <?php
+                $no=1;
+                    foreach($factor as $f){ ?>
+                        <option value="$id_user"><?= 'Rank '.$no++.' - '.$f['name']; ?></option>
+                <?php } ?>
               </select>
             </div>
             <div class="form-group">

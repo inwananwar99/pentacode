@@ -13,7 +13,8 @@ class Welcome extends CI_Controller {
 			'title' => 'dashboard',
 			'judul' => 'Dashboard',
 			'konten' => 'dashboard'
-		];		
+		];
+		$this->ModelPenugasan->cf_sf($this->session->userdata('id'));
 		return $this->load->view('template',$data);
 	}
 	public function do_login(){

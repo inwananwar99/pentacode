@@ -18,7 +18,7 @@ class Proyek extends CI_Controller{
         $this->ModelPenugasan->bobot($id,$kerja);
         //klasifikasi nilai bobot
         $bobot = $this->db->get_where('bobot',['id_user'=> $id])->result_array();
-        $this->ModelPenugasan->classify('pengalaman',$bobot);die;
+        $this->ModelPenugasan->classify('pengalaman',$bobot,$id);
 
         //gap
         $this->ModelPenugasan->gap($id);
@@ -29,6 +29,9 @@ class Proyek extends CI_Controller{
 			'pengalaman' => $gap['pengalaman']
 		];
 		$this->ModelPenugasan->pembobotan('pengalaman',$d,$id);
+
+        //core & secondary factor
+		$this->ModelPenugasan->cf_sf($id);
         return $this->load->view('template',$data);
     }
 
@@ -39,7 +42,8 @@ class Proyek extends CI_Controller{
             'proyek' => $this->ModelProyek->getData('proyek'),
             'pegawai' => $this->ModelProyek->getData('pegawai'),
             'join' => $this->ModelProyek->getJoin(),
-            'konten' => 'manajer/proyek'
+            'konten' => 'manajer/proyek',
+            'factor' => $this->ModelPenugasan->final_result()
         ];
         return $this->load->view('template',$data);
     }

@@ -25,7 +25,9 @@
                 'prestasi' => $sertifikat->num_rows()
             ];
             $this->ModelPenugasan->bobot($id,$sert);
-
+            //klasifikasi nilai bobot
+            $bobot = $this->db->get_where('bobot',['id_user'=> $id])->result_array();
+            $this->ModelPenugasan->classify('prestasi',$bobot,$id);
             //gap
             $this->ModelPenugasan->gap($id);
             

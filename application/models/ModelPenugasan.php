@@ -15,21 +15,99 @@ class ModelPenugasan extends CI_Model{
         }
     }
 
-    public function classify($class,$data){
+    public function classify($class,$data,$id){
         foreach($data as $d){
-           if($class){
+           if($class == 'pengalaman'){
                if($d['pengalaman'] == 0){
-                   echo 'dapet 1 poin';
+                   $n =[
+                    'id_bobot'=> $d['id_bobot'],
+                    'id_user' => $d['id_user'],
+                    'pengalaman' => 1
+                ];
+               }else if($d['pengalaman'] <= 2){
+                   $n =[
+                    'id_bobot'=> $d['id_bobot'],
+                    'id_user' => $d['id_user'],
+                    'pengalaman' => 2
+                ];
+               }else if($d['pengalaman'] <= 4){
+                   $n =[
+                    'id_bobot'=> $d['id_bobot'],
+                    'id_user' => $d['id_user'],
+                    'pengalaman' => 3
+                ];
                }else{
-                   echo 'dapet 2 poin';
+                    $n =[
+                        'id_bobot'=> $d['id_bobot'],
+                        'id_user' => $d['id_user'],
+                        'pengalaman' => 4
+                    ];
                }
-           } 
+           }else if($class == 'prestasi'){
+                if($d['prestasi'] == 0){
+                    $n =[
+                        'id_bobot'=> $d['id_bobot'],
+                        'id_user' => $d['id_user'],
+                        'prestasi' => 1
+                    ];
+                }else if($d['prestasi'] <= 2){
+                    $n =[
+                        'id_bobot'=> $d['id_bobot'],
+                        'id_user' => $d['id_user'],
+                        'prestasi' => 2
+                    ];
+                }else if($d['prestasi'] <= 4){
+                    $n =[
+                        'id_bobot'=> $d['id_bobot'],
+                        'id_user' => $d['id_user'],
+                        'prestasi' => 3
+                    ];
+                }else{
+                    $n =[
+                        'id_bobot'=> $d['id_bobot'],
+                        'id_user' => $d['id_user'],
+                        'prestasi' => 4
+                    ];
+                }
+           }elseif($class == 'kemampuan'){
+                if($d['kemampuan'] <= 5){
+                    $n =[
+                        'id_bobot'=> $d['id_bobot'],
+                        'id_user' => $d['id_user'],
+                        'kemampuan' => 1
+                    ];
+                }else if($d['kemampuan'] <= 10){
+                    $n =[
+                        'id_bobot'=> $d['id_bobot'],
+                        'id_user' => $d['id_user'],
+                        'kemampuan' => 2
+                    ];
+                }else if($d['kemampuan'] <= 15){
+                    $n =[
+                        'id_bobot'=> $d['id_bobot'],
+                        'id_user' => $d['id_user'],
+                        'kemampuan' => 3
+                    ];
+                }else{
+                    $n =[
+                        'id_bobot'=> $d['id_bobot'],
+                        'id_user' => $d['id_user'],
+                        'kemampuan' => 4
+                    ];
+                }
+           }
+        }
+        if($data){
+            $this->db->where('id_user', $id);
+            $this->db->update('bobot',$n);
+        }else{
+            $this->db->insert('bobot',$n);
         }
     }
 
     public function gap($id){
         $gap_data = $this->db->get('gap');
-        $bobot = $this->db->get('bobot')->result_array();
+        $bobot = $this->db->get_where('bobot',['id_user'=> $id])->result_array();
         if($gap_data->num_rows() == 0){
             foreach($bobot as $b){
                 $gap = [
@@ -69,7 +147,7 @@ class ModelPenugasan extends CI_Model{
     }
 
     public function pembobotan($qualify,$data,$id){
-        $d = (int)$data;
+        $d = (int)$data[$qualify];
         $selisih = $this->db->get('pembobotan')->result_array();
             foreach($selisih as $s1){
                     if($d == $s1['selisih']){
@@ -86,6 +164,34 @@ class ModelPenugasan extends CI_Model{
         }else{
             $this->db->insert('nilai_bobot',$nilai);
         }
+    }
+
+    public function cf_sf($id){
+        $factor = $this->db->get('cf_sf');
+        $n_bobot = $this->db->get_where('nilai_bobot',['id_user'=>$id])->result_array();
+        foreach ($n_bobot as $b) {
+            $cf = $b['kemampuan']+$b['prestasi']/2;
+            $sf = $b['pengalaman']/1;
+            $nilai = [
+                'id_user' => $id,
+                'cf'=>$cf,
+                'sf'=>$sf,
+                'final_result' => (0.6*$cf)+(0.4*$sf)
+            ];
+        }
+        $validate = $this->db->get_where('cf_sf',['id_user'=> $id])->row_array();
+        if($validate){
+            $this->db->where('id_user', $id);
+            $this->db->update('cf_sf',$nilai);
+        }else{
+            if($id == 4){
+                $this->db->insert('cf_sf',$nilai);
+            }
+        }
+    }
+
+    public function final_result(){
+        return $this->db->query("SELECT * FROM cf_sf JOIN users ON cf_sf.id_user = users.id ORDER BY cf_sf.final_result DESC LIMIT 3")->result_array();
     }
 }
 

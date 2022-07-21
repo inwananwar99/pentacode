@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Jul 2022 pada 02.13
+-- Waktu pembuatan: 21 Jul 2022 pada 17.46
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -40,8 +40,31 @@ CREATE TABLE `bobot` (
 --
 
 INSERT INTO `bobot` (`id_bobot`, `id_user`, `pengalaman`, `prestasi`, `kemampuan`) VALUES
-(7, 6, 2, 1, 14),
-(8, 8, 0, 2, 10);
+(7, 6, 2, 2, 3),
+(8, 8, 1, 2, 2),
+(9, 7, NULL, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `cf_sf`
+--
+
+CREATE TABLE `cf_sf` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `cf` double NOT NULL,
+  `sf` double NOT NULL,
+  `final_result` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `cf_sf`
+--
+
+INSERT INTO `cf_sf` (`id`, `id_user`, `cf`, `sf`, `final_result`) VALUES
+(1, 6, 6.25, 4, 5.35),
+(2, 8, 5.25, 3, 4.35);
 
 -- --------------------------------------------------------
 
@@ -84,8 +107,9 @@ CREATE TABLE `gap` (
 --
 
 INSERT INTO `gap` (`id`, `id_bobot`, `id_user`, `pengalaman`, `prestasi`, `kemampuan`) VALUES
-(4, 7, 6, -3, 1, 7),
-(5, 8, 8, -3, 1, 6);
+(4, 7, 6, -1, 1, -1),
+(5, 8, 8, -2, 1, -2),
+(9, 9, 7, -3, 0, -3);
 
 -- --------------------------------------------------------
 
@@ -125,37 +149,6 @@ CREATE TABLE `jabatan` (
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `jobdesc`, `id_level`) VALUES
 (1, 'Bussines Analystyyy', 'Mendefinisikan kebutuhan user', 2),
 (2, 'Bussines Analyst', 'Mendefinisikan kebutuhan user', 4);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `klasifikasi`
---
-
-CREATE TABLE `klasifikasi` (
-  `id` int(11) NOT NULL,
-  `interval` varchar(30) NOT NULL,
-  `pengalaman` int(11) DEFAULT NULL,
-  `prestasi` int(11) DEFAULT NULL,
-  `kemampuan` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `klasifikasi`
---
-
-INSERT INTO `klasifikasi` (`id`, `interval`, `pengalaman`, `prestasi`, `kemampuan`) VALUES
-(1, 'Tidak Ada/Pernah', 1, 1, NULL),
-(2, '1-5', NULL, NULL, 1),
-(3, '1-2', NULL, 2, NULL),
-(4, '3-4', NULL, 3, NULL),
-(5, '>5', NULL, 4, NULL),
-(6, '6-10', NULL, NULL, 2),
-(7, '11-15', NULL, NULL, 3),
-(8, '>16', NULL, NULL, 4),
-(9, '1-2 Tahun', 2, NULL, NULL),
-(10, '3-4 Tahun', 3, NULL, NULL),
-(11, '>5 Tahun', 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -231,8 +224,9 @@ CREATE TABLE `nilai_bobot` (
 --
 
 INSERT INTO `nilai_bobot` (`id`, `id_user`, `pengalaman`, `prestasi`, `kemampuan`) VALUES
-(19, 6, 2, 4.5, 4.5),
-(23, 8, 4.5, 4.5, 4.5);
+(19, 6, 4, 4.5, 4),
+(23, 8, 3, 4.5, 3),
+(24, 7, NULL, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -475,6 +469,13 @@ ALTER TABLE `bobot`
   ADD KEY `id_user` (`id_user`);
 
 --
+-- Indeks untuk tabel `cf_sf`
+--
+ALTER TABLE `cf_sf`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indeks untuk tabel `divisi`
 --
 ALTER TABLE `divisi`
@@ -501,12 +502,6 @@ ALTER TABLE `hrd`
 ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`id_jabatan`),
   ADD KEY `id_level` (`id_level`);
-
---
--- Indeks untuk tabel `klasifikasi`
---
-ALTER TABLE `klasifikasi`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `level`
@@ -592,7 +587,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `bobot`
 --
 ALTER TABLE `bobot`
-  MODIFY `id_bobot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_bobot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `cf_sf`
+--
+ALTER TABLE `cf_sf`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `divisi`
@@ -604,7 +605,7 @@ ALTER TABLE `divisi`
 -- AUTO_INCREMENT untuk tabel `gap`
 --
 ALTER TABLE `gap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `hrd`
@@ -617,12 +618,6 @@ ALTER TABLE `hrd`
 --
 ALTER TABLE `jabatan`
   MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT untuk tabel `klasifikasi`
---
-ALTER TABLE `klasifikasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `level`
@@ -640,7 +635,7 @@ ALTER TABLE `manajer`
 -- AUTO_INCREMENT untuk tabel `nilai_bobot`
 --
 ALTER TABLE `nilai_bobot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `pegawai`
@@ -699,6 +694,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `bobot`
   ADD CONSTRAINT `bobot_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `cf_sf`
+--
+ALTER TABLE `cf_sf`
+  ADD CONSTRAINT `cf_sf_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `gap`

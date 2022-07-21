@@ -25,7 +25,11 @@
                 'kemampuan' => $prestasi->num_rows()
             ];
             $this->ModelPenugasan->bobot($id,$prest);
-
+            
+            //klasifikasi nilai bobot
+            $bobot = $this->db->get_where('bobot',['id_user'=> $id])->result_array();
+            $this->ModelPenugasan->classify('kemampuan',$bobot,$id);
+            
             //gap
             $this->ModelPenugasan->gap($id);
 
