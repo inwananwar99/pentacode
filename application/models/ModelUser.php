@@ -25,6 +25,10 @@ class ModelUser extends CI_Model{
         return $this->db->get()->result_array();
     }
 
+    public function joinJabatan($id){
+        return $this->db->query("SELECT *FROM jabatan JOIN level ON jabatan.id_level = level.id_level WHERE jabatan.id_level = $id")->result_array();
+    }
+
     public function getJoinDiv($id){
         return $this->db->query("SELECT *FROM users JOIN level ON  users.id_level = level.id_level WHERE users.id_divisi = $id")->result_array();
     }
@@ -42,6 +46,10 @@ class ModelUser extends CI_Model{
         $this->db->from('pegawai');
         $this->db->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan');
         return $this->db->get()->result_array();
+    }
+
+    public function joinDivisi($id){
+        return $this->db->query("SELECT *FROM users JOIN divisi ON users.id_divisi = divisi.id_divisi WHERE users.id = $id")->result_array();
     }
 
     public function validasiBerkas($table,$data){

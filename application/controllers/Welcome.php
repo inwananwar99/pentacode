@@ -25,9 +25,10 @@ class Welcome extends CI_Controller {
 		if($data){
 			if($data['id_level'] == 1){
 				if($data['password'] == $password){
+					$bidang = $this->db->get_where('divisi',['id_divisi'=> $data['id_divisi']])->row_array();
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Manajer!</div>');
-					$d = ['id'=> $data['id'],'id_divisi'=> $data['id_divisi'],'name' => $data['name'],'role' => 'Manajer'];
-					$this->session->set_userdata($d);
+					$d = ['id'=> $data['id'],'id_divisi'=> $data['id_divisi'],'name' => $data['name'],'role' => 'Manajer','bidang' => $bidang['nama_divisi']];
+					$this->session->set_userdata($d);	
 					return redirect('Welcome/dashboard');
 				}else{
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Password Salah! Mohon isikan dengan benar!</div>');
@@ -86,7 +87,7 @@ class Welcome extends CI_Controller {
 			}else if($data['id_level'] == 4){
 				if($data['password'] == $password){
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Pegawai!</div>');
-					$d = ['id'=> $data['id'],'id_divisi'=> $data['id_divisi'],'name' => $data['name'],'role' => 'Pegawai'];
+					$d = ['id'=> $data['id'],'id_divisi'=> $data['id_divisi'],'id_level'=> $data['id_level'],'name' => $data['name'],'role' => 'Pegawai'];
 					$this->session->set_userdata($d);
 					return redirect('Welcome/dashboard');
 				}else{
@@ -96,7 +97,7 @@ class Welcome extends CI_Controller {
 			}else if($data['id_level'] == 8){	
 				if($data['password'] == $password){
 					$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat Datang Super Admin!</div>');
-					$d = ['id'=> $data['id'],'name' => $data['name'],'role' => 'Super Admin'];
+					$d = ['id'=> $data['id'],'name' => $data['name'],'id_divisi'=> $data['id_divisi'],'role' => 'Super Admin'];
 					$this->session->set_userdata($d);
 					return redirect('Welcome/dashboard');
 				}else{
@@ -111,6 +112,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function logout(){
+		$this->session->sess_destroy();
 		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil logout!
 	  </div>');
 		return redirect('Welcome');

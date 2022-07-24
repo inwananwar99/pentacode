@@ -150,7 +150,7 @@ public function deletePegawai($id){
         $data = [
             'level' => $this->input->post('level'),
         ];
-        $this->ModelUser->update(['id_level',$id],'level',$data);
+        $this->ModelUser->update(['id_level'=>$id],'level',$data);
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil mengubah Data Level!</div>');
         return redirect('User/level');
     }
@@ -212,7 +212,7 @@ public function deletePegawai($id){
             'konten' => 'pegawai/divisi',
             'title' => 'divisi',
             'judul' => 'Data Divisi Pegawai',
-            'divisi' => $this->ModelUser->getData('divisi')
+            'divisi' => $this->ModelUser->joinDivisi($this->session->userdata('id'))
         ];
         $this->load->view('template',$data);
     }
@@ -246,7 +246,7 @@ public function deletePegawai($id){
             'konten' => 'pegawai/jabatan',
             'title' => 'divisi',
             'judul' => 'Data Jabatan Pegawai',
-            'jabatan' => $this->ModelUser->getJoin('jabatan','level')
+            'jabatan' => $this->ModelUser->joinJabatan($this->session->userdata('id_level'))
         ];
         $this->load->view('template',$data);
     }

@@ -69,7 +69,11 @@
           </div>
           <div class="info">
             <a href="#" class="d-block"><?= $this->session->userdata('name'); ?></a>
-            <p class="text-white"><?= '('.$this->session->userdata('role').')'; ?></p>
+            <?php if($this->session->userdata('bidang')){?>
+              <p class="text-white"><?= '('.$this->session->userdata('role').' '.$this->session->userdata('bidang').')'; ?></p>
+            <?php }else{?>
+              <p class="text-white"><?= '('.$this->session->userdata('role').')'; ?></p>
+            <?php }?>
           </div>
         </div>
 
@@ -296,7 +300,7 @@
               </a>
             </li>   
             <li class="nav-item">
-              <a href="<?= base_url('User/pegawai')?>" class="nav-link <?= $title == 'promosi' ? 'active' : ''?>">
+              <a href="<?= base_url('Promosi/pengajuan')?>" class="nav-link <?= $title == 'promosi' ? 'active' : ''?>">
               <i class="nav-icon fas fa-signal"></i>
                 <p>
                 Daftar Promosi Jabatan
@@ -349,6 +353,14 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+                <a href="<?= base_url('Promosi/pengajuan')?>" class="nav-link <?= $title == 'pengajuan' ? 'active' : ''?>">
+                  <i class="nav-icon fas fa-pen"></i>
+                  <p>
+                  Promosi Jabatan
+                  </p>
+                </a>
+              </li>
             <?php
            }else if($this->session->userdata('role') == 'Super Admin'){?>
               <li class="nav-item">
@@ -364,6 +376,14 @@
                 <i class="nav-icon fas fa-signal"></i>
                 <p>
                 Kelola Data Level
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                Kelola Data User
                 </p>
               </a>
             </li>

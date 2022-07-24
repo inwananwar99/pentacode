@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Jul 2022 pada 17.46
+-- Waktu pembuatan: 25 Jul 2022 pada 00.18
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -231,6 +231,32 @@ INSERT INTO `nilai_bobot` (`id`, `id_user`, `pengalaman`, `prestasi`, `kemampuan
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `normalisasi`
+--
+
+CREATE TABLE `normalisasi` (
+  `id_norm` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `prestasi` double DEFAULT NULL,
+  `kemampuan` double DEFAULT NULL,
+  `pengalaman_kerja` double DEFAULT NULL,
+  `pendidikan` double DEFAULT NULL,
+  `level` double DEFAULT NULL,
+  `proyek` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `normalisasi`
+--
+
+INSERT INTO `normalisasi` (`id_norm`, `id_user`, `prestasi`, `kemampuan`, `pengalaman_kerja`, `pendidikan`, `level`, `proyek`) VALUES
+(4, 8, 1, 0.66666666666667, 1, 1.5, 1, 1),
+(5, 8, 1, 0.66666666666667, 1, 1.5, 1, 1),
+(6, 6, 1, 1, 1, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `pegawai`
 --
 
@@ -358,13 +384,40 @@ INSERT INTO `prestasi` (`id_prestasi`, `user_id`, `nama_prestasi`, `bidang`, `ta
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `promosi`
+--
+
+CREATE TABLE `promosi` (
+  `id_promosi` int(11) NOT NULL,
+  `id_manajer` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `jabatan` varchar(128) NOT NULL,
+  `tgl_bergabung` int(11) NOT NULL,
+  `portofolio` text NOT NULL,
+  `jabatan_baru` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `promosi`
+--
+
+INSERT INTO `promosi` (`id_promosi`, `id_manajer`, `id_user`, `jabatan`, `tgl_bergabung`, `portofolio`, `jabatan_baru`) VALUES
+(2, 7, 8, 'Marketing', 2022, 'Surat_Pengajuan-13.png', 'Manajer Retail Solution'),
+(3, 7, 6, 'Marketing', 2022, 'Surat_Pengajuan-14.png', 'Manajer Retail Solution'),
+(4, 7, 9, 'Manajer Digital', 2022, 'Surat_Pengajuan-16.png', 'Manajer Retail Solution');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `proyek`
 --
 
 CREATE TABLE `proyek` (
   `id_proyek` int(11) NOT NULL,
   `nama_proyek` varchar(128) NOT NULL,
-  `id_pegawai` int(30) NOT NULL,
+  `id_user1` int(11) DEFAULT NULL,
+  `id_user2` int(11) DEFAULT NULL,
+  `id_user3` int(11) DEFAULT NULL,
   `ket_proyek` varchar(30) NOT NULL,
   `status_pegawai` varchar(128) NOT NULL,
   `tgl_awal_proyek` date NOT NULL,
@@ -376,9 +429,9 @@ CREATE TABLE `proyek` (
 -- Dumping data untuk tabel `proyek`
 --
 
-INSERT INTO `proyek` (`id_proyek`, `nama_proyek`, `id_pegawai`, `ket_proyek`, `status_pegawai`, `tgl_awal_proyek`, `tgl_akhir_proyek`, `status_proyek`) VALUES
-(2, 'Jawa Tengah', 2, 'dggafs', 'Fungsional', '2022-06-27', '2022-06-28', 'On Progress'),
-(3, 'Purwakarta', 1, 'fgsdggsdg', 'Jasbor', '2022-06-28', '2022-06-30', 'On Progress');
+INSERT INTO `proyek` (`id_proyek`, `nama_proyek`, `id_user1`, `id_user2`, `id_user3`, `ket_proyek`, `status_pegawai`, `tgl_awal_proyek`, `tgl_akhir_proyek`, `status_proyek`) VALUES
+(2, 'Jawa Tengah', 6, 8, 14, 'dggafs', 'Fungsional', '2022-06-27', '2022-06-28', 'On Progress'),
+(4, 'Katalog A', NULL, NULL, NULL, 'SFS', 'Jasbor', '2022-07-12', '2022-07-21', 'On Progress');
 
 -- --------------------------------------------------------
 
@@ -399,7 +452,55 @@ CREATE TABLE `riwayat_pekerjaan` (
 
 INSERT INTO `riwayat_pekerjaan` (`id`, `id_user`, `id_proyek`, `status`) VALUES
 (1, 6, 1, 'selesai'),
-(2, 6, 1, 'selesai');
+(2, 8, 1, 'selesai'),
+(3, 6, 1, 'selesai');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `saw_alternatif`
+--
+
+CREATE TABLE `saw_alternatif` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `pendidikan` double DEFAULT NULL,
+  `kemampuan` double DEFAULT NULL,
+  `pengalaman_kerja` double DEFAULT NULL,
+  `proyek` double DEFAULT NULL,
+  `prestasi` double DEFAULT NULL,
+  `level` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `saw_alternatif`
+--
+
+INSERT INTO `saw_alternatif` (`id`, `id_user`, `pendidikan`, `kemampuan`, `pengalaman_kerja`, `proyek`, `prestasi`, `level`) VALUES
+(34, 8, 3, 2, 4, 1, 2, 4),
+(35, 8, 3, 2, 4, 1, 2, 4),
+(36, 6, 2, 3, 4, 1, 2, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `saw_nilai_bobot`
+--
+
+CREATE TABLE `saw_nilai_bobot` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `nilai` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `saw_nilai_bobot`
+--
+
+INSERT INTO `saw_nilai_bobot` (`id`, `id_user`, `nilai`) VALUES
+(4, 8, 99.166666666667),
+(5, 8, 99.166666666667),
+(6, 6, 100);
 
 -- --------------------------------------------------------
 
@@ -523,6 +624,12 @@ ALTER TABLE `nilai_bobot`
   ADD KEY `id_user` (`id_user`);
 
 --
+-- Indeks untuk tabel `normalisasi`
+--
+ALTER TABLE `normalisasi`
+  ADD PRIMARY KEY (`id_norm`);
+
+--
 -- Indeks untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
@@ -550,11 +657,21 @@ ALTER TABLE `prestasi`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indeks untuk tabel `promosi`
+--
+ALTER TABLE `promosi`
+  ADD PRIMARY KEY (`id_promosi`),
+  ADD KEY `id_manajer` (`id_manajer`,`id_user`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indeks untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
   ADD PRIMARY KEY (`id_proyek`),
-  ADD KEY `id_pegawai` (`id_pegawai`);
+  ADD KEY `id_user` (`id_user1`),
+  ADD KEY `id_user2` (`id_user2`),
+  ADD KEY `id_user3` (`id_user3`);
 
 --
 -- Indeks untuk tabel `riwayat_pekerjaan`
@@ -562,6 +679,19 @@ ALTER TABLE `proyek`
 ALTER TABLE `riwayat_pekerjaan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_proyek` (`id_proyek`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indeks untuk tabel `saw_alternatif`
+--
+ALTER TABLE `saw_alternatif`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `saw_nilai_bobot`
+--
+ALTER TABLE `saw_nilai_bobot`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -638,6 +768,12 @@ ALTER TABLE `nilai_bobot`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT untuk tabel `normalisasi`
+--
+ALTER TABLE `normalisasi`
+  MODIFY `id_norm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
@@ -662,16 +798,34 @@ ALTER TABLE `prestasi`
   MODIFY `id_prestasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
+-- AUTO_INCREMENT untuk tabel `promosi`
+--
+ALTER TABLE `promosi`
+  MODIFY `id_promosi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
-  MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `riwayat_pekerjaan`
 --
 ALTER TABLE `riwayat_pekerjaan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `saw_alternatif`
+--
+ALTER TABLE `saw_alternatif`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT untuk tabel `saw_nilai_bobot`
+--
+ALTER TABLE `saw_nilai_bobot`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `sertifikat`
@@ -739,16 +893,30 @@ ALTER TABLE `prestasi`
   ADD CONSTRAINT `prestasi_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+-- Ketidakleluasaan untuk tabel `promosi`
+--
+ALTER TABLE `promosi`
+  ADD CONSTRAINT `promosi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
 -- Ketidakleluasaan untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
-  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`);
+  ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`id_user1`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `proyek_ibfk_2` FOREIGN KEY (`id_user2`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `proyek_ibfk_3` FOREIGN KEY (`id_user3`) REFERENCES `users` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `riwayat_pekerjaan`
 --
 ALTER TABLE `riwayat_pekerjaan`
   ADD CONSTRAINT `riwayat_pekerjaan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `saw_nilai_bobot`
+--
+ALTER TABLE `saw_nilai_bobot`
+  ADD CONSTRAINT `saw_nilai_bobot_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `sertifikat`

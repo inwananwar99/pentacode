@@ -36,22 +36,20 @@ class Proyek extends CI_Controller{
     }
 
     public function index(){
-        $data = [
-            'judul' => 'Data Proyek',
-            'title' => 'proyek',
-            'proyek' => $this->ModelProyek->getData('proyek'),
-            'pegawai' => $this->ModelProyek->getData('pegawai'),
-            'join' => $this->ModelProyek->getJoin(),
-            'konten' => 'manajer/proyek',
-            'factor' => $this->ModelPenugasan->final_result()
-        ];
+            $data = [
+                'judul' => 'Data Proyek',
+                'title' => 'proyek',
+                'proyek' => $this->ModelProyek->getJoin('proyek'),
+                'pegawai' => $this->ModelProyek->getData('pegawai'),
+                'konten' => 'manajer/proyek',
+                'factor' => $this->ModelPenugasan->final_result(),
+            ];
         return $this->load->view('template',$data);
     }
 
     public function addProyek(){
         $data = [
-            'nama_proyek' => $this->input->post('nama'), 
-            'id_pegawai' => $this->input->post('id_pegawai'), 
+            'nama_proyek' => $this->input->post('nama'),  
             'ket_proyek' => $this->input->post('ket_proyek'), 
             'status_pegawai' => $this->input->post('status_pegawai'), 
             'tgl_awal_proyek' => $this->input->post('tgl_awal_proyek'), 
@@ -81,6 +79,17 @@ class Proyek extends CI_Controller{
     public function deleteProyek($id){
         $this->ModelProyek->delete('proyek',['id_proyek'=>$id]);
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menghapus Data Proyek!</div>');
+        return redirect('Proyek');
+    }
+
+    public function rekomendasi($id){
+        $data = [
+            'id_user1'=> $this->input->post('id_user1'),
+            'id_user2'=> $this->input->post('id_user2'),
+            'id_user3'=> 14
+        ];
+        $this->session->set_userdata($data);
+        $this->ModelPenugasan->recommend($id,$data);
         return redirect('Proyek');
     }
 }

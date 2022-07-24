@@ -80,7 +80,7 @@
             </div>
             <div class="form-group">
                <label for="">Deskripsi Pekerjaan</label>
-                <textarea name="jobdesc class="form-control"><?= $j1['jobdesc']; ?></textarea>
+                <textarea name="jobdesc" class="form-control"><?= $j1['jobdesc']; ?></textarea>
             </div>
             <div class="form-group">
                <label for="">Level Pegawai</label>

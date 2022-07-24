@@ -193,6 +193,14 @@ class ModelPenugasan extends CI_Model{
     public function final_result(){
         return $this->db->query("SELECT * FROM cf_sf JOIN users ON cf_sf.id_user = users.id ORDER BY cf_sf.final_result DESC LIMIT 3")->result_array();
     }
+
+    public function recommend($id,$data){
+        $user = $this->db->get('users')->result_array();
+        foreach($user as $u):
+            $this->db->where('id_proyek', $id);
+            $this->db->update('proyek',$data);
+        endforeach;
+    }
 }
 
 ?>
