@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Agu 2022 pada 04.21
+-- Waktu pembuatan: 02 Agu 2022 pada 01.36
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -148,7 +148,8 @@ CREATE TABLE `jabatan` (
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `jobdesc`, `id_level`) VALUES
 (1, 'Bussines Analystyyy', 'Mendefinisikan kebutuhan user', 2),
-(2, 'Bussines Analyst', 'Mendefinisikan kebutuhan user', 4);
+(2, 'Bussines Analyst', 'Mendefinisikan kebutuhan user', 4),
+(4, 'Leader MLM', 'Prospek terossss', 4);
 
 -- --------------------------------------------------------
 
@@ -355,7 +356,8 @@ CREATE TABLE `portofolio` (
 --
 
 INSERT INTO `portofolio` (`id_portofolio`, `id_user`, `deskripsi`) VALUES
-(2, 6, 'Hai, namaku Denny Adam. Aku lulusan Politeknik Negeri Lampung Jurusan D3 Manajemen Informatika. Sekarang aku bekerja di PT. Indonesia Comnets Plus Kantor Mampang, Jakarta Selatan sebagai salah satu Leader Developer');
+(2, 6, 'Hai, namaku Denny Adam. Aku lulusan Politeknik Negeri Lampung Jurusan D3 Manajemen Informatika. Sekarang aku bekerja di PT. Indonesia Comnets Plus Kantor Mampang, Jakarta Selatan sebagai salah satu Leader Developer'),
+(3, 8, 'JKDJFALK;FJLASDJFASDF');
 
 -- --------------------------------------------------------
 
@@ -776,7 +778,7 @@ ALTER TABLE `hrd`
 -- AUTO_INCREMENT untuk tabel `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `level`
@@ -824,7 +826,7 @@ ALTER TABLE `pendidikan`
 -- AUTO_INCREMENT untuk tabel `portofolio`
 --
 ALTER TABLE `portofolio`
-  MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `prestasi`

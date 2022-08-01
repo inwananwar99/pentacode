@@ -4,6 +4,9 @@
     <thead>
         <tr>
             <th>No. </th>
+            <?php if($this->session->userdata('role')=='Manajer'){?>
+              <th>Nama Pegawai</th>
+            <?php }?>
             <th>Nama Prestasi</th>
             <th>Bidang</th>
             <th>Tahun Prestasi</th>
@@ -18,6 +21,9 @@
     foreach ($prestasi as $p) : ?>
         <tr>       
             <td><?= $no++;?></td>
+            <?php if($this->session->userdata('role')=='Manajer'){?>
+              <td><?= $p['name'];?></td>
+            <?php }?>
             <td><?= $p['nama_prestasi'];?></td>
             <td><?= $p['bidang'];?></td>
             <td><?= $p['tahun'];?></td>

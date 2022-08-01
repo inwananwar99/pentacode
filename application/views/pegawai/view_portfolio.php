@@ -14,9 +14,13 @@
                 <img src="<?= base_url('assets/')?>logo/logobig.png" alt="" width="300" heigth="300">
             </div>
             <div class="col-md-8 bg-primary">
-                <p>Deskripsi saya</p>
+            <?php foreach($desc as $d):?>
+                <p class="mt-3"><?= $d['deskripsi']; ?></p>
+            <?php endforeach; ?>
                 <div class="row bg-light" style="margin-top:200px;margin-left:400px;">
-                    <h1 class="ml-3">Bain Abqary</h1>
+                <?php foreach($users as $u):?>
+                    <h1 class="ml-3"><?= $u['name'];?></h1>
+                <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -27,24 +31,21 @@
                     <p>Email dan Whatsapp</p>
                     <li>KEMAMPUAN</li>
                     <ul>
-                        <li>PHP</li>
-                        <li>Java</li>
-                        <li>Project Management</li>
+                    <?php foreach($kemampuan as $k):?>
+                         <li><?= $k['nama_prestasi']; ?></li>
+                    <?php endforeach; ?>
                     </ul>
                     <li>RIWAYAT PENDIDIKAN</li>
                     <ul>
-                        <li>SD</li>
-                        <li>SMP</li>
-                        <li>SMA</li>
-                        <li>Diploma</li>
-                        <li>Sarjana</li>
-                        <li>Magister</li>
-                        <li>Doktoral</li>
+                    <?php foreach($pendidikan as $p):?>
+                         <li><?= $p['jenjang']; ?></li>
+                    <?php endforeach; ?>
                     </ul>
                     <li>PRESTASI</li>
                     <ul>
-                        <li>Hackaton Sandbox Iconpay</li>
-                        <li>Hackaton Dicoding 2022</li>
+                    <?php foreach($sertifikat as $s):?>
+                         <li><?= $s['jenis_sert']; ?></li>
+                    <?php endforeach; ?>
                     </ul>
                 </ul>
             </div>

@@ -128,12 +128,22 @@ public function deletePegawai($id){
 }
 
     public function level(){
-        $data = [
-            'level' => $this->ModelUser->getData('level'),
-            'konten' => 'pegawai/level',
-            'title' => 'level',
-            'judul' => 'Data Level Pegawai'
-        ];
+        if($this->session->userdata('role')=='Super Admin'){
+            $data = [
+                'level' => $this->ModelUser->getData('level'),
+                'konten' => 'pegawai/level',
+                'title' => 'level',
+                'judul' => 'Data Level Pegawai'
+            ];
+        }else{
+            $div = $this->session->userdata('id_divisi');
+            $data = [
+                'level' => $this->db->query("SELECT *FROM users JOIN level ON users.id_level = level.id_level WHERE level.level IN ('Manajer','Pegawai') AND users.id_divisi = $div")->result_array(),
+                'konten' => 'pegawai/level',
+                'title' => 'level',
+                'judul' => 'Data Level Pegawai'
+            ];
+        }
         $this->load->view('template',$data);
     }
     public function addLevel(){
@@ -244,8 +254,9 @@ public function deletePegawai($id){
             'konten' => 'pegawai/jabatan',
             'title' => 'divisi',
             'judul' => 'Data Jabatan Pegawai',
-            'jabatan' => $this->ModelUser->joinJabatan($this->session->userdata('id_level'))
+            'jabatan' => $this->ModelUser->joinJabatan($this->session->userdata('id_level'),$this->session->userdata('id'))
         ];
+        // var_dump($data);die;
         $this->load->view('template',$data);
     }
 
@@ -438,6 +449,17 @@ public function deletePegawai($id){
         $portfolio = $this->ModelUser->updatePortfolio($this->session->userdata('id'),$data);
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil update deskripsi pribadi Anda!</div>');
         return redirect('User/portofolio/'.$this->session->userdata('id'));
+    }
+
+    public function detailPortfolio(){
+        $data = [
+            'users' => $this->db->get_where('users',['id'=> $this->session->userdata('id')])->result_array(),
+            'desc' => $this->db->get_where('portofolio',['id_user'=> $this->session->userdata('id')])->result_array(),
+            'kemampuan' => $this->db->get_where('prestasi',['user_id'=> $this->session->userdata('id')])->result_array(),
+            'pendidikan' => $this->db->get_where('pendidikan',['user_id'=> $this->session->userdata('id')])->result_array(),
+            'sertifikat' => $this->db->get_where('sertifikat',['user_id'=> $this->session->userdata('id')])->result_array()
+        ];
+        $this->load->view('pegawai/view_portfolio',$data);      
     }
 }
 ?>

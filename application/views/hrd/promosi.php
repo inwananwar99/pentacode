@@ -7,7 +7,8 @@
             <th>Nama Pegawai</th>
             <th>Jabatan</th>
             <th>Tanggal Bergabung</th>
-            <th>Aksi</th>
+            <th>Portofolio</th>
+            <th>Surat Pengajuan</th>
         </tr>
     </thead>
     <tbody>

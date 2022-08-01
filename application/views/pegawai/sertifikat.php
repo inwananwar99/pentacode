@@ -4,6 +4,9 @@
     <thead>
         <tr>
             <th>No. </th>
+            <?php if($this->session->userdata('role')=='Manajer'){?>
+              <th>Nama Pegawai</th>
+            <?php }?>
             <th>Jenis Sertifikat</th>
             <th>Bidang Studi</th>
             <th>Tahun Sertifikat</th>
@@ -18,6 +21,9 @@
     foreach ($sertifikat as $s) : ?>
         <tr>       
             <td><?= $no++;?></td>
+            <?php if($this->session->userdata('role')=='Manajer'){?>
+              <td><?= $s['name'];?></td>
+            <?php }?>
             <td><?= $s['jenis_sert'];?></td>
             <td><?= $s['bidang_studi'];?></td>
             <td><?= $s['thn_sert'];?></td>
