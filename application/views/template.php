@@ -165,6 +165,14 @@
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="<?= base_url('User/portofolio/'.$this->session->userdata('id'))?>" class="nav-link <?= $title == 'sertifikat' ? 'active' : ''?>">
+                <i class="nav-icon fas fa-file"></i>
+                <p>
+                Portofolio
+                </p>
+              </a>
+            </li>
             <?php }else if($this->session->userdata('role') == 'Admin Finance'){?>
             <li class="nav-item">
               <a href="<?= base_url('User')?>" class="nav-link <?= $title == 'user' ? 'active' : ''?>">

@@ -55,5 +55,20 @@ class ModelUser extends CI_Model{
     public function validasiBerkas($table,$data){
         return $this->db->update($table,$data);
     }
+
+    public function getPortfolio($id){
+        return $this->db->query("SELECT *FROM portofolio WHERE id_user = $id")->result_array();
+    }
+
+    public function updatePortfolio($id,$data){
+        $portfolio = $this->db->get_where('portofolio',['id_user' => $id])->num_rows();
+        if($portfolio == 0){
+            $this->db->insert('portofolio',$data);
+        }else{
+            $this->db->where('id_user', $id);
+            $this->db->update('portofolio',$data);
+        }
+    }
+
 }
 ?>

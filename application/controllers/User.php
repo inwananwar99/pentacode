@@ -10,8 +10,6 @@ class User extends CI_Controller{
             'title' => 'user',
             'judul' => 'Data User'
         ];
-        // var_dump($id_div);
-        // var_dump($data['user']);die;
         $this->load->view('template',$data);
     }
 
@@ -420,6 +418,26 @@ public function deletePegawai($id){
             $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil validasi!</div>');
             return redirect('Prestasi');
         }
+    }
+
+    public function portofolio($id){
+        $data = [
+            'portofolio' => $this->ModelUser->getPortfolio($id),
+            'konten' => 'pegawai/portofolio',
+            'title' => 'portofolio',
+            'judul' => 'Data Portofolio'
+        ];
+        $this->load->view('template',$data);      
+    }
+
+    public function updatePortfolio(){
+        $data = [
+            'id_user' => $this->session->userdata('id'),
+            'deskripsi' => $this->input->post('desc')
+        ];
+        $portfolio = $this->ModelUser->updatePortfolio($this->session->userdata('id'),$data);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil update deskripsi pribadi Anda!</div>');
+        return redirect('User/portofolio/'.$this->session->userdata('id'));
     }
 }
 ?>

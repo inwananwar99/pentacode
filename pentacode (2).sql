@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Jul 2022 pada 00.18
+-- Waktu pembuatan: 01 Agu 2022 pada 04.21
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -185,7 +185,10 @@ INSERT INTO `level` (`id_level`, `level`) VALUES
 (5, 'Admin Pentacode'),
 (6, 'Admin Marketing'),
 (7, 'Admin Digital'),
-(8, 'Super');
+(8, 'Super'),
+(9, ''),
+(10, ''),
+(11, '');
 
 -- --------------------------------------------------------
 
@@ -334,6 +337,25 @@ INSERT INTO `pendidikan` (`id_pendidikan`, `user_id`, `jenjang`, `gelar`, `bidan
 (2, 6, 'Sarjana', 'Sarjana Terapan', 'Informatika', 'Politeknik Negeri Subang', 2021, '', 'Disetujui'),
 (3, 8, 'Magister', 'Magister', 'Informatika', 'Politeknik Elektronika Negeri ', 2021, '', 'Disetujui'),
 (4, 6, 'Diploma', 'Ahli Madya', 'Informatika', 'Politeknik Elektronika Negeri Surabaya', 2021, 'BERITA_ACARA_UAT_ICONPAYxMESTIKA_sign_dev.pdf', 'Disetujui');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `portofolio`
+--
+
+CREATE TABLE `portofolio` (
+  `id_portofolio` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `deskripsi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `portofolio`
+--
+
+INSERT INTO `portofolio` (`id_portofolio`, `id_user`, `deskripsi`) VALUES
+(2, 6, 'Hai, namaku Denny Adam. Aku lulusan Politeknik Negeri Lampung Jurusan D3 Manajemen Informatika. Sekarang aku bekerja di PT. Indonesia Comnets Plus Kantor Mampang, Jakarta Selatan sebagai salah satu Leader Developer');
 
 -- --------------------------------------------------------
 
@@ -650,6 +672,13 @@ ALTER TABLE `pendidikan`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indeks untuk tabel `portofolio`
+--
+ALTER TABLE `portofolio`
+  ADD PRIMARY KEY (`id_portofolio`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indeks untuk tabel `prestasi`
 --
 ALTER TABLE `prestasi`
@@ -753,7 +782,7 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT untuk tabel `level`
 --
 ALTER TABLE `level`
-  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `manajer`
@@ -790,6 +819,12 @@ ALTER TABLE `pembobotan`
 --
 ALTER TABLE `pendidikan`
   MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT untuk tabel `portofolio`
+--
+ALTER TABLE `portofolio`
+  MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `prestasi`
@@ -885,6 +920,12 @@ ALTER TABLE `pegawai`
 --
 ALTER TABLE `pendidikan`
   ADD CONSTRAINT `pendidikan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `portofolio`
+--
+ALTER TABLE `portofolio`
+  ADD CONSTRAINT `portofolio_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `prestasi`
