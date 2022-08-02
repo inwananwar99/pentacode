@@ -50,8 +50,7 @@ class Proyek extends CI_Controller{
     public function addProyek(){
         $data = [
             'nama_proyek' => $this->input->post('nama'),  
-            'ket_proyek' => $this->input->post('ket_proyek'), 
-            'status_pegawai' => $this->input->post('status_pegawai'), 
+            'ket_proyek' => $this->input->post('ket_proyek'),  
             'tgl_awal_proyek' => $this->input->post('tgl_awal_proyek'), 
             'tgl_akhir_proyek' => $this->input->post('tgl_akhir_proyek'), 
             'status_proyek' => $this->input->post('status_proyek') 
@@ -66,7 +65,6 @@ class Proyek extends CI_Controller{
             'nama_proyek' => $this->input->post('nama'), 
             'id_pegawai' => $this->input->post('id_pegawai'), 
             'ket_proyek' => $this->input->post('ket_proyek'), 
-            'status_pegawai' => $this->input->post('status_pegawai'), 
             'tgl_awal_proyek' => $this->input->post('tgl_awal_proyek'), 
             'tgl_akhir_proyek' => $this->input->post('tgl_akhir_proyek'), 
             'status_proyek' => $this->input->post('status_proyek') 

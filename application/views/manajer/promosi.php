@@ -45,10 +45,10 @@
             </div>
             <div class="form-group">
                <label for="">Nama Pegawai</label>
-               <select name="id_pegawai" class="form-control">
+               <select name="id_pegawai" id="peg" class="form-control">
                    <option>-- Pilih Pegawai --</option>
                    <?php foreach($user as $u):?>
-                        <option value="<?= $u['id']?>"><?= $u['name']?></option>
+                        <option data-jabatan="<?= $u['nama_jabatan']; ?>" data-bergabung="<?= $u['tanggal_buat']; ?>" value="<?= $u['id']?>"><?= $u['name']?></option>
                     <?php endforeach;?>
                </select>
             </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="form-group">
                <label for="">Tanggal Bergabung</label>
-               <input type="date" name="tgl" class="form-control" placeholder="Tanggal Bergabung ..." > 
+                 <input type="date" name="tgl" class="form-control">
             </div>
             <div class="form-group">
                <label for="">Portofolio</label>
@@ -66,7 +66,12 @@
             </div>
             <div class="form-group">
                <label for="">Jabatan Baru</label>
-               <input type="text" name="jabatan_baru" class="form-control" placeholder="Jabatan Baru ..." > 
+               <select name="jabatan_baru" class="form-control">
+                    <option>-- Pilih Jabatan --</option>
+                    <?php foreach ($jabatan as $jb) :?>
+                      <option><?= $jb['nama_jabatan']; ?></option>
+                    <?php endforeach;?>
+               </select>
             </div>
         </div>
         <div class="modal-footer">
@@ -96,10 +101,10 @@
 
             <div class="form-group">
                <label for="">Nama Pegawai</label>
-               <select name="id_pegawai" class="form-control">
+               <select name="id_pegawai" id="peg1" class="form-control">
                    <option value="<?= $l1['id']; ?>">-- <?= $l1['name']; ?> --</option>
                    <?php foreach($user as $u):?>
-                        <option value="<?= $u['id']?>"><?= $u['name']?></option>
+                        <option data-jabatan1="<?= $u['nama_jabatan']; ?>" data-bergabung1="<?= $u['tanggal_buat']; ?>" value="<?= $u['id']?>"><?= $u['name']?></option>
                     <?php endforeach;?>
                </select>
             </div>
@@ -118,7 +123,12 @@
             <?= $l1['portofolio']; ?>
             <div class="form-group">
                <label for="">Jabatan Baru</label>
-               <input type="text" name="jabatan_baru" class="form-control" value="<?= $l1['jabatan_baru']; ?>" placeholder="Jabatan Baru ..." > 
+               <select name="jabatan_baru" class="form-control">
+                    <option><?= $l1['jabatan_baru']; ?></option>
+                    <?php foreach ($jabatan as $jb) :?>
+                      <option><?= $jb['nama_jabatan']; ?></option>
+                    <?php endforeach;?>
+               </select>
             </div>
         </div>
         <div class="modal-footer">

@@ -536,6 +536,25 @@
     });
   </script>
   <script>
+    $('#peg').on('change', function(){
+      // ambil data dari elemen option yang dipilih
+      const peg = $('#peg option:selected').data('jabatan');
+      const join = $('#peg option:selected').data('bergabung');
+      // tampilkan data ke element
+      $('[name=jabatan_pegawai]').val(peg);
+      $('[name=tgl]').val(join);
+    });
+
+    $('#peg1').on('change', function(){
+      // ambil data dari elemen option yang dipilih
+      const peg = $('#peg1 option:selected').data('jabatan1');
+      const join = $('#peg1 option:selected').data('bergabung1');
+      // tampilkan data ke element
+      $('[name=jabatan_pegawai]').val(peg);
+      $('[name=tgl]').val(join);
+    });
+  </script>
+  <script>
     $(function () {
       $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,

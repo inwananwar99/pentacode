@@ -4,6 +4,10 @@ class ModelPromosi extends CI_Model{
         return $this->db->get($table)->result_array();
     }
 
+    public function joinJabatan(){
+        return $this->db->query("SELECT *FROM users JOIN jabatan ON users.id_jabatan = jabatan.id_jabatan")->result_array();
+    }
+
     public function add($table,$data){
         return $this->db->insert($table, $data);
     }

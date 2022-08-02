@@ -53,14 +53,6 @@
               <textarea name="ket_proyek" class="form-control"></textarea>
             </div>
             <div class="form-group">
-              <label for="">Status Pegawai</label>
-              <select name="status_pegawai" class="form-control">
-                <option>-- Pilih Status --</option>
-                <option>Jasbor</option>
-                <option>Fungsional</option>
-              </select>
-            </div>
-            <div class="form-group">
               <label for="">Tanggal Awal Proyek</label>
               <input type="date" name="tgl_awal_proyek" class="form-control">
             </div>
@@ -72,6 +64,7 @@
               <label for="">Status Proyek</label>
               <select name="status_proyek" class="form-control">
                 <option>-- Pilih Status --</option>
+                <option>Coming Soon</option>
                 <option>On Progress</option>
                 <option>Finish</option>
               </select>

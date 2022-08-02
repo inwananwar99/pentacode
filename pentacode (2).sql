@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Agu 2022 pada 01.36
+-- Waktu pembuatan: 03 Agu 2022 pada 01.27
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -416,7 +416,7 @@ CREATE TABLE `promosi` (
   `id_manajer` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `jabatan` varchar(128) NOT NULL,
-  `tgl_bergabung` int(11) NOT NULL,
+  `tgl_bergabung` date NOT NULL,
   `portofolio` text NOT NULL,
   `jabatan_baru` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -426,9 +426,10 @@ CREATE TABLE `promosi` (
 --
 
 INSERT INTO `promosi` (`id_promosi`, `id_manajer`, `id_user`, `jabatan`, `tgl_bergabung`, `portofolio`, `jabatan_baru`) VALUES
-(2, 7, 8, 'Marketing', 2022, 'Surat_Pengajuan-13.png', 'Manajer Retail Solution'),
-(3, 7, 6, 'Marketing', 2022, 'Surat_Pengajuan-14.png', 'Manajer Retail Solution'),
-(4, 7, 9, 'Manajer Digital', 2022, 'Surat_Pengajuan-16.png', 'Manajer Retail Solution');
+(2, 7, 8, 'Marketing', '0000-00-00', 'Surat_Pengajuan-13.png', 'Manajer Retail Solution'),
+(3, 7, 6, 'Marketing', '0000-00-00', 'Surat_Pengajuan-14.png', 'Manajer Retail Solution'),
+(4, 7, 9, 'Manajer Digital', '0000-00-00', 'Surat_Pengajuan-16.png', 'Manajer Retail Solution'),
+(5, 7, 8, 'Bussines Analyst', '2022-06-30', '98-Article_Text-182-1-10-20190320.pdf', 'Leader MLM');
 
 -- --------------------------------------------------------
 
@@ -443,7 +444,6 @@ CREATE TABLE `proyek` (
   `id_user2` int(11) DEFAULT NULL,
   `id_user3` int(11) DEFAULT NULL,
   `ket_proyek` varchar(30) NOT NULL,
-  `status_pegawai` varchar(128) NOT NULL,
   `tgl_awal_proyek` date NOT NULL,
   `tgl_akhir_proyek` date NOT NULL,
   `status_proyek` varchar(128) NOT NULL
@@ -453,9 +453,10 @@ CREATE TABLE `proyek` (
 -- Dumping data untuk tabel `proyek`
 --
 
-INSERT INTO `proyek` (`id_proyek`, `nama_proyek`, `id_user1`, `id_user2`, `id_user3`, `ket_proyek`, `status_pegawai`, `tgl_awal_proyek`, `tgl_akhir_proyek`, `status_proyek`) VALUES
-(2, 'Jawa Tengah', 6, 8, 14, 'dggafs', 'Fungsional', '2022-06-27', '2022-06-28', 'On Progress'),
-(4, 'Katalog A', NULL, NULL, NULL, 'SFS', 'Jasbor', '2022-07-12', '2022-07-21', 'On Progress');
+INSERT INTO `proyek` (`id_proyek`, `nama_proyek`, `id_user1`, `id_user2`, `id_user3`, `ket_proyek`, `tgl_awal_proyek`, `tgl_akhir_proyek`, `status_proyek`) VALUES
+(2, 'Jawa Tengah', 6, 8, 14, 'dggafs', '2022-06-27', '2022-06-28', 'On Progress'),
+(4, 'Katalog A', NULL, NULL, NULL, 'SFS', '2022-07-12', '2022-07-21', 'On Progress'),
+(5, 'LDK Uswatun Hasanah', NULL, NULL, NULL, 'fdffsfas', '2022-08-18', '2022-08-31', 'Coming Soon');
 
 -- --------------------------------------------------------
 
@@ -503,7 +504,11 @@ CREATE TABLE `saw_alternatif` (
 INSERT INTO `saw_alternatif` (`id`, `id_user`, `pendidikan`, `kemampuan`, `pengalaman_kerja`, `proyek`, `prestasi`, `level`) VALUES
 (34, 8, 3, 2, 4, 1, 2, 4),
 (35, 8, 3, 2, 4, 1, 2, 4),
-(36, 6, 2, 3, 4, 1, 2, 4);
+(36, 6, 2, 3, 4, 1, 2, 4),
+(37, 8, 3, 2, 4, 1, 2, 4),
+(38, 6, 2, 3, 4, 1, 2, 4),
+(39, 9, 2, 1, 1, 1, 1, 4),
+(40, 8, 3, 2, 4, 1, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -560,6 +565,7 @@ INSERT INTO `sertifikat` (`id_sert`, `user_id`, `jenis_sert`, `bidang_studi`, `t
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `id_divisi` int(11) DEFAULT NULL,
+  `id_jabatan` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -573,14 +579,14 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `id_divisi`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
-(6, 4, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31'),
-(7, 2, 'Denny Adam', 'sugiarto@iconpln.co.id', 'sugiarto', 'wp2655834.jpg', 1, 1, '2022-06-19'),
-(8, 3, 'Dhika Pratara', 'dhika@iconpln.co.id', 'pratara', 'wp2655834.jpg', 4, 1, '2022-06-30'),
-(9, 4, 'Ibnu', 'ibnu@iconpln.co.id', 'ibnuicon', 'default.jpg', 8, 1, '2022-07-03'),
-(12, 4, 'Denny Adam', 'denny@pln.co.id', 'dennyicon', 'info1.png', 7, 1, '2022-07-03'),
-(13, 3, 'Dhika Pratara', 'dhika@pln.co.id', 'dhikaicon', 'info2.png', 6, 1, '2022-07-05'),
-(14, NULL, 'Albar Hidayah', 'albarhidayah@mgs.co.id', 'albarhidayah', 'albar.jpg', 2, 1, '2022-07-15');
+INSERT INTO `users` (`id`, `id_divisi`, `id_jabatan`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
+(6, 4, 2, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31'),
+(7, 2, 0, 'Denny Adam', 'sugiarto@iconpln.co.id', 'sugiarto', 'wp2655834.jpg', 1, 1, '2022-06-19'),
+(8, 3, 4, 'Dhika Pratara', 'dhika@iconpln.co.id', 'pratara', 'wp2655834.jpg', 4, 1, '2022-06-30'),
+(9, 4, 0, 'Ibnu', 'ibnu@iconpln.co.id', 'ibnuicon', 'default.jpg', 8, 1, '2022-07-03'),
+(12, 4, 0, 'Denny Adam', 'denny@pln.co.id', 'dennyicon', 'info1.png', 7, 1, '2022-07-03'),
+(13, 3, 0, 'Dhika Pratara', 'dhika@pln.co.id', 'dhikaicon', 'info2.png', 6, 1, '2022-07-05'),
+(14, NULL, 0, 'Albar Hidayah', 'albarhidayah@mgs.co.id', 'albarhidayah', 'albar.jpg', 2, 1, '2022-07-15');
 
 --
 -- Indexes for dumped tables
@@ -738,7 +744,8 @@ ALTER TABLE `sertifikat`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_level` (`id_level`),
-  ADD KEY `id_divisi` (`id_divisi`);
+  ADD KEY `id_divisi` (`id_divisi`),
+  ADD KEY `id_jabatan` (`id_jabatan`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -838,13 +845,13 @@ ALTER TABLE `prestasi`
 -- AUTO_INCREMENT untuk tabel `promosi`
 --
 ALTER TABLE `promosi`
-  MODIFY `id_promosi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_promosi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `proyek`
 --
 ALTER TABLE `proyek`
-  MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `riwayat_pekerjaan`
@@ -856,7 +863,7 @@ ALTER TABLE `riwayat_pekerjaan`
 -- AUTO_INCREMENT untuk tabel `saw_alternatif`
 --
 ALTER TABLE `saw_alternatif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT untuk tabel `saw_nilai_bobot`

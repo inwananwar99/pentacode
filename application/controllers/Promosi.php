@@ -11,11 +11,13 @@ class Promosi extends CI_Controller{
         }else{
             $data = [
                 'promosi' => $this->ModelPromosi->join3('promosi'),
-                'user' => $this->ModelPromosi->getData('users'),
+                'user' => $this->ModelPromosi->joinJabatan(),
+                'jabatan' => $this->ModelPromosi->getData('jabatan'),
                 'konten' => 'manajer/promosi',
                 'title' => 'promosi',
                 'judul' => 'Data Promosi Jabatan'
             ];
+            // var_dump($data);die;
         }
         return $this->load->view('template',$data);
     }
@@ -163,6 +165,7 @@ class Promosi extends CI_Controller{
                 'pengalaman_kerja' => $peng,
                 'proyek' => $proy
             ];
+            // var_dump($data);die;
             if($alt > 0){
                 $this->db->where('id_user', $p['id_user']);
                 $this->db->update('saw_alternatif',$data);
