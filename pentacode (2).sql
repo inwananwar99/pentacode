@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Agu 2022 pada 01.27
+-- Waktu pembuatan: 09 Agu 2022 pada 01.43
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -138,6 +138,7 @@ CREATE TABLE `hrd` (
 CREATE TABLE `jabatan` (
   `id_jabatan` int(11) NOT NULL,
   `nama_jabatan` varchar(128) NOT NULL,
+  `tingkat` int(3) NOT NULL,
   `jobdesc` varchar(128) NOT NULL,
   `id_level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -146,10 +147,10 @@ CREATE TABLE `jabatan` (
 -- Dumping data untuk tabel `jabatan`
 --
 
-INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `jobdesc`, `id_level`) VALUES
-(1, 'Bussines Analystyyy', 'Mendefinisikan kebutuhan user', 2),
-(2, 'Bussines Analyst', 'Mendefinisikan kebutuhan user', 4),
-(4, 'Leader MLM', 'Prospek terossss', 4);
+INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `tingkat`, `jobdesc`, `id_level`) VALUES
+(1, 'Bussines Analystyyy', 4, 'Mendefinisikan kebutuhan user', 2),
+(2, 'Bussines Analyst', 3, 'Mendefinisikan kebutuhan user', 4),
+(4, 'Leader MLM', 4, 'Prospek terossss', 4);
 
 -- --------------------------------------------------------
 
@@ -186,10 +187,7 @@ INSERT INTO `level` (`id_level`, `level`) VALUES
 (5, 'Admin Pentacode'),
 (6, 'Admin Marketing'),
 (7, 'Admin Digital'),
-(8, 'Super'),
-(9, ''),
-(10, ''),
-(11, '');
+(8, 'Super');
 
 -- --------------------------------------------------------
 
@@ -417,7 +415,7 @@ CREATE TABLE `promosi` (
   `id_user` int(11) NOT NULL,
   `jabatan` varchar(128) NOT NULL,
   `tgl_bergabung` date NOT NULL,
-  `portofolio` text NOT NULL,
+  `surat_pengajuan` text NOT NULL,
   `jabatan_baru` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -425,11 +423,12 @@ CREATE TABLE `promosi` (
 -- Dumping data untuk tabel `promosi`
 --
 
-INSERT INTO `promosi` (`id_promosi`, `id_manajer`, `id_user`, `jabatan`, `tgl_bergabung`, `portofolio`, `jabatan_baru`) VALUES
+INSERT INTO `promosi` (`id_promosi`, `id_manajer`, `id_user`, `jabatan`, `tgl_bergabung`, `surat_pengajuan`, `jabatan_baru`) VALUES
 (2, 7, 8, 'Marketing', '0000-00-00', 'Surat_Pengajuan-13.png', 'Manajer Retail Solution'),
 (3, 7, 6, 'Marketing', '0000-00-00', 'Surat_Pengajuan-14.png', 'Manajer Retail Solution'),
 (4, 7, 9, 'Manajer Digital', '0000-00-00', 'Surat_Pengajuan-16.png', 'Manajer Retail Solution'),
-(5, 7, 8, 'Bussines Analyst', '2022-06-30', '98-Article_Text-182-1-10-20190320.pdf', 'Leader MLM');
+(5, 7, 8, 'Bussines Analyst', '2022-06-30', '98-Article_Text-182-1-10-20190320.pdf', 'Leader MLM'),
+(6, 7, 6, 'Bussines Analyst', '2022-05-31', 'info.png', 'Leader MLM');
 
 -- --------------------------------------------------------
 
@@ -845,7 +844,7 @@ ALTER TABLE `prestasi`
 -- AUTO_INCREMENT untuk tabel `promosi`
 --
 ALTER TABLE `promosi`
-  MODIFY `id_promosi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_promosi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `proyek`

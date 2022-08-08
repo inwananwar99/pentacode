@@ -4,6 +4,10 @@ class ModelPromosi extends CI_Model{
         return $this->db->get($table)->result_array();
     }
 
+    public function jabatanBaru($tingkat){
+        return $this->db->query("SELECT * FROM jabatan WHERE tingkat = $tingkat+1")->result_array();
+    }
+
     public function joinJabatan(){
         return $this->db->query("SELECT *FROM users JOIN jabatan ON users.id_jabatan = jabatan.id_jabatan")->result_array();
     }

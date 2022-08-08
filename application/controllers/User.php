@@ -451,13 +451,18 @@ public function deletePegawai($id){
         return redirect('User/portofolio/'.$this->session->userdata('id'));
     }
 
-    public function detailPortfolio(){
+    public function detailPortfolio($id){
+        if($this->session->userdata('role')=='HRD'){
+            $id_user = $id;
+        }else{
+            $id_user = $id;
+        }
         $data = [
-            'users' => $this->db->get_where('users',['id'=> $this->session->userdata('id')])->result_array(),
-            'desc' => $this->db->get_where('portofolio',['id_user'=> $this->session->userdata('id')])->result_array(),
-            'kemampuan' => $this->db->get_where('prestasi',['user_id'=> $this->session->userdata('id')])->result_array(),
-            'pendidikan' => $this->db->get_where('pendidikan',['user_id'=> $this->session->userdata('id')])->result_array(),
-            'sertifikat' => $this->db->get_where('sertifikat',['user_id'=> $this->session->userdata('id')])->result_array()
+            'users' => $this->db->get_where('users',['id'=> $id_user])->result_array(),
+            'desc' => $this->db->get_where('portofolio',['id_user'=> $id_user])->result_array(),
+            'kemampuan' => $this->db->get_where('prestasi',['user_id'=> $id_user])->result_array(),
+            'pendidikan' => $this->db->get_where('pendidikan',['user_id'=> $id_user])->result_array(),
+            'sertifikat' => $this->db->get_where('sertifikat',['user_id'=> $id_user])->result_array()
         ];
         $this->load->view('pegawai/view_portfolio',$data);      
     }

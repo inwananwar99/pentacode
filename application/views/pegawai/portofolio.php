@@ -18,7 +18,7 @@
           <td><?= $port['deskripsi'];?></td>
           <td>
             <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#editModal">Ubah</a>
-            <a href="<?= base_url('User/detailPortfolio'); ?>" class="btn btn-info">Detail</a>
+            <a href="<?= base_url('User/detailPortfolio/'.$port['id_user']); ?>" class="btn btn-info">Detail</a>
           </td>
         </tr>
       <?php } ?>

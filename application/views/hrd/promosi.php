@@ -20,6 +20,8 @@
                 <td><?= $p['name']; ?></td>
                 <td><?= $p['jabatan']; ?></td>
                 <td><?= $p['tgl_bergabung']; ?></td>
+                <td><a href="<?= base_url('User/detailPortfolio/'.$p['id_user']); ?>" class="btn btn-info">Detail</a></td>
+                <td><?= $p['surat_pengajuan']; ?></td>
                 </tr>
         <?php endforeach; ?>
     </tbody>

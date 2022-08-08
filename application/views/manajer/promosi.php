@@ -61,8 +61,8 @@
                  <input type="date" name="tgl" class="form-control">
             </div>
             <div class="form-group">
-               <label for="">Portofolio</label>
-               <input type="file" name="portofolio" class="form-control" placeholder="Portofolio ..." > 
+               <label for="">Surat Pengajuan</label>
+               <input type="file" name="pengajuan" class="form-control" placeholder="Portofolio ..." > 
             </div>
             <div class="form-group">
                <label for="">Jabatan Baru</label>
@@ -118,9 +118,9 @@
             </div>
             <div class="form-group">
                <label for="">Portofolio</label>
-               <input type="file" name="portofolio" class="form-control" placeholder="Portofolio ..." > 
+               <input type="file" name="pengajuan" class="form-control" placeholder="Portofolio ..." > 
             </div>
-            <?= $l1['portofolio']; ?>
+            <?= $l1['surat_pengajuan']; ?>
             <div class="form-group">
                <label for="">Jabatan Baru</label>
                <select name="jabatan_baru" class="form-control">

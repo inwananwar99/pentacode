@@ -9,6 +9,7 @@ class Promosi extends CI_Controller{
                 'judul' => 'Daftar Promosi Jabatan'
             ];
         }else{
+            $tingkat = $this->db->query("SELECT tingkat FROM jabatan")->result_array();
             $data = [
                 'promosi' => $this->ModelPromosi->join3('promosi'),
                 'user' => $this->ModelPromosi->joinJabatan(),
@@ -17,7 +18,6 @@ class Promosi extends CI_Controller{
                 'title' => 'promosi',
                 'judul' => 'Data Promosi Jabatan'
             ];
-            // var_dump($data);die;
         }
         return $this->load->view('template',$data);
     }
@@ -27,7 +27,7 @@ class Promosi extends CI_Controller{
         $config['allowed_types']        = 'gif|jpg|png|pdf';
         $config['max_size']             = 5000;
         $this->load->library('upload', $config);
-        if(!$this->upload->do_upload('portofolio')){
+        if(!$this->upload->do_upload('pengajuan')){
             $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Gagal tambah pengajuan!</div>');
             return redirect('Promosi/pengajuan');
         }else{
@@ -37,7 +37,7 @@ class Promosi extends CI_Controller{
                     'jabatan' => $this->input->post('jabatan_pegawai'),
                     'tgl_bergabung' => $this->input->post('tgl'),
                     'jabatan_baru' => $this->input->post('jabatan_baru'),
-                    'portofolio' => $this->upload->data('file_name')
+                    'surat_pengajuan' => $this->upload->data('file_name')
                 ];
                 $this->ModelPromosi->add('promosi',$data);
                 $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil tambah pengajuan!</div>');
@@ -50,7 +50,7 @@ class Promosi extends CI_Controller{
         $config['allowed_types']        = 'gif|jpg|png|pdf';
         $config['max_size']             = 5000;
         $this->load->library('upload', $config);
-        if(!$this->upload->do_upload('portofolio')){
+        if(!$this->upload->do_upload('pengajuan')){
                 $data = [
                     'id_manajer' => $this->input->post('id_manajer'),
                     'id_user' => $this->input->post('id_pegawai'),
@@ -68,7 +68,7 @@ class Promosi extends CI_Controller{
                 'jabatan' => $this->input->post('jabatan_pegawai'),
                 'tgl_bergabung' => $this->input->post('tgl'),
                 'jabatan_baru' => $this->input->post('jabatan_baru'),
-                'portofolio' => $this->upload->data('file_name')
+                'surat_pengajuan' => $this->upload->data('file_name')
             ];
             $this->ModelPromosi->update(['id_promosi' => $id],'promosi',$data);
             $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil ubah promosi!</div>');
