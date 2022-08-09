@@ -526,23 +526,15 @@
   }
   </script>
   <script>
-    CKEDITOR.replace('noteBorongan',{
-      width: '80%',
-        height: 100,
-    });
-      CKEDITOR.replace('noteSatuan',{
-      width: '80%',
-        height: 100,
-    });
-  </script>
-  <script>
     $('#peg').on('change', function(){
       // ambil data dari elemen option yang dipilih
       const peg = $('#peg option:selected').data('jabatan');
       const join = $('#peg option:selected').data('bergabung');
+      const tk = $('#peg option:selected').data('tingkat');
       // tampilkan data ke element
       $('[name=jabatan_pegawai]').val(peg);
       $('[name=tgl]').val(join);
+      $('[name=jabatan_baru]').val(tk+1);
     });
 
     $('#peg1').on('change', function(){

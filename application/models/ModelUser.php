@@ -45,6 +45,9 @@ class ModelUser extends CI_Model{
         $this->db->select('*');
         $this->db->from('pegawai');
         $this->db->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan');
+        $this->db->join('users', 'users.id_pegawai = pegawai.id_pegawai');
+        $this->db->where('users.id_level',4);
+        $this->db->where('users.id_divisi',$this->session->userdata('id_divisi'));
         return $this->db->get()->result_array();
     }
 

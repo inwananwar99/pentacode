@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Agu 2022 pada 01.43
+-- Waktu pembuatan: 10 Agu 2022 pada 01.54
 -- Versi server: 10.4.22-MariaDB
 -- Versi PHP: 7.4.28
 
@@ -565,6 +565,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `id_divisi` int(11) DEFAULT NULL,
   `id_jabatan` int(11) NOT NULL,
+  `id_pegawai` int(11) DEFAULT NULL,
   `name` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
@@ -578,14 +579,14 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `id_divisi`, `id_jabatan`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
-(6, 4, 2, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31'),
-(7, 2, 0, 'Denny Adam', 'sugiarto@iconpln.co.id', 'sugiarto', 'wp2655834.jpg', 1, 1, '2022-06-19'),
-(8, 3, 4, 'Dhika Pratara', 'dhika@iconpln.co.id', 'pratara', 'wp2655834.jpg', 4, 1, '2022-06-30'),
-(9, 4, 0, 'Ibnu', 'ibnu@iconpln.co.id', 'ibnuicon', 'default.jpg', 8, 1, '2022-07-03'),
-(12, 4, 0, 'Denny Adam', 'denny@pln.co.id', 'dennyicon', 'info1.png', 7, 1, '2022-07-03'),
-(13, 3, 0, 'Dhika Pratara', 'dhika@pln.co.id', 'dhikaicon', 'info2.png', 6, 1, '2022-07-05'),
-(14, NULL, 0, 'Albar Hidayah', 'albarhidayah@mgs.co.id', 'albarhidayah', 'albar.jpg', 2, 1, '2022-07-15');
+INSERT INTO `users` (`id`, `id_divisi`, `id_jabatan`, `id_pegawai`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
+(6, 4, 2, 2, 'Denny Adam', 'denny@iconpln.co.id', 'dennyicon', 'Inwan14.png', 4, 1, '2022-05-31'),
+(7, 2, 0, 2, 'Denny Adam', 'sugiarto@iconpln.co.id', 'sugiarto', 'wp2655834.jpg', 1, 1, '2022-06-19'),
+(8, 2, 4, 3, 'Dhika Pratara', 'dhika@iconpln.co.id', 'pratara', 'wp2655834.jpg', 4, 1, '2022-06-30'),
+(9, 4, 0, NULL, 'Ibnu', 'ibnu@iconpln.co.id', 'ibnuicon', 'default.jpg', 8, 1, '2022-07-03'),
+(12, 4, 0, 2, 'Denny Adam', 'denny@pln.co.id', 'dennyicon', 'info1.png', 7, 1, '2022-07-03'),
+(13, 3, 0, 3, 'Dhika Pratara', 'dhika@pln.co.id', 'dhikaicon', 'info2.png', 6, 1, '2022-07-05'),
+(14, NULL, 0, NULL, 'Albar Hidayah', 'albarhidayah@mgs.co.id', 'albarhidayah', 'albar.jpg', 2, 1, '2022-07-15');
 
 --
 -- Indexes for dumped tables
@@ -744,7 +745,8 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_level` (`id_level`),
   ADD KEY `id_divisi` (`id_divisi`),
-  ADD KEY `id_jabatan` (`id_jabatan`);
+  ADD KEY `id_jabatan` (`id_jabatan`),
+  ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -978,7 +980,8 @@ ALTER TABLE `sertifikat`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `level` (`id_level`),
-  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`id_divisi`) REFERENCES `divisi` (`id_divisi`);
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`id_divisi`) REFERENCES `divisi` (`id_divisi`),
+  ADD CONSTRAINT `users_ibfk_3` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -24,6 +24,7 @@
                   <?php } ?>
                   <td><?= $d['status_proyek']; ?></td>
                   <td>
+                  <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#detailModal<?= $d['id_proyek']?>">Detail</a>
                     <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $d['id_proyek'];?>">Ubah</a>
                     <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $d['id_proyek']?>">Hapus</a>
                   </td>
@@ -105,6 +106,30 @@
         <button type="submit" class="btn btn-primary">Pilih</button>
         </div>
     </form>
+  </div>
+</div>
+</div>
+<?php endforeach;?>
+
+<!-- Modal Detail Proyek -->
+<?php foreach ($proyek as $p3) :?>
+<div class="modal fade" id="detailModal<?= $p3['id_proyek'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Detail Proyek</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <h5>
+              Team Proyek 
+        </h5>
+    </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        </div>
   </div>
 </div>
 </div>

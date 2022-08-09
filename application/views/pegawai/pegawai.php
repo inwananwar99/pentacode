@@ -8,6 +8,7 @@
             <th>Jenis Kelamin</th>
             <th>Alamat</th>
             <th>Jabatan</th>
+            <th>Portofolio</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -21,6 +22,7 @@
             <td><?= $d['jenis_kelamin']; ?></td>
             <td><?= $d['alamat']; ?></td>
             <td><?= $d['nama_jabatan']; ?></td>
+            <td><a href="<?= base_url('User/detailPortfolio/'.$d['id']); ?>" class="btn btn-info">Detail</a></td>
             <td>
                 <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $d['id_pegawai'];?>">Ubah</a>
                 <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $d['id_pegawai']?>">Hapus</a>

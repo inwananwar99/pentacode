@@ -44,6 +44,7 @@ class Proyek extends CI_Controller{
                 'konten' => 'manajer/proyek',
                 'factor' => $this->ModelPenugasan->final_result(),
             ];
+
         return $this->load->view('template',$data);
     }
 

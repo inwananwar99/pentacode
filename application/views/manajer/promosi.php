@@ -48,7 +48,7 @@
                <select name="id_pegawai" id="peg" class="form-control">
                    <option>-- Pilih Pegawai --</option>
                    <?php foreach($user as $u):?>
-                        <option data-jabatan="<?= $u['nama_jabatan']; ?>" data-bergabung="<?= $u['tanggal_buat']; ?>" value="<?= $u['id']?>"><?= $u['name']?></option>
+                        <option data-jabatan="<?= $u['nama_jabatan']; ?>" data-tingkat="<?= $u['tingkat']; ?>" data-bergabung="<?= $u['tanggal_buat']; ?>" value="<?= $u['id']?>"><?= $u['name']?></option>
                     <?php endforeach;?>
                </select>
             </div>
@@ -64,14 +64,10 @@
                <label for="">Surat Pengajuan</label>
                <input type="file" name="pengajuan" class="form-control" placeholder="Portofolio ..." > 
             </div>
+
             <div class="form-group">
                <label for="">Jabatan Baru</label>
-               <select name="jabatan_baru" class="form-control">
-                    <option>-- Pilih Jabatan --</option>
-                    <?php foreach ($jabatan as $jb) :?>
-                      <option><?= $jb['nama_jabatan']; ?></option>
-                    <?php endforeach;?>
-               </select>
+               <input type="text" name="jabatan_baru" class="form-control" placeholder="Jabatan Baru ..." > 
             </div>
         </div>
         <div class="modal-footer">

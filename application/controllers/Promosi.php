@@ -9,7 +9,6 @@ class Promosi extends CI_Controller{
                 'judul' => 'Daftar Promosi Jabatan'
             ];
         }else{
-            $tingkat = $this->db->query("SELECT tingkat FROM jabatan")->result_array();
             $data = [
                 'promosi' => $this->ModelPromosi->join3('promosi'),
                 'user' => $this->ModelPromosi->joinJabatan(),
