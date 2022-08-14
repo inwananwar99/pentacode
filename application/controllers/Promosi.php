@@ -8,7 +8,7 @@ class Promosi extends CI_Controller{
                 'title' => 'promosi',
                 'judul' => 'Daftar Promosi Jabatan'
             ];
-        }else{
+        }else{ 
             $data = [
                 'promosi' => $this->ModelPromosi->join3('promosi'),
                 'user' => $this->ModelPromosi->joinJabatan(),

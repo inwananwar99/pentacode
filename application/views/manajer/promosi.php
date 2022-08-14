@@ -7,6 +7,7 @@
             <th>Nama Pegawai</th>
             <th>Jabatan</th>
             <th>Tanggal Bergabung</th>
+            <th>Surat Pengajuan</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -19,6 +20,7 @@
                 <td><?= $p['name']; ?></td>
                 <td><?= $p['jabatan']; ?></td>
                 <td><?= $p['tgl_bergabung']; ?></td>
+                <td><a href="<?= base_url('assets/upload/manajer/'.$p['surat_pengajuan']); ?>"><?= $p['surat_pengajuan']; ?></a></td>
                 <td>
                 <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#editModal<?= $p['id_promosi'];?>">Ubah</a>
                   <a href="#" class="btn btn-danger mb-3" data-toggle="modal" data-target="#deleteModal<?= $p['id_promosi'];?>">Hapus</a>

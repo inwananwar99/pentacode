@@ -21,7 +21,7 @@
                 <td><?= $p['jabatan']; ?></td>
                 <td><?= $p['tgl_bergabung']; ?></td>
                 <td><a href="<?= base_url('User/detailPortfolio/'.$p['id_user']); ?>" class="btn btn-info">Detail</a></td>
-                <td><?= $p['surat_pengajuan']; ?></td>
+                <td><a href="<?= base_url('assets/upload/manajer/'.$p['surat_pengajuan']); ?>"><?= $p['surat_pengajuan']; ?></a></td>
                 </tr>
         <?php endforeach; ?>
     </tbody>
