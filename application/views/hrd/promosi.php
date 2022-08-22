@@ -4,11 +4,8 @@
     <thead>
         <tr>
             <th>No. </th>
-            <th>Nama Pegawai</th>
             <th>Jabatan</th>
-            <th>Tanggal Bergabung</th>
-            <th>Portofolio</th>
-            <th>Surat Pengajuan</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -17,12 +14,10 @@
         foreach($promosi as $p): ?>
             <tr>       
                 <td><?= $no++; ?></td>
-                <td><?= $p['name']; ?></td>
-                <td><?= $p['jabatan']; ?></td>
-                <td><?= $p['tgl_bergabung']; ?></td>
-                <td><a href="<?= base_url('User/detailPortfolio/'.$p['id_user']); ?>" class="btn btn-info">Detail</a></td>
-                <td><a href="<?= base_url('assets/upload/manajer/'.$p['surat_pengajuan']); ?>"><?= $p['surat_pengajuan']; ?></a></td>
-                </tr>
+                <td><?= $p['jabatan_baru']; ?></td>
+                <td><a href="<?= base_url('Promosi/detailPromosi/'.$p['jabatan_baru']); ?>" class="btn btn-warning ml-3">Detail</a></td>
+            </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+

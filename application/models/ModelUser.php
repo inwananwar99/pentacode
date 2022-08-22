@@ -18,6 +18,15 @@ class ModelUser extends CI_Model{
         return $this->db->delete($table);
     }
 
+    public function getAll(){
+        $this->db->select('*');
+        $this->db->from('pegawai');
+        $this->db->join('jabatan', 'pegawai.id_jabatan = jabatan.id_jabatan');
+        $this->db->join('users', 'users.id_pegawai = pegawai.id_pegawai');
+        $this->db->where('users.id_level',4);
+        return $this->db->get()->result_array();
+    }
+    
     public function getJoin($table1,$table2){
         $this->db->select('*');
         $this->db->from($table1);

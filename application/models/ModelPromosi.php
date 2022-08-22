@@ -47,6 +47,18 @@ class ModelPromosi extends CI_Model{
         $this->db->where($id);
         return $this->db->get()->result_array();
     }
+    
+    public function getJabatan(){
+        return $this->db->query("SELECT *FROM promosi as p JOIN users as u ON p.id_user = u.id GROUP BY jabatan_baru")->result_array();
+    }
+
+    public function getPegawaiByPromosi(){
+        return $this->db->query("SELECT *FROM promosi as p JOIN users as u ON p.id_user = u.id")->result_array();
+    }
+
+    public function getDetailPromosi($jabatan){
+        return $this->db->query("SELECT *FROM promosi as p JOIN users as u ON p.id_user = u.id WHERE p.jabatan_baru LIKE '%$jabatan%'")->result_array();
+    }
 
     public function join3($table){
         $this->db->select('*');

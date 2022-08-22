@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Agu 2022 pada 01.25
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 7.4.28
+-- Generation Time: Aug 22, 2022 at 04:48 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bobot`
+-- Table structure for table `bobot`
 --
 
 CREATE TABLE `bobot` (
@@ -36,7 +36,7 @@ CREATE TABLE `bobot` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `bobot`
+-- Dumping data for table `bobot`
 --
 
 INSERT INTO `bobot` (`id_bobot`, `id_user`, `pengalaman`, `prestasi`, `kemampuan`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `bobot` (`id_bobot`, `id_user`, `pengalaman`, `prestasi`, `kemampuan
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cf_sf`
+-- Table structure for table `cf_sf`
 --
 
 CREATE TABLE `cf_sf` (
@@ -59,7 +59,7 @@ CREATE TABLE `cf_sf` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `cf_sf`
+-- Dumping data for table `cf_sf`
 --
 
 INSERT INTO `cf_sf` (`id`, `id_user`, `cf`, `sf`, `final_result`) VALUES
@@ -69,7 +69,7 @@ INSERT INTO `cf_sf` (`id`, `id_user`, `cf`, `sf`, `final_result`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `divisi`
+-- Table structure for table `divisi`
 --
 
 CREATE TABLE `divisi` (
@@ -78,7 +78,7 @@ CREATE TABLE `divisi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `divisi`
+-- Dumping data for table `divisi`
 --
 
 INSERT INTO `divisi` (`id_divisi`, `nama_divisi`) VALUES
@@ -90,7 +90,7 @@ INSERT INTO `divisi` (`id_divisi`, `nama_divisi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `gap`
+-- Table structure for table `gap`
 --
 
 CREATE TABLE `gap` (
@@ -103,7 +103,7 @@ CREATE TABLE `gap` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `gap`
+-- Dumping data for table `gap`
 --
 
 INSERT INTO `gap` (`id`, `id_bobot`, `id_user`, `pengalaman`, `prestasi`, `kemampuan`) VALUES
@@ -114,7 +114,7 @@ INSERT INTO `gap` (`id`, `id_bobot`, `id_user`, `pengalaman`, `prestasi`, `kemam
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `hrd`
+-- Table structure for table `hrd`
 --
 
 CREATE TABLE `hrd` (
@@ -132,7 +132,7 @@ CREATE TABLE `hrd` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jabatan`
+-- Table structure for table `jabatan`
 --
 
 CREATE TABLE `jabatan` (
@@ -144,7 +144,7 @@ CREATE TABLE `jabatan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `jabatan`
+-- Dumping data for table `jabatan`
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `tingkat`, `jobdesc`, `id_level`) VALUES
@@ -155,7 +155,7 @@ INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `tingkat`, `jobdesc`, `id_l
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kriteria`
+-- Table structure for table `kriteria`
 --
 
 CREATE TABLE `kriteria` (
@@ -167,7 +167,7 @@ CREATE TABLE `kriteria` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `level`
+-- Table structure for table `level`
 --
 
 CREATE TABLE `level` (
@@ -176,7 +176,7 @@ CREATE TABLE `level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `level`
+-- Dumping data for table `level`
 --
 
 INSERT INTO `level` (`id_level`, `level`) VALUES
@@ -192,7 +192,7 @@ INSERT INTO `level` (`id_level`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `manajer`
+-- Table structure for table `manajer`
 --
 
 CREATE TABLE `manajer` (
@@ -210,7 +210,7 @@ CREATE TABLE `manajer` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `nilai_bobot`
+-- Table structure for table `nilai_bobot`
 --
 
 CREATE TABLE `nilai_bobot` (
@@ -222,7 +222,7 @@ CREATE TABLE `nilai_bobot` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `nilai_bobot`
+-- Dumping data for table `nilai_bobot`
 --
 
 INSERT INTO `nilai_bobot` (`id`, `id_user`, `pengalaman`, `prestasi`, `kemampuan`) VALUES
@@ -233,7 +233,7 @@ INSERT INTO `nilai_bobot` (`id`, `id_user`, `pengalaman`, `prestasi`, `kemampuan
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `normalisasi`
+-- Table structure for table `normalisasi`
 --
 
 CREATE TABLE `normalisasi` (
@@ -248,7 +248,7 @@ CREATE TABLE `normalisasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `normalisasi`
+-- Dumping data for table `normalisasi`
 --
 
 INSERT INTO `normalisasi` (`id_norm`, `id_user`, `prestasi`, `kemampuan`, `pengalaman_kerja`, `pendidikan`, `level`, `proyek`) VALUES
@@ -259,7 +259,7 @@ INSERT INTO `normalisasi` (`id_norm`, `id_user`, `prestasi`, `kemampuan`, `penga
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pegawai`
+-- Table structure for table `pegawai`
 --
 
 CREATE TABLE `pegawai` (
@@ -275,7 +275,7 @@ CREATE TABLE `pegawai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pegawai`
+-- Dumping data for table `pegawai`
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `jenis_kelamin`, `tmp_lahir`, `tgl_lahir`, `alamat`, `email`, `no_tlp`, `id_jabatan`) VALUES
@@ -286,7 +286,7 @@ INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `jenis_kelamin`, `tmp_lahir
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembobotan`
+-- Table structure for table `pembobotan`
 --
 
 CREATE TABLE `pembobotan` (
@@ -296,7 +296,7 @@ CREATE TABLE `pembobotan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pembobotan`
+-- Dumping data for table `pembobotan`
 --
 
 INSERT INTO `pembobotan` (`id`, `selisih`, `bobot_nilai`) VALUES
@@ -313,7 +313,7 @@ INSERT INTO `pembobotan` (`id`, `selisih`, `bobot_nilai`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pendidikan`
+-- Table structure for table `pendidikan`
 --
 
 CREATE TABLE `pendidikan` (
@@ -329,7 +329,7 @@ CREATE TABLE `pendidikan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pendidikan`
+-- Dumping data for table `pendidikan`
 --
 
 INSERT INTO `pendidikan` (`id_pendidikan`, `user_id`, `jenjang`, `gelar`, `bidang_studi`, `perguruan_tinggi`, `thn_lulus`, `lampiran`, `status`) VALUES
@@ -340,7 +340,7 @@ INSERT INTO `pendidikan` (`id_pendidikan`, `user_id`, `jenjang`, `gelar`, `bidan
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `portofolio`
+-- Table structure for table `portofolio`
 --
 
 CREATE TABLE `portofolio` (
@@ -350,7 +350,7 @@ CREATE TABLE `portofolio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `portofolio`
+-- Dumping data for table `portofolio`
 --
 
 INSERT INTO `portofolio` (`id_portofolio`, `id_user`, `deskripsi`) VALUES
@@ -360,7 +360,7 @@ INSERT INTO `portofolio` (`id_portofolio`, `id_user`, `deskripsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `prestasi`
+-- Table structure for table `prestasi`
 --
 
 CREATE TABLE `prestasi` (
@@ -374,7 +374,7 @@ CREATE TABLE `prestasi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `prestasi`
+-- Dumping data for table `prestasi`
 --
 
 INSERT INTO `prestasi` (`id_prestasi`, `user_id`, `nama_prestasi`, `bidang`, `tahun`, `lampiran`, `status`) VALUES
@@ -406,7 +406,7 @@ INSERT INTO `prestasi` (`id_prestasi`, `user_id`, `nama_prestasi`, `bidang`, `ta
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `promosi`
+-- Table structure for table `promosi`
 --
 
 CREATE TABLE `promosi` (
@@ -420,20 +420,19 @@ CREATE TABLE `promosi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `promosi`
+-- Dumping data for table `promosi`
 --
 
 INSERT INTO `promosi` (`id_promosi`, `id_manajer`, `id_user`, `jabatan`, `tgl_bergabung`, `surat_pengajuan`, `jabatan_baru`) VALUES
 (2, 7, 8, 'Marketing', '0000-00-00', 'Surat_Pengajuan-13.png', 'Manajer Retail Solution'),
 (3, 7, 6, 'Marketing', '0000-00-00', 'Surat_Pengajuan-14.png', 'Manajer Retail Solution'),
-(4, 7, 9, 'Manajer Digital', '0000-00-00', 'Surat_Pengajuan-16.png', 'Manajer Retail Solution'),
 (5, 7, 8, 'Bussines Analyst', '2022-06-30', '98-Article_Text-182-1-10-20190320.pdf', 'Leader MLM'),
 (6, 7, 6, 'Bussines Analyst', '2022-05-31', 'info.png', 'Leader MLM');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `proyek`
+-- Table structure for table `proyek`
 --
 
 CREATE TABLE `proyek` (
@@ -449,7 +448,7 @@ CREATE TABLE `proyek` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `proyek`
+-- Dumping data for table `proyek`
 --
 
 INSERT INTO `proyek` (`id_proyek`, `nama_proyek`, `id_user1`, `id_user2`, `id_user3`, `ket_proyek`, `tgl_awal_proyek`, `tgl_akhir_proyek`, `status_proyek`) VALUES
@@ -460,7 +459,7 @@ INSERT INTO `proyek` (`id_proyek`, `nama_proyek`, `id_user1`, `id_user2`, `id_us
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `riwayat_pekerjaan`
+-- Table structure for table `riwayat_pekerjaan`
 --
 
 CREATE TABLE `riwayat_pekerjaan` (
@@ -471,7 +470,7 @@ CREATE TABLE `riwayat_pekerjaan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `riwayat_pekerjaan`
+-- Dumping data for table `riwayat_pekerjaan`
 --
 
 INSERT INTO `riwayat_pekerjaan` (`id`, `id_user`, `id_proyek`, `status`) VALUES
@@ -482,7 +481,7 @@ INSERT INTO `riwayat_pekerjaan` (`id`, `id_user`, `id_proyek`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `saw_alternatif`
+-- Table structure for table `saw_alternatif`
 --
 
 CREATE TABLE `saw_alternatif` (
@@ -497,7 +496,7 @@ CREATE TABLE `saw_alternatif` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `saw_alternatif`
+-- Dumping data for table `saw_alternatif`
 --
 
 INSERT INTO `saw_alternatif` (`id`, `id_user`, `pendidikan`, `kemampuan`, `pengalaman_kerja`, `proyek`, `prestasi`, `level`) VALUES
@@ -512,7 +511,7 @@ INSERT INTO `saw_alternatif` (`id`, `id_user`, `pendidikan`, `kemampuan`, `penga
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `saw_nilai_bobot`
+-- Table structure for table `saw_nilai_bobot`
 --
 
 CREATE TABLE `saw_nilai_bobot` (
@@ -522,7 +521,7 @@ CREATE TABLE `saw_nilai_bobot` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `saw_nilai_bobot`
+-- Dumping data for table `saw_nilai_bobot`
 --
 
 INSERT INTO `saw_nilai_bobot` (`id`, `id_user`, `nilai`) VALUES
@@ -533,7 +532,7 @@ INSERT INTO `saw_nilai_bobot` (`id`, `id_user`, `nilai`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sertifikat`
+-- Table structure for table `sertifikat`
 --
 
 CREATE TABLE `sertifikat` (
@@ -547,7 +546,7 @@ CREATE TABLE `sertifikat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `sertifikat`
+-- Dumping data for table `sertifikat`
 --
 
 INSERT INTO `sertifikat` (`id_sert`, `user_id`, `jenis_sert`, `bidang_studi`, `thn_sert`, `lampiran`, `status`) VALUES
@@ -558,7 +557,7 @@ INSERT INTO `sertifikat` (`id_sert`, `user_id`, `jenis_sert`, `bidang_studi`, `t
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -576,7 +575,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `id_divisi`, `id_jabatan`, `id_pegawai`, `name`, `email`, `password`, `foto`, `id_level`, `status_aktif`, `tanggal_buat`) VALUES
@@ -593,27 +592,27 @@ INSERT INTO `users` (`id`, `id_divisi`, `id_jabatan`, `id_pegawai`, `name`, `ema
 --
 
 --
--- Indeks untuk tabel `bobot`
+-- Indexes for table `bobot`
 --
 ALTER TABLE `bobot`
   ADD PRIMARY KEY (`id_bobot`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `cf_sf`
+-- Indexes for table `cf_sf`
 --
 ALTER TABLE `cf_sf`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `divisi`
+-- Indexes for table `divisi`
 --
 ALTER TABLE `divisi`
   ADD PRIMARY KEY (`id_divisi`);
 
 --
--- Indeks untuk tabel `gap`
+-- Indexes for table `gap`
 --
 ALTER TABLE `gap`
   ADD PRIMARY KEY (`id`),
@@ -621,80 +620,80 @@ ALTER TABLE `gap`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `hrd`
+-- Indexes for table `hrd`
 --
 ALTER TABLE `hrd`
   ADD PRIMARY KEY (`id_hrd`),
   ADD KEY `id_jabatan` (`id_jabatan`);
 
 --
--- Indeks untuk tabel `jabatan`
+-- Indexes for table `jabatan`
 --
 ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`id_jabatan`),
   ADD KEY `id_level` (`id_level`);
 
 --
--- Indeks untuk tabel `level`
+-- Indexes for table `level`
 --
 ALTER TABLE `level`
   ADD PRIMARY KEY (`id_level`);
 
 --
--- Indeks untuk tabel `manajer`
+-- Indexes for table `manajer`
 --
 ALTER TABLE `manajer`
   ADD PRIMARY KEY (`id_manajer`);
 
 --
--- Indeks untuk tabel `nilai_bobot`
+-- Indexes for table `nilai_bobot`
 --
 ALTER TABLE `nilai_bobot`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `normalisasi`
+-- Indexes for table `normalisasi`
 --
 ALTER TABLE `normalisasi`
   ADD PRIMARY KEY (`id_norm`);
 
 --
--- Indeks untuk tabel `pegawai`
+-- Indexes for table `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id_pegawai`),
   ADD KEY `id_jabatan` (`id_jabatan`);
 
 --
--- Indeks untuk tabel `pembobotan`
+-- Indexes for table `pembobotan`
 --
 ALTER TABLE `pembobotan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pendidikan`
+-- Indexes for table `pendidikan`
 --
 ALTER TABLE `pendidikan`
   ADD PRIMARY KEY (`id_pendidikan`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indeks untuk tabel `portofolio`
+-- Indexes for table `portofolio`
 --
 ALTER TABLE `portofolio`
   ADD PRIMARY KEY (`id_portofolio`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `prestasi`
+-- Indexes for table `prestasi`
 --
 ALTER TABLE `prestasi`
   ADD PRIMARY KEY (`id_prestasi`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indeks untuk tabel `promosi`
+-- Indexes for table `promosi`
 --
 ALTER TABLE `promosi`
   ADD PRIMARY KEY (`id_promosi`),
@@ -702,7 +701,7 @@ ALTER TABLE `promosi`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `proyek`
+-- Indexes for table `proyek`
 --
 ALTER TABLE `proyek`
   ADD PRIMARY KEY (`id_proyek`),
@@ -711,7 +710,7 @@ ALTER TABLE `proyek`
   ADD KEY `id_user3` (`id_user3`);
 
 --
--- Indeks untuk tabel `riwayat_pekerjaan`
+-- Indexes for table `riwayat_pekerjaan`
 --
 ALTER TABLE `riwayat_pekerjaan`
   ADD PRIMARY KEY (`id`),
@@ -719,27 +718,27 @@ ALTER TABLE `riwayat_pekerjaan`
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `saw_alternatif`
+-- Indexes for table `saw_alternatif`
 --
 ALTER TABLE `saw_alternatif`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `saw_nilai_bobot`
+-- Indexes for table `saw_nilai_bobot`
 --
 ALTER TABLE `saw_nilai_bobot`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indeks untuk tabel `sertifikat`
+-- Indexes for table `sertifikat`
 --
 ALTER TABLE `sertifikat`
   ADD PRIMARY KEY (`id_sert`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -749,208 +748,208 @@ ALTER TABLE `users`
   ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `bobot`
+-- AUTO_INCREMENT for table `bobot`
 --
 ALTER TABLE `bobot`
   MODIFY `id_bobot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `cf_sf`
+-- AUTO_INCREMENT for table `cf_sf`
 --
 ALTER TABLE `cf_sf`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `divisi`
+-- AUTO_INCREMENT for table `divisi`
 --
 ALTER TABLE `divisi`
   MODIFY `id_divisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `gap`
+-- AUTO_INCREMENT for table `gap`
 --
 ALTER TABLE `gap`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `hrd`
+-- AUTO_INCREMENT for table `hrd`
 --
 ALTER TABLE `hrd`
   MODIFY `id_hrd` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `jabatan`
+-- AUTO_INCREMENT for table `jabatan`
 --
 ALTER TABLE `jabatan`
   MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `level`
+-- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
   MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `manajer`
+-- AUTO_INCREMENT for table `manajer`
 --
 ALTER TABLE `manajer`
   MODIFY `id_manajer` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `nilai_bobot`
+-- AUTO_INCREMENT for table `nilai_bobot`
 --
 ALTER TABLE `nilai_bobot`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT untuk tabel `normalisasi`
+-- AUTO_INCREMENT for table `normalisasi`
 --
 ALTER TABLE `normalisasi`
   MODIFY `id_norm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `pegawai`
+-- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
   MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `pembobotan`
+-- AUTO_INCREMENT for table `pembobotan`
 --
 ALTER TABLE `pembobotan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `pendidikan`
+-- AUTO_INCREMENT for table `pendidikan`
 --
 ALTER TABLE `pendidikan`
   MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `portofolio`
+-- AUTO_INCREMENT for table `portofolio`
 --
 ALTER TABLE `portofolio`
   MODIFY `id_portofolio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `prestasi`
+-- AUTO_INCREMENT for table `prestasi`
 --
 ALTER TABLE `prestasi`
   MODIFY `id_prestasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT untuk tabel `promosi`
+-- AUTO_INCREMENT for table `promosi`
 --
 ALTER TABLE `promosi`
   MODIFY `id_promosi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `proyek`
+-- AUTO_INCREMENT for table `proyek`
 --
 ALTER TABLE `proyek`
   MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `riwayat_pekerjaan`
+-- AUTO_INCREMENT for table `riwayat_pekerjaan`
 --
 ALTER TABLE `riwayat_pekerjaan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `saw_alternatif`
+-- AUTO_INCREMENT for table `saw_alternatif`
 --
 ALTER TABLE `saw_alternatif`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- AUTO_INCREMENT untuk tabel `saw_nilai_bobot`
+-- AUTO_INCREMENT for table `saw_nilai_bobot`
 --
 ALTER TABLE `saw_nilai_bobot`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `sertifikat`
+-- AUTO_INCREMENT for table `sertifikat`
 --
 ALTER TABLE `sertifikat`
   MODIFY `id_sert` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `bobot`
+-- Constraints for table `bobot`
 --
 ALTER TABLE `bobot`
   ADD CONSTRAINT `bobot_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `cf_sf`
+-- Constraints for table `cf_sf`
 --
 ALTER TABLE `cf_sf`
   ADD CONSTRAINT `cf_sf_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `gap`
+-- Constraints for table `gap`
 --
 ALTER TABLE `gap`
   ADD CONSTRAINT `gap_ibfk_1` FOREIGN KEY (`id_bobot`) REFERENCES `bobot` (`id_bobot`),
   ADD CONSTRAINT `gap_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `jabatan`
+-- Constraints for table `jabatan`
 --
 ALTER TABLE `jabatan`
   ADD CONSTRAINT `jabatan_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `level` (`id_level`);
 
 --
--- Ketidakleluasaan untuk tabel `nilai_bobot`
+-- Constraints for table `nilai_bobot`
 --
 ALTER TABLE `nilai_bobot`
   ADD CONSTRAINT `nilai_bobot_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `pegawai`
+-- Constraints for table `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD CONSTRAINT `pegawai_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`);
 
 --
--- Ketidakleluasaan untuk tabel `pendidikan`
+-- Constraints for table `pendidikan`
 --
 ALTER TABLE `pendidikan`
   ADD CONSTRAINT `pendidikan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `portofolio`
+-- Constraints for table `portofolio`
 --
 ALTER TABLE `portofolio`
   ADD CONSTRAINT `portofolio_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `prestasi`
+-- Constraints for table `prestasi`
 --
 ALTER TABLE `prestasi`
   ADD CONSTRAINT `prestasi_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `promosi`
+-- Constraints for table `promosi`
 --
 ALTER TABLE `promosi`
   ADD CONSTRAINT `promosi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `proyek`
+-- Constraints for table `proyek`
 --
 ALTER TABLE `proyek`
   ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`id_user1`) REFERENCES `users` (`id`),
@@ -958,25 +957,25 @@ ALTER TABLE `proyek`
   ADD CONSTRAINT `proyek_ibfk_3` FOREIGN KEY (`id_user3`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `riwayat_pekerjaan`
+-- Constraints for table `riwayat_pekerjaan`
 --
 ALTER TABLE `riwayat_pekerjaan`
   ADD CONSTRAINT `riwayat_pekerjaan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `saw_nilai_bobot`
+-- Constraints for table `saw_nilai_bobot`
 --
 ALTER TABLE `saw_nilai_bobot`
   ADD CONSTRAINT `saw_nilai_bobot_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `sertifikat`
+-- Constraints for table `sertifikat`
 --
 ALTER TABLE `sertifikat`
   ADD CONSTRAINT `sertifikat_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_level`) REFERENCES `level` (`id_level`),

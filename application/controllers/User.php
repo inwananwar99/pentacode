@@ -74,13 +74,22 @@ class User extends CI_Controller{
     }
 
     public function pegawai(){
-        $data = [
-        'pegawai' => $this->ModelUser->getJoinn('pegawai'),
-        'jabatan' => $this->ModelUser->getData('jabatan'),
-        'konten' => 'pegawai/pegawai',
-        'title' => 'pegawai',
-        'judul' => 'Data Pegawai'
-    ];
+        if($this->session->userdata('role')=='HRD'){
+            $data = [
+                'pegawai' => $this->ModelUser->getAll(),
+                'konten' => 'pegawai/pegawai',
+                'title' => 'pegawai',
+                'judul' => 'Data Pegawai'
+            ];
+        }else{
+            $data = [
+                'pegawai' => $this->ModelUser->getJoinn('pegawai'),
+                'jabatan' => $this->ModelUser->getData('jabatan'),
+                'konten' => 'pegawai/pegawai',
+                'title' => 'pegawai',
+                'judul' => 'Data Pegawai'
+            ];
+        }
     $this->load->view('template',$data);
 }
 
