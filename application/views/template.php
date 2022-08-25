@@ -495,10 +495,7 @@
   <!-- AdminLTE App -->
   <script src="<?= base_url()?>assets/dist/js/adminlte.js"></script>
   <script src="<?= base_url()?>assets/dist/js/pages/dashboard.js"></script>
-  <script src="<?= base_url()?>assets/dist/js/jquery.mask.min.js"></script>
-  <script src="<?= base_url()?>assets/dist/js/terbilang.js"></script>
   <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <!-- DataTables & Plugins -->
@@ -525,7 +522,7 @@
     }
   }
   </script>
-  <script>
+  <script>  
     $('#peg').on('change', function(){
       // ambil data dari elemen option yang dipilih
       const peg = $('#peg option:selected').data('jabatan');
@@ -534,7 +531,21 @@
       // tampilkan data ke element
       $('[name=jabatan_pegawai]').val(peg);
       $('[name=tgl]').val(join);
-      $('[name=jabatan_baru]').val(tk+1);
+      getData(tk);
+      function getData(tk){
+        $.ajax({
+          method: 'get',
+          url   : '<?=base_url()?>Promosi/highJabatan/'+tk,
+          dataType : 'json',
+          success : function(data){
+            var html = '';
+            var i;
+            $('[name=jabatan_baru]').val(data.nama_jabatan);
+          },error: function() {
+              console.log('Something is wrong');
+           }
+          });
+        }
     });
 
     $('#peg1').on('change', function(){

@@ -1,0 +1,6 @@
+Manajer
+- Tambah promosi jabatan (tampilkan nama jabatan yang setingkat lebih tinggi) (Done)
+
+HRD
+- Pindahkan button perangkingan ke detail promosi (Done)
+- Tampilkan jabatan baru di detail if belum terpilih then belum memenuhi

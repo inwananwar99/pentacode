@@ -22,6 +22,11 @@ class Promosi extends CI_Controller{
         return $this->load->view('template',$data);
     }
 
+    public function highJabatan($tingkat){
+        $data = $this->ModelPromosi->getHighJabatan($tingkat);
+        echo json_encode($data);
+    }
+
     public function addPengajuan(){
         $config['upload_path']          = './assets/upload/manajer';
         $config['allowed_types']        = 'gif|jpg|png|pdf';

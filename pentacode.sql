@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2022 at 04:48 PM
+-- Generation Time: Aug 25, 2022 at 02:04 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -150,7 +150,8 @@ CREATE TABLE `jabatan` (
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`, `tingkat`, `jobdesc`, `id_level`) VALUES
 (1, 'Bussines Analystyyy', 4, 'Mendefinisikan kebutuhan user', 2),
 (2, 'Bussines Analyst', 3, 'Mendefinisikan kebutuhan user', 4),
-(4, 'Leader MLM', 4, 'Prospek terossss', 4);
+(4, 'Leader MLM', 4, 'Prospek terossss', 4),
+(5, 'Manajer Retail Solution', 5, 'Jualan Produk', 4);
 
 -- --------------------------------------------------------
 
@@ -785,7 +786,7 @@ ALTER TABLE `hrd`
 -- AUTO_INCREMENT for table `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `level`

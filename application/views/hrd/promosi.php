@@ -1,4 +1,3 @@
-<a href="<?= base_url('Promosi/saw'); ?>" class="btn btn-success mb-3">Perangkingan</a>
 <?= $this->session->flashdata('message'); ?>
 <table class="table table-bordered" id="example1">
     <thead>

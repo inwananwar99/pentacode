@@ -50,7 +50,7 @@
                <select name="id_pegawai" id="peg" class="form-control">
                    <option>-- Pilih Pegawai --</option>
                    <?php foreach($user as $u):?>
-                        <option data-jabatan="<?= $u['nama_jabatan']; ?>" data-tingkat="<?= $u['tingkat']; ?>" data-bergabung="<?= $u['tanggal_buat']; ?>" value="<?= $u['id']?>"><?= $u['name']?></option>
+                        <option data-jabatan="<?= $u['nama_jabatan']; ?>" data-tingkat="<?= $u['tingkat']+1; ?>" data-bergabung="<?= $u['tanggal_buat']; ?>" value="<?= $u['id']?>"><?= $u['name']?></option>
                     <?php endforeach;?>
                </select>
             </div>
