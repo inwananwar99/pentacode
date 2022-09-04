@@ -167,7 +167,7 @@ class ModelPenugasan extends CI_Model{
     }
 
     public function cf_sf($id){
-        $factor = $this->db->get('cf_sf');
+        $factor = $this->db->get('cf_sf')->result_array();
         $n_bobot = $this->db->get_where('nilai_bobot',['id_user'=>$id])->result_array();
         foreach ($n_bobot as $b) {
             $cf = $b['kemampuan']+$b['prestasi']/2;
@@ -184,14 +184,12 @@ class ModelPenugasan extends CI_Model{
             $this->db->where('id_user', $id);
             $this->db->update('cf_sf',$nilai);
         }else{
-            if($id == 4){
                 $this->db->insert('cf_sf',$nilai);
-            }
         }
     }
 
     public function final_result(){
-        return $this->db->query("SELECT * FROM cf_sf JOIN users ON cf_sf.id_user = users.id ORDER BY cf_sf.final_result DESC LIMIT 3")->result_array();
+        return $this->db->query("SELECT * FROM cf_sf JOIN users ON cf_sf.id_user = users.id WHERE users.id_proyek2 IS NULL ORDER BY cf_sf.final_result DESC")->result_array();
     }
 
     public function recommend($id,$data){
@@ -199,6 +197,19 @@ class ModelPenugasan extends CI_Model{
         foreach($user as $u):
             $this->db->where('id_proyek', $id);
             $this->db->update('proyek',$data);
+        endforeach;
+    }
+
+    public function updateUserProject($id_proyek,$id1,$id2,$id3){
+        $user = $this->db->get('users')->result_array();
+        foreach($user as $u):
+           if($u['id_proyek1'] !== NULL){
+                //ketika id_proyek1 NULL, maka update kolom id_proyek1
+                    $this->db->query("UPDATE users SET users.id_proyek2 = $id_proyek WHERE users.id IN ($id1,$id2,$id3) AND users.id_proyek1 IS NOT NULL");
+            }else{
+                $data = $id_proyek;
+                $this->db->query("UPDATE users SET users.id_proyek1 = $data WHERE users.id IN ($id1,$id2,$id3) AND users.id_proyek2 IS NULL");
+            }
         endforeach;
     }
 }

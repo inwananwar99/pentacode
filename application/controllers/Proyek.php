@@ -44,7 +44,7 @@ class Proyek extends CI_Controller{
                 'konten' => 'manajer/proyek',
                 'factor' => $this->ModelPenugasan->final_result(),
             ];
-
+            // var_dump($data['factor']);die;
         return $this->load->view('template',$data);
     }
 
@@ -57,6 +57,7 @@ class Proyek extends CI_Controller{
             'status_proyek' => $this->input->post('status_proyek') 
         ];
         $this->ModelProyek->add('proyek',$data);
+
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menambahkan Data Proyek!</div>');
         return redirect('Proyek');
     }
@@ -85,11 +86,17 @@ class Proyek extends CI_Controller{
         $data = [
             'id_user1'=> $this->input->post('id_user1'),
             'id_user2'=> $this->input->post('id_user2'),
-            'id_user3'=> 14
+            'id_user3'=> $this->input->post('id_user3')
         ];
         $this->session->set_userdata($data);
         $this->ModelPenugasan->recommend($id,$data);
+        $this->ModelPenugasan->updateUserProject($id,$this->input->post('id_user1'),$this->input->post('id_user2'),$this->input->post('id_user3'));
         return redirect('Proyek');
+    }
+
+    public function detailProyek($u1,$u2,$u3){
+        $data = $this->ModelProyek->getDetailProyek($u1,$u2,$u3);
+        echo json_encode($data);
     }
 }
 

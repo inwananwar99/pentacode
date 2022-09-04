@@ -18,10 +18,14 @@ class ModelProyek extends CI_Model{
         return $this->db->delete($table);
     }
     public function getJoin(){
-        return $this->db->query("SELECT *FROM proyek JOIN users GROUP BY proyek.id_proyek")->result_array();
+        return $this->db->query("SELECT * FROM proyek")->result_array();
     }
     public function join($id){
         return $this->db->query("SELECT *FROM riwayat_pekerjaan JOIN users ON riwayat_pekerjaan.id_user = users.id WHERE riwayat_pekerjaan.id_user = $id")->result_array();
+    }
+
+    public function getDetailProyek($u1,$u2,$u3){
+        return $this->db->query("SELECT *FROM proyek JOIN users WHERE users.id IN ($u1,$u2,$u3) AND proyek.id_user1 IS NOT NULL")->result_array();
     }
 }
 ?>

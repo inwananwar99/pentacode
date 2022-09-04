@@ -556,6 +556,34 @@
       $('[name=jabatan_pegawai]').val(peg);
       $('[name=tgl]').val(join);
     });
+
+    $('#detail').on('click', function(){
+      // ambil data dari elemen option yang dipilih
+      const user1 = $('#detail').data('user1');
+      const user2 = $('#detail').data('user2');
+      const user3 = $('#detail').data('user3');
+      // tampilkan data ke element
+      getData(user1,user2,user3);
+      function getData(user1,user2,user3){
+        $.ajax({
+          method: 'get',
+          url   : '<?=base_url()?>Proyek/detailProyek/'+user1+'/'+user2+'/'+user3,
+          dataType : 'json',
+          success : function(data){
+                      const body = document.getElementById('rowDetail1')
+                      const user1 = document.createElement("p")
+                      const user2 = document.createElement("p")
+                      const user3 = document.createElement("p")
+                      user1.innerText = data[0].name+',';
+                      user2.innerText = data[1].name+',';
+                      user3.innerText = data[2].name;
+                      body.append()
+           },error: function() {
+              console.log('Something is wrong');
+           }
+          });
+        }
+    });
   </script>
   <script>
     $(function () {

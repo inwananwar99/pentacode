@@ -5,7 +5,7 @@
         <tr>
             <th>No. </th>
             <th>Nama Proyek</th>
-            <th>Nama Pegawai</th>
+            <th>Rekomendasi</th>
             <th>Status Proyek</th>
             <th>Aksi</th>
         </tr>
@@ -19,12 +19,12 @@
                   <td><?= $d['nama_proyek'];?></td>
                   <?php if($d['id_user1']==NULL){ ?>
                   <td><button class="btn btn-info" data-toggle="modal" data-target="#recommendModal<?= $d['id_proyek'];?>">Rekomendasi</button></td>
-                  <?php }else{ ?>
-                    <td><?= $d['name'];?></td>
-                  <?php } ?>
+                  <?php }else{?>
+                    <td><?= 'Sudah memilih rekomendasi'; ?></td>
+                  <?php }?>
                   <td><?= $d['status_proyek']; ?></td>
                   <td>
-                  <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#detailModal<?= $d['id_proyek']?>">Detail</a>
+                  <a href="#" class="btn btn-warning" id="detail" data-toggle="modal" data-user1="<?= $d['id_user1']; ?>" data-user2="<?= $d['id_user2']; ?>" data-user3="<?= $d['id_user3']; ?>" data-target="#detailModal<?= $d['id_proyek']?>">Detail</a>
                     <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal<?= $d['id_proyek'];?>">Ubah</a>
                     <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal<?= $d['id_proyek']?>">Hapus</a>
                   </td>
@@ -93,13 +93,19 @@
     </div>
     <form action="<?= base_url('Proyek/rekomendasi/'.$p2['id_proyek']); ?>" method="POST">
         <div class="modal-body">
-            <p>Apakah anda yakin ingin memilih pegawai ini?</p>
             <?php
-                $no=1;
-                    foreach($factor as $f){ ?>
+        $data = $this->db->query("SELECT * FROM cf_sf JOIN users ON cf_sf.id_user = users.id WHERE users.id_proyek2 IS NULL ORDER BY cf_sf.final_result DESC");
+            if($data->num_rows()== 0){ ?>
+            <p>Belum ada karyawan yang direkomendasikan!</p>
+            <?php }else{ ?>
+              <p>Apakah anda yakin ingin memilih pegawai ini?</p>
+              <?php $no=1;
+                  foreach($factor as $f){ 
+                      ?>
                     <p><?= 'Rank '.$no.' - '.$f['name'].'(PIC)';?></p>
                     <input type="hidden" class="form-control" name="id_user<?= $no++;?>" value="<?= $f['id_user']; ?>">
-                <?php } ?>
+              <?php }  
+            }?>
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -114,18 +120,76 @@
 <!-- Modal Detail Proyek -->
 <?php foreach ($proyek as $p3) :?>
 <div class="modal fade" id="detailModal<?= $p3['id_proyek'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-s" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Detail Proyek</h5>
+      <h5 class="modal-title" id="exampleModalLabel">Detail Proyek <?= $p3['nama_proyek'].' ('.$p3['status_proyek'].')';?></h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-        <h5>
-              Team Proyek 
-        </h5>
+    <h5>
+
+<?php $p3['id_proyek'];
+  $user1 = $p3['id_user1'];
+  $user2 = $p3['id_user2'];
+  $user3 = $p3['id_user3'];
+
+  $nama_user1 = $this->db->get_where ('users', array('id' => $user1))->row();
+  $nama_user2 = $this->db->get_where ('users', array('id' => $user2))->row();
+  $nama_user3 = $this->db->get_where ('users', array('id' => $user3))->row();
+// var_dump($nama_user3);
+?>
+<div>
+  <form>
+
+    <div class="form-group row">
+      <label for="staticEmail" class="col-sm-2 col-form-label">Nama Proyek</label>
+      <div class="col-sm-10">
+        <input type="readonly" readonly class="form-control-plaintext" id="staticEmail" value=" <?= $p3['nama_proyek']?>">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Deskripsi Proyek</label>
+      <div class="col-sm-10">
+        <input type="readonly" readonly class="form-control" value=" <?= $p3['ket_proyek']?>">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Tanggal Awal</label>
+      <div class="col-sm-10">
+        <input type="readonly" readonly class="form-control" value=" <?= $p3['tgl_awal_proyek']?>">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Tanggal Akhir</label>
+      <div class="col-sm-10">
+        <input type="readonly" readonly class="form-control" value=" <?= $p3['tgl_akhir_proyek']?>">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="inputPassword" class="col-sm-2 col-form-label">Team Proyek</label>
+      <div class="col-sm-10">
+        <?php if($p3['id_user1']==NULL){ ?>
+          <p>Silahkan pilih rekomendasi terlebih dahulu</p>
+        <?php }else{ ?>
+        <ul >
+          <li><?= $nama_user1->name ?></li>
+          <li><?= $nama_user2->name ?></li>
+          <li><?= $nama_user3->name ?></li>
+        </ul>
+        <?php } ?>
+      </div>
+    </div>
+
+  </form>
+</div>
+</h5>
     </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

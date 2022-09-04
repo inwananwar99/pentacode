@@ -14,7 +14,9 @@ class Welcome extends CI_Controller {
 			'judul' => 'Dashboard',
 			'konten' => 'dashboard'
 		];
-		$this->ModelPenugasan->cf_sf($this->session->userdata('id'));
+		if($this->session->userdata('role')!== 'Manajer'){
+			$this->ModelPenugasan->cf_sf($this->session->userdata('id'));
+		}
 		return $this->load->view('template',$data);
 	}
 	public function do_login(){

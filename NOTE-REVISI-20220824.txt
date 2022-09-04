@@ -1,6 +1,16 @@
-Manajer
-- Tambah promosi jabatan (tampilkan nama jabatan yang setingkat lebih tinggi) (Done)
-
 HRD
-- Pindahkan button perangkingan ke detail promosi (Done)
 - Tampilkan jabatan baru di detail if belum terpilih then belum memenuhi
+- proses perangkingan untuk promosi jabatan dilakukan untuk setiap jabatan baru
+  yang dipromosikan
+
+🐬 Manajer -> Kelola data proyek
+  - Pada kolom aksi tambah button detail
+  - Button detail berisi detail proyek  dari nama proyek, keterangan proyek, 
+    tgl awal, tgl akhir dan status proyek (dONE)
+  - pada detail juga tambahkan kolom portofolio pegawai dan bisa dilihat
+  - sebelumnya kan proyek tidak dikerjakan oleh satu org bisa 2 orang nah, 
+    tampilkan nama pegawai yang ikut dalam proyek tidak hanya satu tapi dua 
+    seperti di cantumkan di database proyek usernya ada 3/2
+  - Batasi juga proyek pegawai misal jika pegawai tersebut sudah 
+    terdapat dua proyek dengan keterangan on proggres/coming soon maka 
+    tidak bisa dipilih lagi untuk mengikuti proyek
