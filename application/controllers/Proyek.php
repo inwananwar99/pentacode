@@ -64,21 +64,20 @@ class Proyek extends CI_Controller{
 
     public function updateProyek($id){
         $data = [
-            'nama_proyek' => $this->input->post('nama'), 
-            'id_pegawai' => $this->input->post('id_pegawai'), 
+            'nama_proyek' => $this->input->post('nama'),  
             'ket_proyek' => $this->input->post('ket_proyek'), 
             'tgl_awal_proyek' => $this->input->post('tgl_awal_proyek'), 
             'tgl_akhir_proyek' => $this->input->post('tgl_akhir_proyek'), 
             'status_proyek' => $this->input->post('status_proyek') 
         ];
         $this->ModelProyek->update('proyek',['id_proyek'=>$id],$data);
-        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menambahkan Data Proyek!</div>');
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil mengubah Data Proyek!</div>');
         return redirect('Proyek');
     }
 
     public function deleteProyek($id){
         $this->ModelProyek->delete('proyek',['id_proyek'=>$id]);
-        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menghapus Data Proyek!</div>');
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Berhasil menghapus Data Proyek!</div>');
         return redirect('Proyek');
     }
 
@@ -98,6 +97,7 @@ class Proyek extends CI_Controller{
         $data = $this->ModelProyek->getDetailProyek($u1,$u2,$u3);
         echo json_encode($data);
     }
+
 }
 
 ?>

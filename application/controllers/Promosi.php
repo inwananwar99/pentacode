@@ -190,6 +190,7 @@ class Promosi extends CI_Controller{
             'title' => 'rank',
             'judul' => 'Data Rank Promosi Jabatan'
         ];
+        var_dump($data['rank']);die;
     return $this->load->view('template',$data);
     }
 
@@ -205,6 +206,8 @@ class Promosi extends CI_Controller{
         ];
         return $this->load->view('template',$data);
     }
+
+
 }
 
 ?>

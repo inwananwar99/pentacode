@@ -127,7 +127,20 @@ class ModelPromosi extends CI_Model{
     }
 
     public function rank(){
-        return $this->db->query("SELECT * FROM saw_nilai_bobot JOIN users ON saw_nilai_bobot.id_user = users.id ORDER BY saw_nilai_bobot.nilai DESC LIMIT 10")->result_array();
+        $promosi = $this->db->get('promosi')->result_array();
+        $saw_nilai_bobot = $this->db->get('saw_nilai_bobot')->result_array();
+        foreach($promosi as $p){
+            foreach($saw_nilai_bobot as $s){
+                if($p['id_user'] == $s['id_user']){
+                    $data = [
+                        'id_promosi' => $p['id_promosi']
+                    ];
+                    $this->db->where('id_user', $s['id_user']);
+                    $this->db->update('saw_nilai_bobot',$data);
+                }
+            }
+        }
+        return $this->db->query("SELECT * FROM saw_nilai_bobot JOIN users ON saw_nilai_bobot.id_user = users.id JOIN promosi ON saw_nilai_bobot.id_promosi = promosi.id_promosi WHERE jabatan_baru ='LEADER MLM' GROUP BY saw_nilai_bobot.id_promosi DESC")->result_array();
     }
 }
 ?>

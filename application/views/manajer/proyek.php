@@ -198,3 +198,77 @@
 </div>
 </div>
 <?php endforeach;?>
+
+<?php foreach($proyek as $proy):?>
+  <!-- Modal Edit User -->
+<div class="modal fade" id="editModal<?= $proy['id_proyek'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Ubah Proyek</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form action="<?= base_url('Proyek/updateProyek/'.$proy['id_proyek']);?>" method="POST">
+            <div class="form-group">
+               <label for="">Nama Proyek</label>
+               <input type="text" name="nama" class="form-control" value="<?= $proy['nama_proyek'];?>" autofocus> 
+            </div>
+            <div class="form-group">
+               <label for="">Keterangan Proyek</label>
+              <textarea name="ket_proyek" class="form-control"><?= $proy['ket_proyek'];?></textarea>
+            </div>
+            <div class="form-group">
+              <label for="">Tanggal Awal Proyek</label>
+              <input type="date" name="tgl_awal_proyek" class="form-control" value="<?= $proy['tgl_awal_proyek'];?>">
+            </div>
+            <div class="form-group">
+              <label for="">Tanggal Akhir Proyek</label>
+              <input type="date" name="tgl_akhir_proyek" class="form-control" value="<?= $proy['tgl_akhir_proyek'];?>">
+            </div>
+            <div class="form-group">
+              <label for="">Status Proyek</label>
+              <select name="status_proyek" class="form-control">
+                <option value="<?= $proy['status_proyek'];?>">-- <?= $proy['status_proyek'];?> --</option>
+                <option>Coming Soon</option>
+                <option>On Progress</option>
+                <option>Finish</option>
+              </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+    </form>
+  </div>
+</div>
+</div>
+<?php endforeach; ?>
+
+<?php foreach($proyek as $proy1):?>
+  <!-- Modal Delete Proyek -->
+<div class="modal fade" id="deleteModal<?= $proy1['id_proyek'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-s" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Hapus Proyek</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form action="<?= base_url('Proyek/deleteProyek/'.$proy1['id_proyek']);?>" method="POST">
+          <p>Apakah anda yakin ingin menghapus data ini?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            <button type="submit" class="btn btn-danger">Hapus</button>
+        </div>
+    </form>
+  </div>
+</div>
+</div>
+<?php endforeach; ?>
