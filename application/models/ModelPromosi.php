@@ -77,9 +77,10 @@ class ModelPromosi extends CI_Model{
         return $this->db->get()->result_array();
     }
 
-    public function bobot(){
-        $alternatif = $this->db->get('saw_alternatif')->result_array();
-        $norm = $this->db->get('normalisasi')->num_rows();
+    public function bobot($id){
+        $alternatif = $this->db->get_where('saw_alternatif',['id_user'=> $id])->result_array();
+        // var_dump($alternatif);die;
+        $norm = $this->db->get_where('normalisasi',['id_user'=> $id])->num_rows();
         $min = $this->db->query("SELECT MIN(saw_alternatif.pendidikan) AS pend,MIN(saw_alternatif.level) AS lvl FROM saw_alternatif")->result_array();
         $max = $this->db->query("SELECT MAX(saw_alternatif.proyek) AS proy,MAX(saw_alternatif.pengalaman_kerja) AS kerja,MAX(saw_alternatif.prestasi) AS prest,MAX(saw_alternatif.kemampuan) AS kemampuan FROM saw_alternatif")->result_array();
         foreach($alternatif as $alt){
@@ -109,9 +110,9 @@ class ModelPromosi extends CI_Model{
         }
     }
 
-    public function final_result(){
-        $normalisasi = $this->db->get('normalisasi')->result_array();
-        $bobot = $this->db->get('saw_nilai_bobot')->num_rows();
+    public function final_result($id){
+        $normalisasi = $this->db->get_where('normalisasi',['id_user'=>$id])->result_array();
+        $bobot = $this->db->get_where('saw_nilai_bobot',['id_user'=>$id])->num_rows();
         foreach($normalisasi as $norm){
             $data =[
                 'id_user' => $norm['id_user'],
@@ -126,7 +127,7 @@ class ModelPromosi extends CI_Model{
         }      
     }
 
-    public function rank(){
+    public function rank($jabatan){
         $promosi = $this->db->get('promosi')->result_array();
         $saw_nilai_bobot = $this->db->get('saw_nilai_bobot')->result_array();
         foreach($promosi as $p){
@@ -140,7 +141,7 @@ class ModelPromosi extends CI_Model{
                 }
             }
         }
-        return $this->db->query("SELECT * FROM saw_nilai_bobot JOIN users ON saw_nilai_bobot.id_user = users.id JOIN promosi ON saw_nilai_bobot.id_promosi = promosi.id_promosi WHERE jabatan_baru ='LEADER MLM' GROUP BY saw_nilai_bobot.id_promosi DESC")->result_array();
+        return $this->db->query("SELECT *FROM promosi as p JOIN users as u ON p.id_user = u.id JOIN saw_nilai_bobot as snb ON p.id_promosi = snb.id_promosi WHERE p.jabatan_baru LIKE '%$jabatan%'")->result_array();
     }
 }
 ?>

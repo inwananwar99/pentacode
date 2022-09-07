@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 06, 2022 at 11:48 PM
+-- Generation Time: Sep 07, 2022 at 11:32 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `normalisasi` (
   `level` double DEFAULT NULL,
   `proyek` double DEFAULT NULL,
   PRIMARY KEY (`id_norm`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `normalisasi`
@@ -286,7 +286,9 @@ CREATE TABLE IF NOT EXISTS `normalisasi` (
 INSERT INTO `normalisasi` (`id_norm`, `id_user`, `prestasi`, `kemampuan`, `pengalaman_kerja`, `pendidikan`, `level`, `proyek`) VALUES
 (4, 8, 1, 0.66666666666667, 1, 1.5, 1, 1),
 (5, 8, 1, 0.66666666666667, 1, 1.5, 1, 1),
-(6, 6, 1, 1, 1, 1, 1, 1);
+(6, 6, 1, 1, 1, 1, 1, 1),
+(7, 13, 0.5, 0.33333333333333, 0.25, 1, 1, 1),
+(8, 12, 0.5, 0.33333333333333, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -366,7 +368,7 @@ CREATE TABLE IF NOT EXISTS `pendidikan` (
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id_pendidikan`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pendidikan`
@@ -375,7 +377,9 @@ CREATE TABLE IF NOT EXISTS `pendidikan` (
 INSERT INTO `pendidikan` (`id_pendidikan`, `user_id`, `jenjang`, `gelar`, `bidang_studi`, `perguruan_tinggi`, `thn_lulus`, `lampiran`, `status`) VALUES
 (2, 6, 'Sarjana', 'Sarjana Terapan', 'Informatika', 'Politeknik Negeri Subang', 2021, '', 'Disetujui'),
 (3, 8, 'Magister', 'Magister', 'Informatika', 'Politeknik Elektronika Negeri ', 2021, '', 'Disetujui'),
-(4, 6, 'Diploma', 'Ahli Madya', 'Informatika', 'Politeknik Elektronika Negeri Surabaya', 2021, 'BERITA_ACARA_UAT_ICONPAYxMESTIKA_sign_dev.pdf', 'Disetujui');
+(4, 6, 'Diploma', 'Ahli Madya', 'Informatika', 'Politeknik Elektronika Negeri Surabaya', 2021, 'BERITA_ACARA_UAT_ICONPAYxMESTIKA_sign_dev.pdf', 'Disetujui'),
+(5, 12, 'Sarjana', 'Sarjana Terapan', 'Informatika', 'Politeknik Negeri Subang', 2021, 'cv.pdf', 'Disetujui'),
+(6, 13, 'Sarjana', 'Ahli Madya Komputer', 'Informatika', 'Politeknik Negeri Bandung', 2022, 'cv.pdf', 'Disetujui');
 
 -- --------------------------------------------------------
 
@@ -445,8 +449,8 @@ INSERT INTO `prestasi` (`id_prestasi`, `user_id`, `nama_prestasi`, `bidang`, `ta
 (25, 6, 'karina aulia', 'Teknologi Informasi', 2021, 'INVOICE1.pdf', 'Diajukan'),
 (26, 6, 'karina aulia', 'Teknologi Informasi', 2021, 'INVOICE2.pdf', 'Diajukan'),
 (27, 6, 'karina aulia', 'Teknologi Informasi', 2021, 'INVOICE3.pdf', 'Diajukan'),
-(28, 6, 'Jawa Tengah', 'Teknologi Informasi', 2021, 'INVOICE4.pdf', 'Diajukan'),
-(29, 6, 'Katalog A', 'Keagamaan', 2018, '98-Article_Text-182-1-10-2019032020.pdf', 'Diajukan'),
+(28, 12, 'Jawa Tengah', 'Teknologi Informasi', 2021, 'INVOICE4.pdf', 'Diajukan'),
+(29, 13, 'Katalog A', 'Keagamaan', 2018, '98-Article_Text-182-1-10-2019032020.pdf', 'Diajukan'),
 (30, 8, 'Maulid', 'Keagamaan', 2021, '98-Article_Text-182-1-10-2019032021.pdf', 'Diajukan');
 
 -- --------------------------------------------------------
@@ -553,7 +557,7 @@ CREATE TABLE IF NOT EXISTS `saw_alternatif` (
   `prestasi` double DEFAULT NULL,
   `level` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `saw_alternatif`
@@ -566,7 +570,9 @@ INSERT INTO `saw_alternatif` (`id`, `id_user`, `pendidikan`, `kemampuan`, `penga
 (37, 8, 3, 2, 4, 1, 2, 4),
 (38, 6, 2, 3, 4, 1, 2, 4),
 (39, 9, 2, 1, 1, 1, 1, 4),
-(40, 8, 3, 2, 4, 1, 2, 4);
+(40, 8, 3, 2, 4, 1, 2, 4),
+(41, 13, 2, 1, 1, 1, 1, 4),
+(42, 12, 2, 1, 4, 1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -583,7 +589,7 @@ CREATE TABLE IF NOT EXISTS `saw_nilai_bobot` (
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   KEY `id_promosi` (`id_promosi`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `saw_nilai_bobot`
@@ -592,7 +598,9 @@ CREATE TABLE IF NOT EXISTS `saw_nilai_bobot` (
 INSERT INTO `saw_nilai_bobot` (`id`, `id_user`, `id_promosi`, `nilai`) VALUES
 (4, 8, 5, 99.166666666667),
 (5, 8, 5, 99.166666666667),
-(6, 6, 6, 100);
+(6, 6, 6, 100),
+(7, 13, 2, 67.083333333333),
+(8, 12, 3, 78.333333333333);
 
 -- --------------------------------------------------------
 
@@ -660,7 +668,7 @@ INSERT INTO `users` (`id`, `id_divisi`, `id_jabatan`, `id_pegawai`, `id_proyek1`
 (8, 2, 4, 3, 2, 4, 'Dhika Pratara', 'dhika@iconpln.co.id', 'pratara', 'wp2655834.jpg', 4, 1, '2022-06-30'),
 (9, 4, 0, NULL, NULL, NULL, 'Ibnu', 'ibnu@iconpln.co.id', 'ibnuicon', 'default.jpg', 8, 1, '2022-07-03'),
 (12, 4, 0, 2, 2, 4, 'Denny Adam', 'denny@pln.co.id', 'dennyicon', 'info1.png', 4, 1, '2022-07-03'),
-(13, 3, 0, 3, NULL, NULL, 'Dhika Pratara', 'dhika@pln.co.id', 'dhikaicon', 'info2.png', 6, 1, '2022-07-05'),
+(13, 3, 0, 3, NULL, NULL, 'Dhika Pratara', 'dhika@pln.co.id', 'dhikaicon', 'info2.png', 4, 1, '2022-07-05'),
 (14, NULL, 0, NULL, NULL, NULL, 'Albar Hidayah', 'albarhidayah@mgs.co.id', 'albarhidayah', 'albar.jpg', 2, 1, '2022-07-15');
 
 --

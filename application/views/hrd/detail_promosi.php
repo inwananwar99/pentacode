@@ -1,4 +1,4 @@
-<a href="<?= base_url('Promosi/saw'); ?>" class="btn btn-success mb-3">Perangkingan</a>
+<a href="<?= base_url('Promosi/saw/'.$new_jabatan); ?>" class="btn btn-success mb-3">Perangkingan</a>
 <table class="table table-bordered" id="example1">
     <thead>
         <tr>

@@ -87,11 +87,10 @@ class Promosi extends CI_Controller{
         return redirect('Promosi/pengajuan');
     }
 
-    public function saw(){
+    public function saw($jabatan_baru){
         error_reporting(0);
         //pembobotan
         $promosi = $this->db->get('promosi')->result_array();
-        $alt = $this->db->get('saw_alternatif')->num_rows();
         foreach($promosi as $p){
             $pendidikan = $this->db->get_where('pendidikan',['user_id' => $p['id_user']])->result_array();
             if($pendidikan[0]['jenjang'] == "Magister"){
@@ -170,27 +169,26 @@ class Promosi extends CI_Controller{
                 'pengalaman_kerja' => $peng,
                 'proyek' => $proy
             ];
-            // var_dump($data);die;
+            $alt = $this->db->get_where('saw_alternatif',['id_user'=> $p['id_user']])->num_rows();
             if($alt > 0){
                 $this->db->where('id_user', $p['id_user']);
                 $this->db->update('saw_alternatif',$data);
             }else{
                 $this->db->insert('saw_alternatif',$data);
             }
+            $this->ModelPromosi->bobot($p['id_user']);
+            $this->ModelPromosi->final_result($p['id_user']);
         }
-        $this->ModelPromosi->bobot();
-        $this->ModelPromosi->final_result();
-        redirect('Promosi/rank');
+        redirect('Promosi/rank/'.$jabatan_baru);
     }
 
-    public function rank(){
+    public function rank($jabatan){
         $data = [
-            'rank' => $this->ModelPromosi->rank(),
+            'rank' => $this->ModelPromosi->rank($jabatan),
             'konten' => 'hrd/rank',
             'title' => 'rank',
             'judul' => 'Data Rank Promosi Jabatan'
         ];
-        var_dump($data['rank']);die;
     return $this->load->view('template',$data);
     }
 
@@ -202,7 +200,8 @@ class Promosi extends CI_Controller{
             'promosi' => $this->ModelPromosi->getDetailPromosi($result),
             'konten' => 'hrd/detail_promosi',
             'title' => 'promosi',
-            'judul' => 'Detail Promosi Jabatan'
+            'judul' => 'Detail Promosi Jabatan',
+            'new_jabatan' => $result
         ];
         return $this->load->view('template',$data);
     }
