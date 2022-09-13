@@ -187,7 +187,9 @@ class Promosi extends CI_Controller{
             'rank' => $this->ModelPromosi->rank($jabatan),
             'konten' => 'hrd/rank',
             'title' => 'rank',
-            'judul' => 'Data Rank Promosi Jabatan'
+            'judul' => 'Data Rank Promosi Jabatan',
+            'jab_baru' => $jabatan,
+            'id_promosi' => $this->ModelPromosi->highPromotionById($jabatan)
         ];
     return $this->load->view('template',$data);
     }
@@ -204,6 +206,13 @@ class Promosi extends CI_Controller{
             'new_jabatan' => $result
         ];
         return $this->load->view('template',$data);
+    }
+
+    public function updateJabatan($jabatan,$id_promosi){
+        $data = $this->input->post('status');
+        $d = $this->db->query("SELECT MAX(nilai) as nilai,p.id_promosi FROM saw_nilai_bobot as snb JOIN promosi as p ON snb.id_promosi = p.id_promosi WHERE p.jabatan_baru LIKE '%$jabatan%' AND snb.id_promosi = $id_promosi ORDER BY snb.nilai DESC")->result_array();
+        $id = $id_promosi;
+        return $this->ModelPromosi->updateJabatan($id);
     }
 
 

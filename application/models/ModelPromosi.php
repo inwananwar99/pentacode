@@ -141,7 +141,16 @@ class ModelPromosi extends CI_Model{
                 }
             }
         }
-        return $this->db->query("SELECT *FROM promosi as p JOIN users as u ON p.id_user = u.id JOIN saw_nilai_bobot as snb ON p.id_promosi = snb.id_promosi WHERE p.jabatan_baru LIKE '%$jabatan%'")->result_array();
+        return $this->db->query("SELECT *FROM promosi as p JOIN users as u ON p.id_user = u.id JOIN saw_nilai_bobot as snb ON p.id_promosi = snb.id_promosi WHERE p.jabatan_baru LIKE '%$jabatan%' ORDER BY snb.nilai DESC")->result_array();
+    }
+
+    public function highPromotionById($jabatan){
+        return $this->db->query("SELECT p.id_promosi FROM promosi as p JOIN users as u ON p.id_user = u.id JOIN saw_nilai_bobot as snb ON p.id_promosi = snb.id_promosi WHERE p.jabatan_baru LIKE '%$jabatan%' ORDER BY snb.nilai DESC LIMIT 1")->result_array();
+    }
+
+    public function updateJabatan($id){
+        $this->db->where('id_promosi', $id);
+        return $this->db->update('promosi',['status'=>TRUE]);
     }
 }
 ?>

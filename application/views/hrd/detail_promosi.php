@@ -7,6 +7,7 @@
             <th>Tanggal Bergabung</th>
             <th>Portofolio</th>
             <th>Surat Pengajuan</th>
+            <th>Status Promosi</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,11 @@
                 <td><?= $p['tgl_bergabung']; ?></td>
                 <td><a href="<?= base_url('User/detailPortfolio/'.$p['id_user']); ?>" class="btn btn-info">Detail</a></td>
                 <td><a href="<?= base_url('assets/upload/manajer/'.$p['surat_pengajuan']); ?>"><?= $p['surat_pengajuan']; ?></a></td>
+                <?php if($p['status'] == TRUE){?>
+                    <td>Terpilih</td>
+                    <?php }else{?>
+                      <td>Belum Terpilih</td>
+                <?php } ?>
             </tr>
         <?php endforeach; ?>
     </tbody>
