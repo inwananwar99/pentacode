@@ -98,6 +98,40 @@ class Proyek extends CI_Controller{
         echo json_encode($data);
     }
 
+    public function data_proyek()
+	{
+
+    $data = [
+        'judul' => 'Data Proyek',
+        'title' => 'proyek',
+        'data_proyek' => $this->ModelProyek->getJoin('proyek'),
+
+        'konten' => 'manajer/data_proyek',
+
+    ];
+    // var_dump($data['factor']);die;
+    return $this->load->view('template',$data);
+	}
+
+
+  public function do_edit_pegawai($id_proyek)
+	{
+		$id_user1 = $_POST['id_user1'];
+    $id_user2 = $_POST['id_user2'];
+    $id_user3 = $_POST['id_user3'];
+
+		$data = array('id_user1' => $id_user1,'id_user2' => $id_user2,'id_user3' => $id_user3);
+		$where = array('id_proyek' => $id_proyek);
+
+		$res = $this->ModelProyek->UpdateData('proyek', $data, $where);
+		if ($res >= 1) {
+			$this->session->set_flashdata('pesan', 'Validasi Pengajuan Judul' . $nama . 'Berhasil');
+			redirect('Proyek/data_proyek');
+		} else {
+			echo "<h3>Delete Data Pengajuan Judul Gagal</h3>";
+		}
+    }
+
 }
 
 ?>

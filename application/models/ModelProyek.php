@@ -27,5 +27,11 @@ class ModelProyek extends CI_Model{
     public function getDetailProyek($u1,$u2,$u3){
         return $this->db->query("SELECT *FROM proyek JOIN users WHERE users.id IN ($u1,$u2,$u3) AND proyek.id_user1 IS NOT NULL")->result_array();
     }
+
+    public function UpdateData($tableName, $data, $where)
+	{
+		$res = $this->db->update($tableName, $data, $where);
+		return $res;
+	}
 }
 ?>

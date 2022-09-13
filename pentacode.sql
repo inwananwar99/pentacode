@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 13, 2022 at 12:14 AM
+-- Generation Time: Sep 13, 2022 at 11:20 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -481,8 +481,8 @@ CREATE TABLE IF NOT EXISTS `promosi` (
 INSERT INTO `promosi` (`id_promosi`, `id_manajer`, `id_user`, `jabatan`, `tgl_bergabung`, `surat_pengajuan`, `jabatan_baru`, `status`) VALUES
 (2, 7, 13, 'Marketing', '0000-00-00', 'Surat_Pengajuan-13.png', 'Manajer Retail Solution', NULL),
 (3, 7, 12, 'Marketing', '0000-00-00', 'Surat_Pengajuan-14.png', 'Manajer Retail Solution', 1),
-(5, 7, 8, 'Bussines Analyst', '2022-06-30', '98-Article_Text-182-1-10-20190320.pdf', 'Leader MLM', NULL),
-(6, 7, 6, 'Bussines Analyst', '2022-05-31', 'info.png', 'Leader MLM', 1);
+(5, 7, 8, 'Bussines Analyst', '2022-06-30', '98-Article_Text-182-1-10-20190320.pdf', 'Web Programmer', NULL),
+(6, 7, 6, 'Bussines Analyst', '2022-05-31', 'info.png', 'Web Programmer', 1);
 
 -- --------------------------------------------------------
 

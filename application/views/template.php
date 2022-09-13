@@ -325,7 +325,7 @@
               </a>
             </li>
               <li class="nav-item">
-                <a href="<?= base_url('Proyek')?>" class="nav-link <?= $title == 'proyek' ? 'active' : ''?>">
+                <a href="<?= base_url('Proyek/data_proyek')?>" class="nav-link <?= $title == 'proyek' ? 'active' : ''?>">
                   <i class="nav-icon fas fa-pen"></i>
                   <p>
                   Kelola Data Proyek

@@ -183,27 +183,26 @@ class Promosi extends CI_Controller{
     }
 
     public function rank($jabatan){
+        $jabatan_baru = urldecode($jabatan);
         $data = [
-            'rank' => $this->ModelPromosi->rank($jabatan),
+            'rank' => $this->ModelPromosi->rank($jabatan_baru),
             'konten' => 'hrd/rank',
             'title' => 'rank',
             'judul' => 'Data Rank Promosi Jabatan',
-            'jab_baru' => $jabatan,
-            'id_promosi' => $this->ModelPromosi->highPromotionById($jabatan)
+            'jab_baru' => $jabatan_baru,
+            'id_promosi' => $this->ModelPromosi->highPromotionById($jabatan_baru)
         ];
     return $this->load->view('template',$data);
     }
 
     public function detailPromosi($jabatan){
-        $arr = str_split($jabatan);
-        $fix = $arr[0].$arr[1].$arr[2].$arr[3].$arr[4].$arr[5].$arr[6].$arr[7].$arr[8]; 
-        $result = preg_replace("/[^a-zA-Z]/", "", $fix);
+        $jabatan_baru = urldecode($jabatan);
         $data = [
-            'promosi' => $this->ModelPromosi->getDetailPromosi($result),
+            'promosi' => $this->ModelPromosi->getDetailPromosi($jabatan_baru),
             'konten' => 'hrd/detail_promosi',
             'title' => 'promosi',
             'judul' => 'Detail Promosi Jabatan',
-            'new_jabatan' => $result
+            'new_jabatan' => $jabatan_baru
         ];
         return $this->load->view('template',$data);
     }
@@ -212,7 +211,9 @@ class Promosi extends CI_Controller{
         $data = $this->input->post('status');
         $d = $this->db->query("SELECT MAX(nilai) as nilai,p.id_promosi FROM saw_nilai_bobot as snb JOIN promosi as p ON snb.id_promosi = p.id_promosi WHERE p.jabatan_baru LIKE '%$jabatan%' AND snb.id_promosi = $id_promosi ORDER BY snb.nilai DESC")->result_array();
         $id = $id_promosi;
-        return $this->ModelPromosi->updateJabatan($id);
+        $this->ModelPromosi->updateJabatan($id);
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menyimpan promosi!</div>');
+        return redirect('Promosi/detailPromosi/'.$jabatan);
     }
 
 
