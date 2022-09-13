@@ -148,9 +148,14 @@ class ModelPromosi extends CI_Model{
         return $this->db->query("SELECT p.id_promosi FROM promosi as p JOIN users as u ON p.id_user = u.id JOIN saw_nilai_bobot as snb ON p.id_promosi = snb.id_promosi WHERE p.jabatan_baru LIKE '%$jabatan%' ORDER BY snb.nilai DESC LIMIT 1")->result_array();
     }
 
-    public function updateJabatan($id){
+    public function updatePromotionStatus($id){
         $this->db->where('id_promosi', $id);
         return $this->db->update('promosi',['status'=>TRUE]);
+    }
+
+    public function updateNewJabatan($id_user,$id_jabatan){
+        $this->db->where('id', $id_user);
+        return $this->db->update('users',['id_jabatan'=>$id_jabatan]);
     }
 }
 ?>

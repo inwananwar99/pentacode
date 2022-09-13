@@ -208,10 +208,14 @@ class Promosi extends CI_Controller{
     }
 
     public function updateJabatan($jabatan,$id_promosi){
+        $jabatan_baru = urldecode($jabatan);
         $data = $this->input->post('status');
-        $d = $this->db->query("SELECT MAX(nilai) as nilai,p.id_promosi FROM saw_nilai_bobot as snb JOIN promosi as p ON snb.id_promosi = p.id_promosi WHERE p.jabatan_baru LIKE '%$jabatan%' AND snb.id_promosi = $id_promosi ORDER BY snb.nilai DESC")->result_array();
+        $d = $this->db->query("SELECT MAX(nilai) as nilai,p.id_promosi,p.id_user FROM saw_nilai_bobot as snb JOIN promosi as p ON snb.id_promosi = p.id_promosi WHERE p.jabatan_baru LIKE '%$jabatan_baru%' AND snb.id_promosi = $id_promosi ORDER BY snb.nilai DESC")->result_array();
         $id = $id_promosi;
-        $this->ModelPromosi->updateJabatan($id);
+        $id_user = $d[0]['id_user'];
+        $id_jabatan = $this->db->query("SELECT id_jabatan FROM jabatan WHERE nama_jabatan = '$jabatan_baru'")->row_array();
+        $this->ModelPromosi->updatePromotionStatus($id);
+        $this->ModelPromosi->updateNewJabatan($id_user,$id_jabatan['id_jabatan']);
         $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Berhasil menyimpan promosi!</div>');
         return redirect('Promosi/detailPromosi/'.$jabatan);
     }
